@@ -1,0 +1,6 @@
+genesis-zero-bot/
+.DS_Store
+node_modules/
+dist/
+.env
+scripts/__pycache__/
