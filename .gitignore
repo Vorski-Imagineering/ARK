@@ -1,5 +1,5 @@
 research/regentribe/genesis-zero-bot/
-.DS_Store
+*/.DS_Store
 node_modules/
 dist/
 .env
