@@ -1,4 +1,4 @@
-![ARK](ARK.jpg){height=250px}
+![ARK](ARK-sml.png)
 
 # ARK — Agentic Recall & Knowledge
 
@@ -140,4 +140,4 @@ If those norms appeal to you, you are in the right place. If they feel constrain
 5. **Open a PR** with a short description of what you scanned, what you added, and what open questions remain.
 
 Welcome to the ARK
-![ARK](./ARK.jpg)
+![ARK](./ARK.png)
