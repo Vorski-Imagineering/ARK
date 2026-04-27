@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ARK · Agentic Recall &amp; Knowledge</title>
+<meta name="description" content="A small collaborative study group exploring how humans and AI agents build, remember, and reason together over a shared body of knowledge. Public domain. CC0." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ─────────────────────────────────────────────
+     ARK · public node
+     ───────────────────────────────────────────── */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:     #f6f4ee;
+    --paper-2:   #efece4;
+    --ink:       #0c0c0c;
+    --ink-soft:  #4a4a47;
+    --ink-fade:  #8a8a85;
+    --rule:      #0c0c0c;
+    --hairline:  rgba(12, 12, 12, 0.14);
+    --hair-soft: rgba(12, 12, 12, 0.08);
+
+    --col-num:   5.5rem;
+    --col-label: 11rem;
+    --col-body:  40rem;
+    --gutter:    3rem;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: 'Fraunces', 'Times New Roman', serif;
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+    font-variation-settings: "opsz" 18, "wght" 350;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 1.0625rem;
+    letter-spacing: -0.003em;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* page-edge frame (very subtle) */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 1.25rem;
+    border: 1px solid var(--hair-soft);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+    font-feature-settings: "kern" 1;
+  }
+
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  /* ─────────────────────────────────────────────
+     TOP BAR
+     ───────────────────────────────────────────── */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.875rem 2rem;
+    background: rgba(246, 244, 238, 0.86);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--hairline);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .topbar__group { display: flex; align-items: center; gap: 1.25rem; }
+
+  .topbar__sep {
+    width: 0.25rem; height: 0.25rem; border-radius: 50%;
+    background: var(--ink); opacity: 0.35;
+    display: inline-block;
+  }
+
+  .topbar__nav { display: flex; gap: 0.875rem; align-items: center; }
+  .topbar__nav a {
+    color: var(--ink); text-decoration: none;
+    transition: opacity 0.18s ease;
+    padding: 2px 0;
+  }
+  .topbar__nav a:hover { opacity: 0.45; }
+
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .live__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink);
+    animation: live-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.25); }
+  }
+
+  /* ─────────────────────────────────────────────
+     HERO
+     ───────────────────────────────────────────── */
+  main { position: relative; z-index: 3; }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    padding: 5.5rem 2rem 3rem;
+    position: relative;
+  }
+
+  .hero__meta {
+    align-self: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 1.5rem;
+  }
+
+  .hero__meta-block { display: flex; flex-direction: column; gap: 0.4rem; line-height: 1.4; }
+  .hero__meta-block--right { text-align: right; }
+  .hero__meta-key { color: var(--ink-fade); }
+
+  .hero__center {
+    align-self: center;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .sigil {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "wght" 300;
+    font-size: 1.25rem;
+    color: var(--ink);
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    animation: sigil-spin 90s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes sigil-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "wght" 240;
+    font-size: clamp(7rem, 24vw, 20rem);
+    line-height: 0.82;
+    letter-spacing: -0.045em;
+    margin-bottom: 1.75rem;
+    text-indent: -0.04em;
+  }
+
+  .wordmark__l {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.5em);
+    animation: rise 1.4s cubic-bezier(0.18, 0.85, 0.22, 1) forwards;
+  }
+  .wordmark__l:nth-child(1) { animation-delay: 0.10s; }
+  .wordmark__l:nth-child(2) { animation-delay: 0.26s; }
+  .wordmark__l:nth-child(3) { animation-delay: 0.42s; }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero__sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 60, "wght" 380;
+    font-size: clamp(1.0625rem, 1.75vw, 1.5rem);
+    letter-spacing: 0.005em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fade 1s ease-out 0.85s forwards;
+  }
+  @keyframes fade { to { opacity: 1; } }
+
+  .hero__bottom {
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 0.5rem;
+    opacity: 0;
+    animation: fade 1s ease-out 1.15s forwards;
+  }
+
+  .hero__lede {
+    max-width: 32rem;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 24, "wght" 360;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .hero__enter {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 3px;
+    transition: opacity 0.2s ease, letter-spacing 0.4s ease;
+  }
+  .hero__enter:hover { opacity: 0.55; letter-spacing: 0.24em; }
+
+  /* horizontal reading rules at hero edges */
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    left: 2rem; right: 2rem;
+    height: 1px;
+    background: var(--ink);
+    opacity: 0;
+    animation: rule-extend 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  .hero::before { top: 5.5rem; }
+  .hero::after  { bottom: 3rem; }
+
+  @keyframes rule-extend {
+    to { opacity: 1; transform: scaleX(1); }
+  }
+
+  /* ─────────────────────────────────────────────
+     SECTIONS
+     ───────────────────────────────────────────── */
+  .section {
+    border-top: 1px solid var(--rule);
+    padding: 5.5rem 2rem;
+    max-width: calc(var(--col-num) + var(--col-label) + var(--col-body) + var(--gutter) * 2 + 4rem);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: var(--col-num) var(--col-label) minmax(0, var(--col-body));
+    gap: var(--gutter);
+    align-items: start;
+  }
+
+  .section__num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    line-height: 1.6;
+    padding-top: 0.5rem;
+  }
+
+  .section__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.7;
+    padding-top: 0.5rem;
+    color: var(--ink);
+  }
+
+  .section__label .sublabel {
+    display: block;
+    color: var(--ink-fade);
+    margin-top: 0.4rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+  }
+
+  .section__body { max-width: var(--col-body); }
+
+  .section__body h2 {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 80, "wght" 320;
+    font-size: clamp(1.875rem, 3.4vw, 2.625rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.75rem;
+    color: var(--ink);
+  }
+
+  .section__body h2 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 80, "wght" 360;
+  }
+
+  .section__body p {
+    margin-bottom: 1.15rem;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .section__body p + p { text-indent: 1.5em; }
+
+  .section__body em { font-style: italic; }
+  .section__body strong {
+    font-weight: 500;
+    font-variation-settings: "wght" 480;
+  }
+
+  .section__body a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+    transition: opacity 0.18s ease;
+  }
+  .section__body a:hover { opacity: 0.5; }
+
+  .section__body code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.85em;
+    background: var(--paper-2);
+    padding: 0.05em 0.35em;
+    border: 1px solid var(--hair-soft);
+  }
+
+  .section__body ul {
+    list-style: none;
+    margin: 1.25rem 0 1.5rem;
+  }
+  .section__body ul li {
+    padding-left: 2rem;
+    position: relative;
+    margin-bottom: 0.85rem;
+    line-height: 1.6;
+  }
+  .section__body ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ink);
+  }
+
+  /* ─────────────────────────────────────────────
+     MANIFESTO (pull-styled first paragraph)
+     ───────────────────────────────────────────── */
+  .manifesto .section__body > p:first-of-type {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "wght" 320;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    margin-bottom: 1.75rem;
+    text-indent: 0;
+  }
+
+  .manifesto .section__body > p:nth-of-type(2) {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-indent: 0;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+  }
+
+  /* ─────────────────────────────────────────────
+     PLATE (image)
+     ───────────────────────────────────────────── */
+  .plate {
+    border-top: 1px solid var(--rule);
+    padding: 5rem 2rem 5.5rem;
+    text-align: center;
+  }
+  .plate__head {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2.25rem;
+  }
+  .plate__head::before, .plate__head::after {
+    content: "—";
+    margin: 0 0.85rem;
+    color: var(--ink-fade);
+  }
+  .plate__frame {
+    display: inline-block;
+    padding: 0.75rem;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .plate__image {
+    display: block;
+    max-width: 100%;
+    width: 28rem;
+    height: auto;
+    filter: grayscale(100%) contrast(1.05) brightness(0.97);
+  }
+  .plate__caption {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "wght" 360;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 1.5rem;
+  }
+
+  /* ─────────────────────────────────────────────
+     CODE / TREE BLOCK
+     ───────────────────────────────────────────── */
+  .tree {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.85;
+    background: transparent;
+    border-left: 1px solid var(--rule);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 1.75rem 0 2rem;
+    white-space: pre;
+    overflow-x: auto;
+    color: var(--ink);
+  }
+  .tree .arrow { color: var(--ink-fade); }
+
+  /* ─────────────────────────────────────────────
+     RESEARCH (six active threads)
+     ───────────────────────────────────────────── */
+  .research-section {
+    border-top: 1px solid var(--rule);
+    padding: 5.5rem 2rem 0;
+    max-width: calc(var(--col-num) + var(--col-label) + var(--col-body) + var(--gutter) * 2 + 4rem);
+    margin: 0 auto;
+  }
+
+  .research-section__head {
+    display: grid;
+    grid-template-columns: var(--col-num) var(--col-label) minmax(0, var(--col-body));
+    gap: var(--gutter);
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .research-section__intro h2 {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 80, "wght" 320;
+    font-size: clamp(1.875rem, 3.4vw, 2.625rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .research-section__intro h2 em { font-style: italic; }
+  .research-section__intro p {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    max-width: 36rem;
+  }
+
+  .threads { padding-bottom: 2rem; }
+
+  .thread {
+    display: grid;
+    grid-template-columns: var(--col-num) var(--col-label) minmax(0, var(--col-body));
+    gap: var(--gutter);
+    align-items: start;
+    padding: 3rem 0 3.25rem;
+    border-top: 1px solid var(--hairline);
+    position: relative;
+  }
+  .thread:last-child { border-bottom: 1px solid var(--hairline); }
+
+  .thread__num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    padding-top: 0.55rem;
+  }
+
+  .thread__tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.85;
+    padding-top: 0.55rem;
+  }
+  .thread__tag .tag-line { display: block; }
+  .thread__tag .tag-line + .tag-line { color: var(--ink-fade); }
+
+  .thread__content { max-width: var(--col-body); }
+
+  .thread__title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 80, "wght" 320;
+    font-size: clamp(1.5rem, 2.5vw, 2.0rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.85rem;
+    color: var(--ink);
+  }
+  .thread__title em {
+    font-style: italic;
+    font-variation-settings: "opsz" 80, "wght" 360;
+  }
+
+  .thread__thesis {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 60, "wght" 360;
+    font-size: 1.125rem;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .thread__body {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .thread__body em { font-style: italic; }
+  .thread__body strong {
+    font-weight: 500;
+    font-variation-settings: "wght" 480;
+  }
+
+  .thread__cite {
+    margin-top: 1rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+  }
+  .thread__cite a {
+    color: var(--ink-fade);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .thread__cite a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  /* ─────────────────────────────────────────────
+     JOIN · OPEN CHANNEL
+     ───────────────────────────────────────────── */
+  .join {
+    border-top: 1px solid var(--rule);
+    padding: 6.5rem 2rem 7rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .join__head {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+  }
+  .join__head::before, .join__head::after {
+    content: "·";
+    margin: 0 0.85rem;
+    color: var(--ink-fade);
+  }
+
+  .join__title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "wght" 270;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+    margin-bottom: 1.75rem;
+    color: var(--ink);
+  }
+  .join__title em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "wght" 320;
+  }
+
+  .join__lede {
+    max-width: 32rem;
+    margin: 0 auto 3rem;
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 24, "wght" 360;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .join__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.125rem 2.25rem;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .join__cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: translateY(101%);
+    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: -1;
+  }
+  .join__cta:hover,
+  .join__cta:focus-visible { color: var(--paper); outline: none; }
+  .join__cta:hover::before,
+  .join__cta:focus-visible::before { transform: translateY(0); }
+
+  .join__cta-arrow {
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    font-variation-settings: "wght" 320;
+    font-size: 1.0625rem;
+    line-height: 1;
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .join__cta:hover .join__cta-arrow,
+  .join__cta:focus-visible .join__cta-arrow {
+    transform: translateX(0.45rem);
+  }
+
+  .join__sub {
+    margin-top: 2.25rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+  }
+
+  .topbar__nav .topbar__nav-cta {
+    border: 1px solid var(--ink);
+    padding: 4px 10px 3px;
+    margin-left: 0.5rem;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .topbar__nav .topbar__nav-cta:hover {
+    background: var(--ink);
+    color: var(--paper);
+    opacity: 1;
+  }
+
+  /* ─────────────────────────────────────────────
+     FOOTER
+     ───────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+  }
+
+  .end-mark {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "wght" 300;
+    font-size: 1.625rem;
+    line-height: 1;
+    margin-bottom: 1.75rem;
+    color: var(--ink);
+  }
+
+  .end-text {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 2.1;
+  }
+
+  .end-text .strong { color: var(--ink); }
+
+  .footer-rule {
+    width: 4rem;
+    height: 1px;
+    background: var(--ink);
+    margin: 0 auto 2rem;
+  }
+
+  /* ─────────────────────────────────────────────
+     SCROLL REVEAL
+     ───────────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─────────────────────────────────────────────
+     RESPONSIVE
+     ───────────────────────────────────────────── */
+  @media (max-width: 880px) {
+    body::after { inset: 0.5rem; }
+    .topbar { padding: 0.625rem 1rem; gap: 0.5rem; }
+    .topbar__group:nth-child(2) { display: none; }
+    .topbar__nav { gap: 0.625rem; }
+
+    .hero { padding: 4.5rem 1.25rem 2.5rem; }
+    .hero__meta { font-size: 0.625rem; gap: 1rem; padding-top: 0.75rem; }
+    .hero::before, .hero::after { left: 1.25rem; right: 1.25rem; }
+    .hero::before { top: 4.5rem; }
+    .hero::after  { bottom: 2.5rem; }
+
+    .section {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 4rem 1.25rem;
+    }
+    .section__num, .section__label { padding-top: 0; }
+    .section__num { display: inline-block; margin-right: 1rem; }
+    .section__label { display: inline-block; }
+    .section__body p + p { text-indent: 0; }
+
+    .plate { padding: 4rem 1.25rem; }
+    .plate__image { width: 100%; }
+
+    .research-section { padding: 4rem 1.25rem 0; }
+    .research-section__head {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .research-section__intro h2 { margin-top: 0.5rem; }
+
+    .thread {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      padding: 2.5rem 0;
+    }
+    .thread__num { padding-top: 0; display: inline-block; margin-right: 0.75rem; }
+    .thread__tag  { padding-top: 0; display: inline-block; }
+    .thread__title { margin-top: 0.75rem; }
+
+    footer { padding: 4rem 1.25rem 3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───── TOP BAR ───── -->
+<nav class="topbar" aria-label="primary">
+  <div class="topbar__group">
+    <span>ARK</span>
+    <span class="topbar__sep" aria-hidden="true"></span>
+    <span>NODE 001</span>
+    <span class="topbar__sep" aria-hidden="true"></span>
+    <span id="cycle">CYCLE —</span>
+  </div>
+  <div class="topbar__group topbar__nav">
+    <a href="#mandate">About</a>
+    <a href="#research">Research</a>
+    <a href="#method">Method</a>
+    <a href="#onboard">Onboard</a>
+    <a href="#join" class="topbar__nav-cta">→ Join</a>
+  </div>
+  <div class="topbar__group">
+    <span class="live"><span class="live__dot" aria-hidden="true"></span>Public Transmission</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ───── HERO ───── -->
+  <section class="hero" aria-label="masthead">
+    <div class="hero__meta">
+      <div class="hero__meta-block">
+        <span class="hero__meta-key">Filed under</span>
+        <span>Open Research / Public Domain</span>
+      </div>
+      <div class="hero__meta-block hero__meta-block--right">
+        <span class="hero__meta-key">Issued</span>
+        <span>EST. 2026 · CC0</span>
+      </div>
+    </div>
+
+    <div class="hero__center">
+      <div class="sigil" aria-hidden="true">⁕</div>
+      <h1 class="wordmark" aria-label="ARK">
+        <span class="wordmark__l">A</span><span class="wordmark__l">R</span><span class="wordmark__l">K</span>
+      </h1>
+      <p class="hero__sub">Agentic Recall &amp; Knowledge</p>
+    </div>
+
+    <div class="hero__bottom">
+      <p class="hero__lede">
+        A small collaborative study group exploring how humans and AI agents can build, remember, and reason together over a shared body of knowledge.
+      </p>
+      <a href="#manifesto" class="hero__enter">↓ Enter the Node</a>
+    </div>
+  </section>
+
+  <!-- ───── §00 MANIFESTO ───── -->
+  <section class="section manifesto" id="manifesto">
+    <div class="section__num">§ 00</div>
+    <div class="section__label">
+      Manifesto
+      <span class="sublabel">Frontispiece</span>
+    </div>
+    <div class="section__body reveal">
+      <p>This repository is our commons — and our portfolio. The working surface where research, design, and tooling accumulate in public, not as a polished product, but as an honest, append-only trail of how we think.</p>
+      <p>Welcome.</p>
+    </div>
+  </section>
+
+  <!-- ───── §01 MANDATE ───── -->
+  <section class="section" id="mandate">
+    <div class="section__num">§ 01</div>
+    <div class="section__label">
+      Mandate
+      <span class="sublabel">What &amp; Why</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>A working group on memory.</h2>
+      <p>ARK is a small study group focused on <em>agentic recall and knowledge</em> — the practical art of giving AI agents and the humans who work with them <strong>durable memory</strong>, <strong>defensible reasoning</strong>, and a <strong>shared base</strong> they can extend without stepping on each other.</p>
+      <p>The work is grounded in two long-running threads: <strong>The Coherence Company</strong> (transcript-native institutional intelligence, dreaming architectures, the Living Book) and <strong>Regentribe</strong> (decentralized knowledge infrastructure on Radicle and SurrealDB). Both feed the same question — <em>how do we build a memory that grows.</em></p>
+    </div>
+  </section>
+
+  <!-- ───── PLATE ───── -->
+  <section class="plate" aria-label="plate">
+    <div class="plate__head">Plate I — The Ark</div>
+    <div class="reveal">
+      <div class="plate__frame">
+        <img src="../ARK.jpg" alt="The Ark — a vessel for what is worth carrying forward" class="plate__image" />
+      </div>
+      <p class="plate__caption">A small craft for what is worth carrying forward.</p>
+    </div>
+  </section>
+
+  <!-- ───── §02 RESEARCH ───── -->
+  <section class="research-section" id="research" aria-label="research threads">
+    <div class="research-section__head reveal">
+      <div class="section__num">§ 02</div>
+      <div class="section__label">
+        Research
+        <span class="sublabel">Six Active Threads</span>
+      </div>
+      <div class="research-section__intro">
+        <h2>What we are studying <em>now</em>.</h2>
+        <p>Six threads are alive in the repository at the moment. Each is a working investigation, not a finished position — open questions are tagged in the source and welcome challenge.</p>
+      </div>
+    </div>
+
+    <div class="threads">
+
+      <article class="thread reveal">
+        <div class="thread__num">[ 01 ]</div>
+        <div class="thread__tag">
+          <span class="tag-line">Memory</span>
+          <span class="tag-line">Institutional intelligence</span>
+        </div>
+        <div class="thread__content">
+          <h3 class="thread__title">Transcript-native institutional intelligence.</h3>
+          <p class="thread__thesis">Conversations as the source of truth — not documents as the artifact.</p>
+          <p class="thread__body">Building institutional memory from transcripts is not primarily a tool-calling problem; it is a <strong>memory-compilation</strong> problem. Conversations are high-volume, low-signal raw material that needs to be turned into a temporal graph of <em>episodes, claims, contradictions, and unresolved questions</em> — something a future agent (or human) can actually reason over, not just retrieve from.</p>
+          <p class="thread__cite">→ research/The Coherence Company/agent-orchestration-and-memory-systems.md</p>
+        </div>
+      </article>
+
+      <article class="thread reveal">
+        <div class="thread__num">[ 02 ]</div>
+        <div class="thread__tag">
+          <span class="tag-line">Runtimes</span>
+          <span class="tag-line">Harness design</span>
+        </div>
+        <div class="thread__content">
+          <h3 class="thread__title">Agent runtimes &amp; the harness split.</h3>
+          <p class="thread__thesis">The 2026 convergence: harness, execution, memory — three planes, not one chatbot.</p>
+          <p class="thread__body">Serious agent systems are separating the <strong>control plane</strong> (turns, approvals, tracing) from the <strong>execution plane</strong> (sandbox, files, ports) from the <strong>memory plane</strong>. We compare live runtimes — <em>OpenClaw</em>, <em>HERMES</em>, <em>LangGraph</em>, the OpenAI Agents SDK, and Microsoft Agent Framework — against transcript-first institutional workloads.</p>
+          <p class="thread__cite">→ research/The Coherence Company/coco-openclaw-vs-hermes.md</p>
+        </div>
+      </article>
+
+      <article class="thread reveal">
+        <div class="thread__num">[ 03 ]</div>
+        <div class="thread__tag">
+          <span class="tag-line">Memory</span>
+          <span class="tag-line">Consolidation</span>
+        </div>
+        <div class="thread__content">
+          <h3 class="thread__title">Dreaming &amp; consolidation architectures.</h3>
+          <p class="thread__thesis">Periodic sweeps that promote evidence into durable knowledge — wake, sleep, replay.</p>
+          <p class="thread__body">The frontier of agent memory is no longer "store more"; it is <em>write-manage-read</em> with explicit consolidation, update, and forgetting policies. We track the lineage from Dyna and DreamCoder through Generative Agents, Reflexion, ReasoningBank, ReMe, and OpenClaw's core <em>Dreaming</em> subsystem — looking for trustworthy, governed consolidation rather than poetic generation.</p>
+          <p class="thread__cite">→ research/The Coherence Company/openclaw-dreams-and-hermes-dreaming-architecture.md</p>
+        </div>
+      </article>
+
+      <article class="thread reveal">
+        <div class="thread__num">[ 04 ]</div>
+        <div class="thread__tag">
+          <span class="tag-line">Substrate</span>
+          <span class="tag-line">Knowledge graphs</span>
+        </div>
+        <div class="thread__content">
+          <h3 class="thread__title">Compiled memory &amp; temporal graphs.</h3>
+          <p class="thread__thesis">Pages, not chunks. Provenance, not retrieval.</p>
+          <p class="thread__body">The cleanest memory model is not "retrieve better chunks" but <em>compile raw sources into a persistent, interlinked wiki</em> that compounds over time. We benchmark <strong>SurrealDB</strong>, <strong>Neo4j Agent Memory</strong>, <strong>Zep / Graphiti</strong>, <strong>Letta</strong>, and <strong>Mem0</strong> against the requirements for compiled, evidence-backed institutional knowledge with temporal facts and provenance.</p>
+          <p class="thread__cite">→ research/regentribe/surrealdb-alternatives-research.md</p>
+        </div>
+      </article>
+
+      <article class="thread reveal">
+        <div class="thread__num">[ 05 ]</div>
+        <div class="thread__tag">
+          <span class="tag-line">Infrastructure</span>
+          <span class="tag-line">Commons</span>
+        </div>
+        <div class="thread__content">
+          <h3 class="thread__title">Knowledge infrastructure for distributed communities.</h3>
+          <p class="thread__thesis">GitHub for authoring, queryable graph for retrieval, MCP for any tool.</p>
+          <p class="thread__body"><strong>Genesis Brain Light</strong> is a two-layer system: members edit markdown in their own AI tools and push to GitHub; an automatic pipeline lifts those changes into a SurrealDB knowledge graph exposed via <em>MCP</em>. The aim is a knowledge commons that any AI assistant can query, regardless of which tool the human is working in.</p>
+          <p class="thread__cite">→ research/regentribe/genesis-brain-light-design.md</p>
+        </div>
+      </article>
+
+      <article class="thread reveal">
+        <div class="thread__num">[ 06 ]</div>
+        <div class="thread__tag">
+          <span class="tag-line">Medium</span>
+          <span class="tag-line">Publishing</span>
+        </div>
+        <div class="thread__content">
+          <h3 class="thread__title">The Living Book.</h3>
+          <p class="thread__thesis">Knowledge that grows, not knowledge that ends.</p>
+          <p class="thread__body">A new medium for deep knowledge — where the <em>author maintains authoritative coherence</em>, the <em>community adds annotation and extension</em>, multiple coherence streams coexist as different lenses, and contributors are recognized for the value they add. The manifesto in the repo is one of the philosophical anchors for the rest of the work.</p>
+          <p class="thread__cite">→ research/The Coherence Company/living-book-manifesto.md</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ───── §03 LICENSE ───── -->
+  <section class="section" id="license">
+    <div class="section__num">§ 03</div>
+    <div class="section__label">
+      License
+      <span class="sublabel">CC0 1.0</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>A commons <em>and</em> a portfolio.</h2>
+      <p>Everything in this repository is released under <strong>CC0 1.0 Universal</strong> — a public domain dedication. No copyright is asserted. No attribution is required. Contributions you make become part of the commons; do not contribute material you cannot release that way.</p>
+      <p>The choice is deliberate. A <em>commons</em>, because every artifact here is dedicated to the public domain so anyone can build on it. A <em>portfolio</em>, because everything you write here is signed by your commits and visible to anyone who wants to see how you think — your research, your syntheses, your judgment under uncertainty, the questions you choose to chase.</p>
+      <p>We work in the open so we can <strong>show our thinking</strong>, <strong>share research and synthesis</strong>, <strong>learn together</strong>, and <strong>show what each of us is capable of</strong>. Both readings are intended. Contribute work you would be proud to put your name on, and contribute it in a way that helps the next person.</p>
+    </div>
+  </section>
+
+  <!-- ───── §04 REPOSITORY ───── -->
+  <section class="section" id="repository">
+    <div class="section__num">§ 04</div>
+    <div class="section__label">
+      Repository
+      <span class="sublabel">Four Artifacts</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Four kinds of artifact.</h2>
+      <p>The repo is organized so the <em>kind of thinking</em> is obvious from the path. Research is durable, citable knowledge. Plans are design specs and workstream breakdowns. Needs are open invitations. Scripts and skills are the shared tooling.</p>
+<pre class="tree">ARK/
+├── README.md           <span class="arrow">←</span> orientation
+├── AGENT.md            <span class="arrow">←</span> operating instructions
+├── LICENSE             <span class="arrow">←</span> CC0 public domain
+│
+├── research/           <span class="arrow">←</span> what we have learned
+├── plan/               <span class="arrow">←</span> what we intend to build
+├── needs/              <span class="arrow">←</span> who we are looking for
+├── scripts/            <span class="arrow">←</span> repo-wide tooling
+└── skills/             <span class="arrow">←</span> shared agent skills</pre>
+      <p>Current research threads live under <code>research/The Coherence Company/</code> and <code>research/regentribe/</code>. The active design is in <code>plan/The Coherence Company/metis-hermes-01/</code> — a thirteen-part workstream covering everything from operating model to migration sequencing.</p>
+      <p>Skills are reusable agent capabilities — packaged instructions an AI collaborator pulls in to do a specific job consistently across the group. The folder is intentionally young: if you build something twice, package it as a skill.</p>
+    </div>
+  </section>
+
+  <!-- ───── §05 METHOD ───── -->
+  <section class="section" id="method">
+    <div class="section__num">§ 05</div>
+    <div class="section__label">
+      Method
+      <span class="sublabel">Operating Guide</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>How we collaborate.</h2>
+      <p>When you sit down to contribute, the first thing you feel is the weight of this being <em>public and permanent</em>. Every word can be read, cited, and forked by anyone, forever. So you carry a quiet checklist with you: no PII, no names of private individuals — you use roles instead — no private chat excerpts, no credentials, no NDA-bound material. If it would be inappropriate on a public website, it does not belong here.</p>
+      <p>Next you notice that you are being treated as a <em>research collaborator, not an assistant</em>. The expectation is transparent, auditable work — explicit assumptions, structured markdown, inline citations, no hidden reasoning, no answer-first shortcuts. You write for the next person who will walk in cold.</p>
+      <p>When you start a real research task, the work moves through a familiar arc. You <strong>scan</strong> first — what is already there, what can you cite or supersede. Then you <strong>decompose</strong> the question into sub-questions, written into a notes file <em>before</em> you go exploring. Then you <strong>explore</strong>, gathering data and citing inline. Then <strong>synthesize</strong> — pulling threads into a document that stands on its own. Then <strong>reflect</strong> — leaving open-question markers for what is still unclear. And finally <strong>persist</strong> — a short dated entry in the topic's log so the trail is visible to whoever comes next. You append; you do not silently overwrite.</p>
+      <p>Throughout, citation and uncertainty are not optional. Load-bearing assumptions are tagged so the next reader can challenge them. You never fabricate a source — if you cannot verify it, you ask before citing it.</p>
+      <p>This is not a hackathon and it is not a Slack thread. It is closer to a <em>public lab notebook</em> that a small group keeps together — slow, append-only work over fast throwaway output; visible reasoning over polished conclusions; reproducibility for the next agent over efficiency for the current one.</p>
+    </div>
+  </section>
+
+  <!-- ───── §06 ONBOARD ───── -->
+  <section class="section" id="onboard">
+    <div class="section__num">§ 06</div>
+    <div class="section__label">
+      Onboard
+      <span class="sublabel">First Contribution</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Getting started.</h2>
+      <ul>
+        <li>Read <a href="../AGENT.md">AGENT.md</a> end to end. The rules of the road.</li>
+        <li>Skim <code>research/</code> and <code>plan/</code> for threads that interest you. Begin with the <em>Living Book Manifesto</em> for the philosophical frame; <code>metis-hermes-01/00-workstreams-index.md</code> for what is being designed.</li>
+        <li>Check <code>needs/</code> for explicit roles to step into.</li>
+        <li>Pick a small first contribution — a research note, a citation cleanup, an open question you can answer. Follow the loop.</li>
+        <li>Open a PR with a short description: what you scanned, what you added, what remains open.</li>
+      </ul>
+      <p style="margin-top: 2.5rem; font-style: italic; font-size: 1.1875rem; font-variation-settings: 'opsz' 60, 'wght' 380;">Welcome to the commons.</p>
+    </div>
+  </section>
+
+  <!-- ───── JOIN ───── -->
+  <section class="join" id="join" aria-label="join the group">
+    <p class="join__head">Open Channel · Telegram</p>
+    <h2 class="join__title reveal">Join <em>the&nbsp;node</em>.</h2>
+    <p class="join__lede reveal">A small group meets — mostly — in the channel. Slow conversations, shared notes, the occasional argument worth having. Drop in.</p>
+    <a class="join__cta reveal" href="https://t.me/+V776eqmvCCFiZmY0" target="_blank" rel="noopener noreferrer">
+      <span>Join on Telegram</span>
+      <span class="join__cta-arrow" aria-hidden="true">→</span>
+    </a>
+    <p class="join__sub">↗ t.me · private invitation · readers welcome</p>
+  </section>
+
+</main>
+
+<!-- ───── FOOTER ───── -->
+<footer>
+  <div class="footer-rule" aria-hidden="true"></div>
+  <div class="end-mark" aria-hidden="true">⁂</div>
+  <div class="end-text">
+    End of Transmission<br />
+    <span class="strong">No Rights Reserved</span> · CC0 1.0 Universal · MMXXVI<br />
+    This work is dedicated to the public domain
+  </div>
+</footer>
+
+<script>
+  /* ─── live cycle clock ─── */
+  (function () {
+    const el = document.getElementById('cycle');
+    if (!el) return;
+    function tick() {
+      const d = new Date();
+      const yy = String(d.getUTCFullYear()).slice(2);
+      const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(d.getUTCDate()).padStart(2, '0');
+      const hh = String(d.getUTCHours()).padStart(2, '0');
+      const mi = String(d.getUTCMinutes()).padStart(2, '0');
+      el.textContent = `CYCLE ${yy}.${mm}.${dd}/${hh}${mi}Z`;
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+
+  /* ─── scroll reveal ─── */
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+</script>
+
+</body>
+</html>
