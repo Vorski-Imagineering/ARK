@@ -19,7 +19,24 @@ The result: any agent working in this repo can query what TCC knows — across a
 
 ---
 
-## 2. What Is Explicitly Out of Scope (MVP)
+## 2. Scope vs Broader Hermes Memory Model
+
+This MVP implements **only the durable semantic memory of the `research/` corpus**. The wider Hermes memory architecture has multiple layers (see [05-memory-model-and-retrieval-policy.md](./05-memory-model-and-retrieval-policy.md) and [06-dreaming-and-consolidation-architecture.md](./06-dreaming-and-consolidation-architecture.md)) — this MVP touches one of them.
+
+| Memory layer | Where it lives | Owned by |
+|---|---|---|
+| Working memory (current prompt) | Hermes session context | Hermes built-in |
+| User memory (`MEMORY.md`, `USER.md`) | Hermes profile dir | Hermes built-in |
+| Session / episodic STM | Hermes session store | Hermes built-in |
+| **Durable semantic (research corpus)** | **SurrealDB knowledge graph** | **This MVP** |
+| Durable procedural / skills | Hermes skills dir | Hermes built-in (out of scope) |
+| Mid-term consolidation, group memory, dream reports | — | Post-MVP, see [06-dreaming-and-consolidation-architecture.md](./06-dreaming-and-consolidation-architecture.md) |
+
+The knowledge graph is **derived** from the markdown corpus. The corpus is canonical (see [02-system-boundary-and-source-of-truth.md](./02-system-boundary-and-source-of-truth.md)); the graph can always be rebuilt from it via full reindex.
+
+---
+
+## 3. What Is Explicitly Out of Scope (MVP)
 
 | Genesis Brain Light feature | Decision |
 |---|---|
@@ -34,6 +51,10 @@ The result: any agent working in this repo can query what TCC knows — across a
 ---
 
 ## 3. File Layout
+
+Three classes of artifact, three locations. Code is in the repo; runtime state is under the Hermes profile; the venv is local to the skill but gitignored.
+
+### 3.1 In this repo (git-tracked)
 
 ```
 skills/knowledge-base/
@@ -56,7 +77,28 @@ skills/knowledge-base/
 │   └── ingest.sh
 ├── docker-compose.yml      # SurrealDB container (port 8765)
 └── SKILL.md                # Hermes skill definition
+
+research/                   # The corpus — already exists, system of record
 ```
+
+### 3.2 Under the Hermes profile (runtime state, not git-tracked)
+
+```
+~/.hermes/<profile>/state/knowledge-base/
+└── surreal-data/           # SurrealDB on-disk database files
+```
+
+This mirrors the Genesis pattern of `~/.openclaw/surreal-data/` — the agent's runtime state belongs with the agent, not in the code repo. The exact path uses Hermes's profile state directory convention (verify against current Hermes docs at install time).
+
+The only writable pipeline state besides the DB itself is `kb_meta.last_indexed_commit`, which is stored **inside** SurrealDB. So "where does the SurrealDB data live" is the only state-location decision needed.
+
+### 3.3 Local to the skill but gitignored
+
+```
+skills/knowledge-base/pipeline/.venv/   # Deterministic from requirements.txt
+```
+
+Same pattern as Genesis's `~/.openclaw/workspace-genesis/skills/semantic-graph/.venv/`. Add `skills/knowledge-base/pipeline/.venv/` to `.gitignore`.
 
 ---
 
@@ -64,7 +106,7 @@ skills/knowledge-base/
 
 ### 4.1 SurrealDB Container
 
-Run SurrealDB on port **8765** (not 8000, to avoid collision with any existing Genesis instance). Persist data in `skills/knowledge-base/data/`. Configuration mirrors the Genesis production setup described in [TOOLS.md § Knowledge Graph](../../research/regentribe/genesis-zero-bot/TOOLS.md).
+Run SurrealDB on port **8765** (not 8000, to avoid collision with any existing Genesis instance). Persist data outside the repo at `${HERMES_KB_DATA_DIR}` (see § 3.2 — typically `~/.hermes/<profile>/state/knowledge-base/surreal-data/`). The `docker-compose.yml` bind-mounts that path into the container's `/data` volume. This keeps mutating binary state out of the code repo and aligns with the Genesis production setup ([TOOLS.md § Knowledge Graph](../../research/regentribe/genesis-zero-bot/TOOLS.md)).
 
 ---
 
@@ -178,6 +220,7 @@ Identical to the Genesis Brain Light data flow described in [§ 4](../../researc
 | `SURREAL_PASS` | SurrealDB root password | _(set in Hermes profile `.env`)_ |
 | `SURREAL_NS` | SurrealDB namespace | `tcc` |
 | `SURREAL_DB` | SurrealDB database | `knowledge_base` |
+| `HERMES_KB_DATA_DIR` | Host path bind-mounted into the SurrealDB container's `/data` (see § 3.2) | `~/.hermes/tcc/state/knowledge-base/surreal-data` |
 | `OPENROUTER_API_KEY` | OpenRouter API key (embeddings + extraction) | _(set in Hermes profile `.env`)_ |
 | `EMBED_MODEL` | Embedding model via OpenRouter | `openai/text-embedding-3-small` |
 | `EXTRACT_MODEL` | Extraction LLM via OpenRouter | `anthropic/claude-haiku-4-5` |
