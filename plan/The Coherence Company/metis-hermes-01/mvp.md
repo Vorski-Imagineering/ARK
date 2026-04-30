@@ -158,6 +158,7 @@ HNSW vector index on `chunk.embedding` and `concept.embedding` for semantic sear
 | Obsidian | File watcher or periodic sync | Native markdown, wikilinks preserved |
 | Telegram | Bot API webhook | Real-time file ingestion |
 | Fathom | Email trigger + API download | Transcript from meeting recording link |
+| ChatGPT Projects | Export + API fetch | Ingest all threads from a ChatGPT project |
 
 All sources flow through the same `ingest.py` pipeline after format-normalization via Kreuzberg.
 
@@ -304,6 +305,18 @@ ingest.py:
   chunker → embedder → extractor → SurrealDB upsert
         ↓
 Graph updated → confirmation to email sender
+
+Path F: ChatGPT Projects threads
+Manual project export or API trigger
+        ↓
+Fetch all conversation threads
+        ↓
+convert.py: threads → markdown format
+        ↓
+ingest.py:
+  chunker → embedder → extractor → SurrealDB upsert
+        ↓
+Graph updated → confirmation to Telegram/email
 ```
 
 ---
@@ -328,6 +341,7 @@ Graph updated → confirmation to email sender
 | `GDRIVE_CREDENTIALS` | Google Service Account JSON path | `~/.hermes/tcc/secrets/gdrive.json` |
 | `NOTION_API_KEY` | Notion integration token | _(set in Hermes profile `.env`)_ |
 | `FATHOM_API_KEY` | Fathom API token for transcript download | _(set in Hermes profile `.env`)_ |
+| `OPENAI_API_KEY` | OpenAI API key for ChatGPT Projects access | _(set in Hermes profile `.env`)_ |
 
 ---
 
