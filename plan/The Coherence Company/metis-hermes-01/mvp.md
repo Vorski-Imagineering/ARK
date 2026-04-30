@@ -194,13 +194,13 @@ Dry-run flag (`--dry-run`) prints the file list without writing anything — use
 
 Same interface as the production Genesis Brain scripts documented in [TOOLS.md § Genesis Brain scripts](../../research/regentribe/genesis-zero-bot/TOOLS.md). Each script activates the Python venv, sets required env vars, and returns JSON.
 
-|| Script | Input | Output | Notes |
-||---|---|---|---||
-|| `query.sh "<query>" [limit]` | Query string, optional result limit (default 5) | `{results: [{path, title, text, score}]}` | Vector search on chunk embeddings via SurrealDB HNSW |
-|| `relate.sh "<A>" "<B>"` | Two concept names | `{from, to, direct: [{verb, weight}], shared_neighbors: [...]}` | Graph traversal between concept nodes |
-|| `stats.sh` | — | `{document: N, chunk: N, concept: N, ...}` | Row counts per table |
-|| `capture.sh "<text>"` | Freeform text | Ingest result JSON | Writes to a temp file, ingests it, deletes the file |
-|| `ingest.sh <path>` | Path to a file | Ingest result JSON | Direct call to `ingest.py` |
+| Script | Input | Output | Notes |
+|---|---|---|---|
+| `query.sh "<query>" [limit]` | Query string, optional result limit (default 5) | `{results: [{path, title, text, score}]}` | Vector search on chunk embeddings via SurrealDB HNSW |
+| `relate.sh "<A>" "<B>"` | Two concept names | `{from, to, direct: [{verb, weight}], shared_neighbors: [...]}` | Graph traversal between concept nodes |
+| `stats.sh` | — | `{document: N, chunk: N, concept: N, ...}` | Row counts per table |
+| `capture.sh "<text>"` | Freeform text | Ingest result JSON | Writes to a temp file, ingests it, deletes the file |
+| `ingest.sh <path>` | Path to a file | Ingest result JSON | Direct call to `ingest.py` |
 
 ---
 
@@ -347,13 +347,13 @@ Graph updated → confirmation to Telegram/email
 
 ## 8. Key Design Decisions vs Genesis
 
-|| Decision point | Genesis Brain Light | This system ||
-||---|---|---||
-|| Document layer | GitHub repo | This git repo (`research/`) + S3 + GDrive + Notion + Obsidian |
-|| Reindex trigger | GitHub webhook → VPS FastAPI | Hermes cron + `git diff` + S3 sync + GDrive API + Notion API |
-|| Query interface | Separate MCP server (FastAPI + FastMCP) | Hermes skill scripts |
-|| Blob storage | Cloudflare R2 | **S3-compatible storage included** |
-|| Auth | API key per user | Single Hermes profile (no auth) |
+| Decision point | Genesis Brain Light | This system |
+|---|---|---|
+| Document layer | GitHub repo | This git repo (`research/`) + S3 + GDrive + Notion + Obsidian |
+| Reindex trigger | GitHub webhook → VPS FastAPI | Hermes cron + `git diff` + S3 sync + GDrive API + Notion API |
+| Query interface | Separate MCP server (FastAPI + FastMCP) | Hermes skill scripts |
+| Blob storage | Cloudflare R2 | **S3-compatible storage included** |
+| Auth | API key per user | Single Hermes profile (no auth) |
 
 The core pipeline logic (chunking, embedding, extraction, SurrealDB schema) is identical to Genesis. See [GENESIS-BRAIN-LIGHT-DESIGN.md](../../research/regentribe/GENESIS-BRAIN-LIGHT-DESIGN.md) for the authoritative design rationale.
 
@@ -361,12 +361,12 @@ The core pipeline logic (chunking, embedding, extraction, SurrealDB schema) is i
 
 ## 9. References
 
-|| Document | What it covers ||
-||---|---||
-|| [GENESIS-BRAIN-LIGHT-DESIGN.md](../../research/regentribe/GENESIS-BRAIN-LIGHT-DESIGN.md) | Full Genesis Brain Light design — authoritative source |
-|| [GENESIS-BRAIN-ARCHITECTURE.md](../../research/regentribe/GENESIS-BRAIN-ARCHITECTURE.md) | SurrealDB schema, current live architecture |
-|| [genesis-zero-bot/TOOLS.md](../../research/regentribe/genesis-zero-bot/TOOLS.md) | Production script interface, env vars, SurrealDB location |
-|| [CoCo-OpenClaw-vs-Hermes.md](../../research/The Coherence Company/CoCo-OpenClaw-vs-Hermes.md) | Why Hermes over OpenClaw for this system |
-|| [OpenClaw Dreams and HERMES Dreaming Architecture.md](../../research/The Coherence Company/OpenClaw%20Dreams%20and%20a%20HERMES%20Dreaming%20Architecture.md) | Memory consolidation context (post-MVP dreaming layer) |
-|| [07-knowledge-graph-and-compiled-knowledge-design.md](./07-knowledge-graph-and-compiled-knowledge-design.md) | Open questions on schema evolution |
-|| [05-memory-model-and-retrieval-policy.md](./05-memory-model-and-retrieval-policy.md) | Retrieval policy decisions to revisit post-MVP |
+| Document | What it covers |
+|---|---|
+| [GENESIS-BRAIN-LIGHT-DESIGN.md](../../research/regentribe/GENESIS-BRAIN-LIGHT-DESIGN.md) | Full Genesis Brain Light design — authoritative source |
+| [GENESIS-BRAIN-ARCHITECTURE.md](../../research/regentribe/GENESIS-BRAIN-ARCHITECTURE.md) | SurrealDB schema, current live architecture |
+| [genesis-zero-bot/TOOLS.md](../../research/regentribe/genesis-zero-bot/TOOLS.md) | Production script interface, env vars, SurrealDB location |
+| [CoCo-OpenClaw-vs-Hermes.md](../../research/The Coherence Company/CoCo-OpenClaw-vs-Hermes.md) | Why Hermes over OpenClaw for this system |
+| [OpenClaw Dreams and HERMES Dreaming Architecture.md](../../research/The Coherence Company/OpenClaw%20Dreams%20and%20a%20HERMES%20Dreaming%20Architecture.md) | Memory consolidation context (post-MVP dreaming layer) |
+| [07-knowledge-graph-and-compiled-knowledge-design.md](./07-knowledge-graph-and-compiled-knowledge-design.md) | Open questions on schema evolution |
+| [05-memory-model-and-retrieval-policy.md](./05-memory-model-and-retrieval-policy.md) | Retrieval policy decisions to revisit post-MVP |
