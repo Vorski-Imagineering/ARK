@@ -182,6 +182,29 @@ Instructs Hermes when to use the knowledge base. Mirrors [TOOLS.md § When to us
 
 ---
 
+### 4.7 Live Ingestion (Telegram file attachment)
+
+In addition to cron-triggered reindexing, the system supports live ingestion via Telegram file attachments, mirroring the Genesis Brain Mode A ingestion ([GENESIS-BRAIN-ARCHITECTURE.md § Pipeline](#)). This enables real-time knowledge capture from any device with Telegram access.
+
+**Trigger mechanism:** Telegram bot receives file attachment → Hermes gateway webhook → `ingest.sh` wrapper → `pipeline.py ingest --embed`
+
+**Workflow:**
+```
+Telegram file attachment
+  → Hermes Telegram gateway webhook
+  → save to /tmp/tcc-ingest/
+  → pipeline.py ingest --embed
+  → SurrealDB
+  → respond with summary
+```
+
+**Required environment variable:**
+- `TELEGRAM_BOT_TOKEN` — Bot API token for file downloads (set in Hermes profile `.env`)
+
+**Implementation note:** The `ingest.sh` script already supports this workflow. The missing piece is the Hermes gateway webhook configuration to route Telegram attachments to the ingest pipeline.
+
+---
+
 ### 4.6 Cron Trigger (replaces GitHub webhook)
 
 Hermes cron job runs `python reindex.py` (incremental mode) daily at 03:00. This replaces the GitHub webhook + VPS pipeline in the Genesis Brain Light design ([GENESIS-BRAIN-LIGHT-DESIGN.md § 3.3](../../research/regentribe/GENESIS-BRAIN-LIGHT-DESIGN.md)). Manual trigger: run `python reindex.py` or `python reindex.py --full` from the pipeline directory.
@@ -191,6 +214,7 @@ Hermes cron job runs `python reindex.py` (incremental mode) daily at 03:00. This
 ## 5. Data Flow
 
 ```
+Path A: Cron-triggered corpus update
 Edit markdown in research/
         ↓
 git commit + push
@@ -203,8 +227,18 @@ ingest.py per file:
   chunker → embedder → extractor → entity_resolver → SurrealDB upsert
         ↓
 Graph updated
+
+Path B: Live Telegram ingestion
+Telegram file attachment
         ↓
-Any agent: query.sh / relate.sh → fresh results with citations
+Hermes Telegram gateway webhook
+        ↓
+save to /tmp/tcc-ingest/
+        ↓
+ingest.py:
+  (Kreuzberg extract for PDFs) → chunker → embedder → extractor → SurrealDB upsert
+        ↓
+Graph updated → summary response to Telegram
 ```
 
 Identical to the Genesis Brain Light data flow described in [§ 4](../../research/regentribe/GENESIS-BRAIN-LIGHT-DESIGN.md), with the webhook layer removed.
@@ -224,6 +258,7 @@ Identical to the Genesis Brain Light data flow described in [§ 4](../../researc
 | `OPENROUTER_API_KEY` | OpenRouter API key (embeddings + extraction) | _(set in Hermes profile `.env`)_ |
 | `EMBED_MODEL` | Embedding model via OpenRouter | `openai/text-embedding-3-small` |
 | `EXTRACT_MODEL` | Extraction LLM via OpenRouter | `anthropic/claude-haiku-4-5` |
+| `TELEGRAM_BOT_TOKEN` | Telegram bot token for live file ingestion (Telegram attachment support) | _(set in Hermes profile `.env`)_ |
 
 ---
 
