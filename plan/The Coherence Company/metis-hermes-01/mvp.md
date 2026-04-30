@@ -310,24 +310,24 @@ Graph updated → confirmation to email sender
 
 ## 7. Environment Variables Required
 
-|| Variable | Purpose | Example ||
-||---|---|---|---||
-|| `SURREAL_URL` | SurrealDB WebSocket endpoint | `ws://127.0.0.1:8765/rpc` |
-|| `SURREAL_USER` | SurrealDB root user | `root` |
-|| `SURREAL_PASS` | SurrealDB root password | _(set in Hermes profile `.env`)_ |
-|| `SURREAL_NS` | SurrealDB namespace | `tcc` |
-|| `SURREAL_DB` | SurrealDB database | `knowledge_base` |
-|| `HERMES_KB_DATA_DIR` | Host path bind-mounted into the SurrealDB container's `/data` | `~/.hermes/tcc/state/knowledge-base/surreal-data` |
-|| `OPENROUTER_API_KEY` | OpenRouter API key (embeddings + extraction) | _(set in Hermes profile `.env`)_ |
-|| `EMBED_MODEL` | Embedding model via OpenRouter | `openai/text-embedding-3-small` |
-|| `EXTRACT_MODEL` | Extraction LLM via OpenRouter | `anthropic/claude-haiku-4-5` |
-|| `TELEGRAM_BOT_TOKEN` | Telegram bot token for live file ingestion | _(set in Hermes profile `.env`)_ |
-|| `AWS_ACCESS_KEY_ID` | S3 access key | _(set in Hermes profile `.env`)_ |
-|| `AWS_SECRET_ACCESS_KEY` | S3 secret key | _(set in Hermes profile `.env`)_ |
-|| `S3_BUCKET` | Default S3 bucket for document sync | `tcc-knowledge-base` |
-|| `GDRIVE_CREDENTIALS` | Google Service Account JSON path | `~/.hermes/tcc/secrets/gdrive.json` |
-|| `NOTION_API_KEY` | Notion integration token | _(set in Hermes profile `.env`)_ |
-|| `FATHOM_API_KEY` | Fathom API token for transcript download | _(set in Hermes profile `.env`)_ |
+| Variable | Purpose | Example |
+|---|---|---|
+| `SURREAL_URL` | SurrealDB WebSocket endpoint | `ws://127.0.0.1:8765/rpc` |
+| `SURREAL_USER` | SurrealDB root user | `root` |
+| `SURREAL_PASS` | SurrealDB root password | _(set in Hermes profile `.env`)_ |
+| `SURREAL_NS` | SurrealDB namespace | `tcc` |
+| `SURREAL_DB` | SurrealDB database | `knowledge_base` |
+| `HERMES_KB_DATA_DIR` | Host path bind-mounted into the SurrealDB container's `/data` | `~/.hermes/tcc/state/knowledge-base/surreal-data` |
+| `OPENROUTER_API_KEY` | OpenRouter API key (embeddings + extraction) | _(set in Hermes profile `.env`)_ |
+| `EMBED_MODEL` | Embedding model via OpenRouter | `openai/text-embedding-3-small` |
+| `EXTRACT_MODEL` | Extraction LLM via OpenRouter | `anthropic/claude-haiku-4-5` |
+| `TELEGRAM_BOT_TOKEN` | Telegram bot token for live file ingestion | _(set in Hermes profile `.env`)_ |
+| `AWS_ACCESS_KEY_ID` | S3 access key | _(set in Hermes profile `.env`)_ |
+| `AWS_SECRET_ACCESS_KEY` | S3 secret key | _(set in Hermes profile `.env`)_ |
+| `S3_BUCKET` | Default S3 bucket for document sync | `tcc-knowledge-base` |
+| `GDRIVE_CREDENTIALS` | Google Service Account JSON path | `~/.hermes/tcc/secrets/gdrive.json` |
+| `NOTION_API_KEY` | Notion integration token | _(set in Hermes profile `.env`)_ |
+| `FATHOM_API_KEY` | Fathom API token for transcript download | _(set in Hermes profile `.env`)_ |
 
 ---
 
