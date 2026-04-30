@@ -157,6 +157,7 @@ HNSW vector index on `chunk.embedding` and `concept.embedding` for semantic sear
 | Notion | Notion API | Export pages to HTML/Markdown |
 | Obsidian | File watcher or periodic sync | Native markdown, wikilinks preserved |
 | Telegram | Bot API webhook | Real-time file ingestion |
+| Fathom | Email trigger + API download | Transcript from meeting recording link |
 
 All sources flow through the same `ingest.py` pipeline after format-normalization via Kreuzberg.
 
@@ -291,6 +292,18 @@ ingest.py:
   (Kreuzberg extract for PDFs) → chunker → embedder → extractor → SurrealDB upsert
         ↓
 Graph updated → summary response to Telegram
+
+Path E: Fathom meeting transcript
+Fathom email notification
+        ↓
+Hermes email gateway parses webhook
+        ↓
+Download transcript via Fathom API
+        ↓
+ingest.py:
+  chunker → embedder → extractor → SurrealDB upsert
+        ↓
+Graph updated → confirmation to email sender
 ```
 
 ---
@@ -314,6 +327,7 @@ Graph updated → summary response to Telegram
 || `S3_BUCKET` | Default S3 bucket for document sync | `tcc-knowledge-base` |
 || `GDRIVE_CREDENTIALS` | Google Service Account JSON path | `~/.hermes/tcc/secrets/gdrive.json` |
 || `NOTION_API_KEY` | Notion integration token | _(set in Hermes profile `.env`)_ |
+|| `FATHOM_API_KEY` | Fathom API token for transcript download | _(set in Hermes profile `.env`)_ |
 
 ---
 
