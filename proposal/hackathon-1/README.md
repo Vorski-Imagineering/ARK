@@ -1,6 +1,6 @@
 # ARC Agent remote hackathon
 
-This folder contains the proposal and working execution package for a remote-only, two-day hackathon.
+This folder contains the ARC Community Agent vision, the hackathon proposal, and the working execution package for a remote-only, two-day build event.
 
 The aim is deliberately small: bring several organisations together, place approved public information into one shared agent, test whether it can answer useful cross-organisation questions with visible sources, produce one concise digest, and decide whether a short pilot is worthwhile.
 
@@ -8,16 +8,19 @@ This is a prepared build event, not a cold start. A basic agent must already be 
 
 ## Start here
 
-1. Read the [ARC Community Agent Proposal](<ARC Community Agent Proposal.md>) for the product idea, intended value, and overall hackathon concept.
-2. Read the [Hackathon Planning Guide](<Hackathon Planning Guide.md>) for the broader planning method and participant preparation journey.
-3. Use [execution/00-start-here.md](execution/00-start-here.md) as the operational index. It contains the preparation sequence, readiness gates, mandatory owners, and current next actions.
-4. Use [execution/05-technical-specification.md](execution/05-technical-specification.md) before creating infrastructure or granting access. It defines the two-hour agent bootstrap, technical baseline, access domains, role boundaries, backup and restore plan, acceptance tests, and budget.
+1. Read [ARC Community Agent: Vision and Functionality](arc-community-agent-vision.md) for the enduring product purpose, users, capabilities, operating model, and governance boundaries.
+2. Read the [ARC Community Agent Hackathon Proposal](arc-community-agent-hackathon-proposal.md) for the event challenge, scope, MVP, roles, evidence, and decision process.
+3. Read the [Hackathon Planning Guide](<Hackathon Planning Guide.md>) for the broader planning method and participant preparation journey.
+4. Use [execution/00-start-here.md](execution/00-start-here.md) as the operational index. It contains the preparation sequence, readiness gates, mandatory owners, and current next actions.
+5. Use [execution/05-technical-specification.md](execution/05-technical-specification.md) before creating infrastructure or granting access. It defines the two-hour agent bootstrap, technical baseline, access domains, role boundaries, backup and restore plan, acceptance tests, and budget.
 
 ## Documents in this folder
 
 | Document | Purpose | Current use |
 |---|---|---|
-| [ARC Community Agent Proposal](<ARC Community Agent Proposal.md>) | Explains the opportunity, participants, intended agent, and proposed hackathon | Background and product intent |
+| [ARC Community Agent: Vision and Functionality](arc-community-agent-vision.md) | Defines the enduring agent purpose, functionality, user journeys, technical operating model, and governance | Canonical product vision |
+| [ARC Community Agent Hackathon Proposal](arc-community-agent-hackathon-proposal.md) | Defines the event proposition, scope, MVP, format, roles, deliverables, and decisions | Canonical hackathon proposal |
+| [Combined proposal compatibility index](<ARC Community Agent Proposal.md>) | Redirects links into the former combined document | Legacy-link compatibility only |
 | [Hackathon Planning Guide](<Hackathon Planning Guide.md>) | Describes how to organise participation and prepare a useful collaborative event | Planning reference |
 | [execution/00-start-here.md](execution/00-start-here.md) | Connects the proposal to an executable remote event | Primary organiser checklist and status page |
 | [execution/01-participant-invitation.md](execution/01-participant-invitation.md) | Provides the invitation, reply request, follow-up, and confirmation language | Complete dates and sender details, then send privately |
