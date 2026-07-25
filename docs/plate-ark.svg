@@ -355,7 +355,7 @@
   <g fill="#0c0c0c" stroke="none">
     <!-- top-left italic Latin -->
     <text x="60" y="74" font-family="'Fraunces', serif" font-style="italic" font-size="14" opacity="0.78"
-          font-variation-settings="'opsz' 24, 'wght' 360">memoria · machina</text>
+          font-variation-settings="'opsz' 24, 'wght' 360">collegium · machina</text>
     <text x="60" y="92" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" letter-spacing="2" opacity="0.55">FOL. I · R°</text>
 
     <!-- top-right -->
@@ -364,21 +364,21 @@
 
     <!-- bottom-left -->
     <text x="60" y="730" font-family="'Fraunces', serif" font-style="italic" font-size="11" opacity="0.65"
-          font-variation-settings="'opsz' 24, 'wght' 360">agentic recall</text>
+          font-variation-settings="'opsz' 24, 'wght' 360">agentic</text>
 
     <!-- bottom-right -->
     <text x="740" y="730" text-anchor="end" font-family="'Fraunces', serif" font-style="italic" font-size="11" opacity="0.65"
-          font-variation-settings="'opsz' 24, 'wght' 360">&amp; knowledge</text>
+          font-variation-settings="'opsz' 24, 'wght' 360">collaboration</text>
 
     <!-- left margin rotated mirror caption -->
     <text x="40" y="556" transform="rotate(-90 40 556)"
           font-family="'JetBrains Mono', ui-monospace, monospace"
-          font-size="9" letter-spacing="3.2" opacity="0.55">PLATE · I — A SMALL CRAFT FOR WHAT IS WORTH CARRYING FORWARD</text>
+          font-size="9" letter-spacing="3.2" opacity="0.55">PLATE · I — A SMALL CRAFT FOR CARRYING ORGANISATIONS' WORK FORWARD, TOGETHER</text>
 
     <!-- right margin: schematic reference -->
     <text x="760" y="556" transform="rotate(90 760 556)"
           font-family="'JetBrains Mono', ui-monospace, monospace"
-          font-size="9" letter-spacing="3.2" opacity="0.55">NODE 001 · CYCLE 26.04 · PUBLIC TRANSMISSION · CC0</text>
+          font-size="9" letter-spacing="3.2" opacity="0.55">LAB Nº1 · CYCLE 26.04 · PUBLIC TRANSMISSION · CC0</text>
 
     <!-- micro labels near the spire -->
     <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="7.5" letter-spacing="1.5" opacity="0.65">
@@ -395,7 +395,7 @@
   <g fill="#0c0c0c" stroke="none" opacity="0.45">
     <text x="510" y="120" font-family="'Fraunces', serif" font-style="italic" font-size="11"
           font-variation-settings="'opsz' 24, 'wght' 350"
-          transform="scale(-1 1) translate(-1020 0)">memoria crescit · vinculum tenet</text>
+          transform="scale(-1 1) translate(-1020 0)">vinculum crescit · fides manet</text>
   </g>
 
 </svg>

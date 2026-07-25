@@ -1,25 +1,60 @@
 ![ARK](ARK-sml.png)
 
-# ARK — Agentic Recall & Knowledge
+# [Audax](https://audax.earth/) Lab №1 — Agentic Collaboration
 
-Welcome. If you are reading this, you have been invited into a small collaborative study group exploring how humans and AI agents can build, remember, and reason together over a shared body of knowledge.
+Welcome. If you are reading this, you have been invited into a small working lab building **agentic collaboration between organisations** — shared AI agents that make a distributed community's work visible, understandable, and connected, so its people and organisations can find each other and act on what they learn.
 
-This repository is our **commons**. It is the working surface where research, design, and tooling accumulate in public — not as a polished product, but as an honest, append-only trail of how we think.
+This repository is our **commons**. It is the working surface where a live build, research, design, and tooling accumulate in public — not as a polished product, but as an honest, append-only trail of how we build collaboration infrastructure.
 
 ---
 
-## What this group is
+## What this lab is
 
-ARK is a working group on **agentic recall and knowledge** — the practical art of giving AI agents (and the humans who work with them) durable memory, defensible reasoning, and a shared base they can extend without stepping on each other.
+[Audax](https://audax.earth/) Lab №1 exists to test one proposition: that a shared agent can make participating organisations more visible, connected, and useful to one another. The current, and first, test of that proposition is the **ARC Community Agent hackathon** — see [`proposal/hackathon-1/`](./proposal/hackathon-1/).
 
-We are interested in questions like:
+Memory, recall, and knowledge infrastructure are **not the point of this lab — they are the tool**. A shared agent that helps organisations collaborate has to remember what each one is doing, reason over it faithfully, attribute it correctly, and share it without confusing whose it is. That engineering problem is where most of our research effort goes, but it is in service of the collaboration the agent is actually for, not an end in itself.
 
-- How does a group of agents remember things together without each one re-deriving context?
+So the questions we chase are collaboration questions first, memory questions second:
+
+- What does an organisation need to share, and how, before a shared agent can represent it faithfully to the rest of a network?
+- How does a group of agents remember things together without each one re-deriving context, or misattributing one organisation's work to another?
 - What is the right substrate for **transcript-native** institutional intelligence — conversations as the source of truth, not documents as the artifact?
-- How do we build knowledge systems that **dream**, **consolidate**, and surface emergent structure rather than just retrieve?
-- What does a knowledge commons look like when contributors — human and AI — are visible, attributable, and welcome to fork?
+- How do we build knowledge systems that **dream**, **consolidate**, and surface emergent structure rather than just retrieve — reliably enough that a cross-organisational digest can be trusted?
+- What does a knowledge commons look like when contributors — human, AI, and organisational — are visible, attributable, and welcome to fork?
 
-The work is grounded in two long-running threads in this repo: the **Coherence Company** thread (transcript-native intelligence, dreaming architectures, the Living Book) and the **Regentribe** thread (decentralized knowledge infrastructure on Radicle + SurrealDB). Both feed the same underlying question: how do we build a memory that grows.
+The research work is grounded in two long-running threads in this repo: the **Coherence Company** thread (transcript-native intelligence, dreaming architectures, the Living Book) and the **Regentribe** thread (decentralized knowledge infrastructure on Radicle + SurrealDB). Both feed the tooling the ARC Community Agent needs.
+
+---
+
+## Current build — the ARC Community Agent hackathon
+
+Our flagship collaboration experiment: a hackathon to build the first working version of a shared AI agent for the ARC network — a community of people who participate through organisations.
+
+The agent has two connected functions:
+
+1. **Updates** — collecting and synthesising organisational information into general community intelligence and participant-specific digests.
+2. **Relationship management** — onboarding and engaging participants, maintaining their relationship with the community, and (in a later phase) surfacing worthwhile conversations between aligned people and organisations, always with consent.
+
+The hackathon should produce one complete, observable loop:
+
+```
+Organisational public updates
+        ↓
+Collection and source-linked memory
+        ↓
+Cross-organisational synthesis
+        ↓
+Permission-controlled member delivery
+        ↓
+Member response, follow-up, and continued relationship
+        ↓
+Public learning and a pilot decision
+```
+
+The memory and knowledge-store work shows up here too — it's what lets the agent answer questions across organisations instead of parroting one feed — but the loop is not built to demonstrate memory. It is built to test whether a shared agent can make participating organisations more visible, connected, and useful to one another.
+
+- **[`proposal/hackathon-1/arc-community-agent-hackathon-proposal.md`](./proposal/hackathon-1/arc-community-agent-hackathon-proposal.md)** — the event: scope, roles, format, evidence, and decision process.
+- **[`proposal/hackathon-1/arc-community-agent-vision.md`](./proposal/hackathon-1/arc-community-agent-vision.md)** — the enduring product purpose and functionality.
 
 ---
 
@@ -48,7 +83,7 @@ Both readings are intended. Contribute work you would be proud to put your name 
 
 ## Repository structure
 
-The repo is organized around four kinds of artifact: **research**, **plans**, **needs**, and **tooling**. Each is a separate top-level folder so the kind of thinking is obvious from the path.
+The repo is organized around five kinds of artifact: **proposals**, **research**, **plans**, **needs**, and **tooling**. Each is a separate top-level folder so the kind of thinking is obvious from the path.
 
 ```
 ARK/
@@ -57,16 +92,23 @@ ARK/
 ├── LICENSE              ← CC0 public domain dedication
 ├── ARK.jpg              ← project mark
 │
-├── research/            ← durable, citable knowledge
+├── proposal/            ← agentic collaboration builds (the hackathon)
+├── research/            ← the tools we have learned — memory, knowledge, runtimes
 ├── plan/                ← design specs and workstream plans
 ├── needs/               ← invitations, roles, calls for collaborators
 ├── scripts/             ← repo-wide tooling
 └── skills/              ← shared agent skills
 ```
 
-### `research/` — what we have learned
+### `proposal/` — the collaboration builds
 
-Durable, public, citable knowledge. The point of this folder is that another agent or human can **find, cite, supersede, or fork** what is here later.
+The live tests of the lab's core proposition — a proposal document defines the event, scope, roles, and decision process for each build.
+
+- **`proposal/hackathon-1/`** — the ARC Community Agent hackathon proposal and vision (see above).
+
+### `research/` — the tools we have learned
+
+Durable, public, citable knowledge about the infrastructure a collaborating agent needs — not the collaboration itself. The point of this folder is that another agent or human can **find, cite, supersede, or fork** what is here later.
 
 Current threads:
 
@@ -119,7 +161,7 @@ You also learn to recognise the **stop-and-ask moments** — the points where th
 
 ### What this means for the kind of collaboration this is
 
-This is not a hackathon and it is not a Slack thread. It is closer to a **public lab notebook** that a small group keeps together. The norms are tilted toward:
+The research work described above is not a hackathon and it is not a Slack thread. It is closer to a **public lab notebook** that a small group keeps together. The hackathon itself runs to a tighter, event-scoped process (defined in `proposal/hackathon-1/`), but its outputs land back in the same notebook. The norms are tilted toward:
 
 - **Slow, append-only work** over fast, throwaway output.
 - **Visible reasoning** over polished conclusions.
@@ -133,11 +175,12 @@ If those norms appeal to you, you are in the right place. If they feel constrain
 
 ## Getting started as a new contributor
 
-1. **Read [`README.md`](./README.md) this document end to end.** It is your welcome
-2. **Skim `research/` and `plan/`** for the threads that interest you. Start with `research/The Coherence Company/LIVING-BOOK-MANIFESTO.md` for the philosophical frame, and `plan/The Coherence Company/metis-hermes-01/00-workstreams-index.md` for what is being designed.
-3. **Check `needs/`** if you are looking for an explicit role to step into.
-4. **Pick a small first contribution** — a research note, a citation cleanup, a `[OPEN QUESTION]` you can answer. Follow the six-verb loop.
-5. **Open a PR** with a short description of what you scanned, what you added, and what open questions remain.
+1. **Read [`README.md`](./README.md) this document end to end.** It is your welcome.
+2. **Read `proposal/hackathon-1/`** first — it's the current build, and the clearest picture of what the lab is actually for.
+3. **Skim `research/` and `plan/`** for the tooling threads that feed it. Start with `research/The Coherence Company/LIVING-BOOK-MANIFESTO.md` for the philosophical frame, and `plan/The Coherence Company/metis-hermes-01/00-workstreams-index.md` for what is being designed.
+4. **Check `needs/`** if you are looking for an explicit role to step into.
+5. **Pick a small first contribution** — a research note, a citation cleanup, a `[OPEN QUESTION]` you can answer. Follow the six-verb loop.
+6. **Open a PR** with a short description of what you scanned, what you added, and what open questions remain.
 
-Welcome to the ARK
+Welcome to [Audax](https://audax.earth/) Lab №1
 ![ARK](./ARK.png)

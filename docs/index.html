@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ARK · Agentic Recall &amp; Knowledge</title>
-<meta name="description" content="A small collaborative study group exploring how humans and AI agents build, remember, and reason together over a shared body of knowledge. Public domain. CC0." />
+<title>Audax Lab №1 · Agentic Collaboration</title>
+<meta name="description" content="A small working lab building agentic collaboration between organisations — shared AI agents that make a distributed community's work visible, connected, and easy to act on. Public domain. CC0." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -16,14 +16,18 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --paper:     #f6f4ee;
-    --paper-2:   #efece4;
-    --ink:       #0c0c0c;
-    --ink-soft:  #4a4a47;
-    --ink-fade:  #8a8a85;
-    --rule:      #0c0c0c;
-    --hairline:  rgba(12, 12, 12, 0.14);
-    --hair-soft: rgba(12, 12, 12, 0.08);
+    /* Audax palette — sumi-e ink on parchment, forest as the one committed hue */
+    --paper:     #fbfaf3;
+    --paper-2:   #f7f5ec;
+    --ink:       #14130e;
+    --ink-soft:  #3a3830;
+    --ink-fade:  #807d72;
+    --rule:      #14130e;
+    --hairline:  rgba(20, 19, 14, 0.14);
+    --hair-soft: rgba(20, 19, 14, 0.08);
+    --accent:      #1f4d2e;
+    --accent-deep: #163322;
+    --accent-soft: #e2ebdd;
 
     --col-num:   5.5rem;
     --col-label: 11rem;
@@ -128,7 +132,7 @@
   .live__dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: var(--ink);
+    background: var(--accent);
     animation: live-pulse 2.4s ease-in-out infinite;
   }
   @keyframes live-pulse {
@@ -176,7 +180,7 @@
     font-family: 'Fraunces', serif;
     font-variation-settings: "opsz" 144, "wght" 300;
     font-size: 1.25rem;
-    color: var(--ink);
+    color: var(--accent);
     display: inline-block;
     margin-bottom: 2.5rem;
     animation: sigil-spin 90s linear infinite;
@@ -331,6 +335,7 @@
   .section__body h2 em {
     font-style: italic;
     font-variation-settings: "opsz" 80, "wght" 360;
+    color: var(--accent);
   }
 
   .section__body p {
@@ -349,13 +354,28 @@
   }
 
   .section__body a {
-    color: var(--ink);
+    color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--accent);
     padding-bottom: 1px;
     transition: opacity 0.18s ease;
   }
-  .section__body a:hover { opacity: 0.5; }
+  .section__body a:hover { opacity: 0.6; }
+
+  .doc-cite {
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-fade);
+  }
+  .doc-cite a {
+    color: var(--ink-fade);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .doc-cite a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
   .section__body code {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -466,129 +486,6 @@
   .tree .arrow { color: var(--ink-fade); }
 
   /* ─────────────────────────────────────────────
-     RESEARCH (six active threads)
-     ───────────────────────────────────────────── */
-  .research-section {
-    border-top: 1px solid var(--rule);
-    padding: 5.5rem 2rem 0;
-    max-width: calc(var(--col-num) + var(--col-label) + var(--col-body) + var(--gutter) * 2 + 4rem);
-    margin: 0 auto;
-  }
-
-  .research-section__head {
-    display: grid;
-    grid-template-columns: var(--col-num) var(--col-label) minmax(0, var(--col-body));
-    gap: var(--gutter);
-    align-items: start;
-    margin-bottom: 4rem;
-  }
-
-  .research-section__intro h2 {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 80, "wght" 320;
-    font-size: clamp(1.875rem, 3.4vw, 2.625rem);
-    line-height: 1.06;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .research-section__intro h2 em { font-style: italic; }
-  .research-section__intro p {
-    font-size: 1.0625rem;
-    line-height: 1.65;
-    max-width: 36rem;
-  }
-
-  .threads { padding-bottom: 2rem; }
-
-  .thread {
-    display: grid;
-    grid-template-columns: var(--col-num) var(--col-label) minmax(0, var(--col-body));
-    gap: var(--gutter);
-    align-items: start;
-    padding: 3rem 0 3.25rem;
-    border-top: 1px solid var(--hairline);
-    position: relative;
-  }
-  .thread:last-child { border-bottom: 1px solid var(--hairline); }
-
-  .thread__num {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    color: var(--ink);
-    padding-top: 0.55rem;
-  }
-
-  .thread__tag {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    line-height: 1.85;
-    padding-top: 0.55rem;
-  }
-  .thread__tag .tag-line { display: block; }
-  .thread__tag .tag-line + .tag-line { color: var(--ink-fade); }
-
-  .thread__content { max-width: var(--col-body); }
-
-  .thread__title {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 80, "wght" 320;
-    font-size: clamp(1.5rem, 2.5vw, 2.0rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.85rem;
-    color: var(--ink);
-  }
-  .thread__title em {
-    font-style: italic;
-    font-variation-settings: "opsz" 80, "wght" 360;
-  }
-
-  .thread__thesis {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-variation-settings: "opsz" 60, "wght" 360;
-    font-size: 1.125rem;
-    line-height: 1.45;
-    letter-spacing: -0.005em;
-    margin-bottom: 1.25rem;
-    color: var(--ink);
-  }
-
-  .thread__body {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--ink);
-  }
-  .thread__body em { font-style: italic; }
-  .thread__body strong {
-    font-weight: 500;
-    font-variation-settings: "wght" 480;
-  }
-
-  .thread__cite {
-    margin-top: 1rem;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-fade);
-  }
-  .thread__cite a {
-    color: var(--ink-fade);
-    text-decoration: none;
-    border-bottom: 1px solid var(--hairline);
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-  .thread__cite a:hover {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
-  }
-
-  /* ─────────────────────────────────────────────
      JOIN · OPEN CHANNEL
      ───────────────────────────────────────────── */
   .join {
@@ -624,6 +521,7 @@
   .join__title em {
     font-style: italic;
     font-variation-settings: "opsz" 144, "wght" 320;
+    color: var(--accent);
   }
 
   .join__lede {
@@ -641,9 +539,9 @@
     align-items: center;
     gap: 1.25rem;
     padding: 1.125rem 2.25rem;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--accent);
     background: var(--paper);
-    color: var(--ink);
+    color: var(--accent);
     text-decoration: none;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
     font-size: 0.8125rem;
@@ -658,7 +556,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: var(--ink);
+    background: var(--accent);
     transform: translateY(101%);
     transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
     z-index: -1;
@@ -691,16 +589,24 @@
   }
 
   .topbar__nav .topbar__nav-cta {
-    border: 1px solid var(--ink);
+    border: 1px solid var(--accent);
+    color: var(--accent);
     padding: 4px 10px 3px;
     margin-left: 0.5rem;
     transition: background 0.3s ease, color 0.3s ease;
   }
   .topbar__nav .topbar__nav-cta:hover {
-    background: var(--ink);
+    background: var(--accent);
     color: var(--paper);
     opacity: 1;
   }
+
+  .brand-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.18s ease;
+  }
+  .brand-link:hover { opacity: 0.55; }
 
   /* ─────────────────────────────────────────────
      FOOTER
@@ -782,23 +688,6 @@
     .plate { padding: 4rem 1.25rem; }
     .plate__image { width: 100%; }
 
-    .research-section { padding: 4rem 1.25rem 0; }
-    .research-section__head {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      margin-bottom: 2.5rem;
-    }
-    .research-section__intro h2 { margin-top: 0.5rem; }
-
-    .thread {
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
-      padding: 2.5rem 0;
-    }
-    .thread__num { padding-top: 0; display: inline-block; margin-right: 0.75rem; }
-    .thread__tag  { padding-top: 0; display: inline-block; }
-    .thread__title { margin-top: 0.75rem; }
-
     footer { padding: 4rem 1.25rem 3rem; }
   }
 
@@ -816,15 +705,16 @@
 <!-- ───── TOP BAR ───── -->
 <nav class="topbar" aria-label="primary">
   <div class="topbar__group">
-    <span>ARK</span>
+    <a class="brand-link" href="https://audax.earth/" target="_blank" rel="noopener noreferrer">AUDAX</a>
     <span class="topbar__sep" aria-hidden="true"></span>
-    <span>NODE 001</span>
+    <span>LAB Nº1</span>
     <span class="topbar__sep" aria-hidden="true"></span>
     <span id="cycle">CYCLE —</span>
   </div>
   <div class="topbar__group topbar__nav">
     <a href="#mandate">About</a>
-    <a href="#research">Research</a>
+    <a href="#hackathon">Hackathon</a>
+    <a href="./action-learning.html">Action Learning</a>
     <a href="#method">Method</a>
     <a href="#join" class="topbar__nav-cta">→ Join</a>
   </div>
@@ -840,7 +730,7 @@
     <div class="hero__meta">
       <div class="hero__meta-block">
         <span class="hero__meta-key">Filed under</span>
-        <span>Open Research / Public Domain</span>
+        <span>Agentic Collaboration / Public Domain</span>
       </div>
       <div class="hero__meta-block hero__meta-block--right">
         <span class="hero__meta-key">Issued</span>
@@ -850,44 +740,62 @@
 
     <div class="hero__center">
       <div class="sigil" aria-hidden="true">⁕</div>
-      <h1 class="wordmark" aria-label="ARK">
-        <span class="wordmark__l">A</span><span class="wordmark__l">R</span><span class="wordmark__l">K</span>
+      <h1 class="wordmark" aria-label="Audax Lab Number One">
+        <span class="wordmark__l">L</span><span class="wordmark__l">A</span><span class="wordmark__l">B</span>
       </h1>
-      <p class="hero__sub">Agentic Recall &amp; Knowledge</p>
+      <p class="hero__sub"><a class="brand-link" href="https://audax.earth/" target="_blank" rel="noopener noreferrer">Audax</a> · Agentic Collaboration</p>
     </div>
 
     <div class="hero__bottom">
       <p class="hero__lede">
-        A small collaborative study group exploring how humans and AI agents can build, remember, and reason together over a shared body of knowledge.
+        An open lab for agentic collaboration between organisations — shared AI agents that make a distributed community's work visible, connected, and easy to act on. First build: the ARC Community Agent.
       </p>
-      <a href="#manifesto" class="hero__enter">↓ Enter the Node</a>
+      <a href="#mandate" class="hero__enter">↓ Enter the Lab</a>
     </div>
   </section>
 
-  <!-- ───── §00 MANIFESTO ───── -->
-  <section class="section manifesto" id="manifesto">
-    <div class="section__num">§ 00</div>
-    <div class="section__label">
-      Manifesto
-      <span class="sublabel">Frontispiece</span>
-    </div>
-    <div class="section__body reveal">
-      <p>This repository is our commons — and our portfolio. The working surface where research, design, and tooling accumulate in public, not as a polished product, but as an honest, append-only trail of how we think.</p>
-      <p>Welcome.</p>
-    </div>
-  </section>
-
-  <!-- ───── §01 MANDATE ───── -->
+  <!-- ───── §00 MANDATE ───── -->
   <section class="section" id="mandate">
-    <div class="section__num">§ 01</div>
+    <div class="section__num">§ 00</div>
     <div class="section__label">
       Mandate
       <span class="sublabel">What &amp; Why</span>
     </div>
     <div class="section__body reveal">
-      <h2>A working group on memory.</h2>
-      <p>ARK is a small study group focused on <em>agentic recall and knowledge</em> — the practical art of giving AI agents and the humans who work with them <strong>durable memory</strong>, <strong>defensible reasoning</strong>, and a <strong>shared base</strong> they can extend without stepping on each other.</p>
-      <p>The work is grounded in two long-running threads: <strong>The Coherence Company</strong> (transcript-native institutional intelligence, dreaming architectures, the Living Book) and <strong>Regentribe</strong> (decentralized knowledge infrastructure on Radicle and SurrealDB). Both feed the same question — <em>how do we build a memory that grows.</em></p>
+      <h2>A lab for <em>agentic collaboration</em>.</h2>
+      <p><a href="https://audax.earth/" target="_blank" rel="noopener noreferrer">Audax</a> Lab №1 is a small working group building <strong>agentic collaboration between organisations</strong> — shared AI agents that make the public work of a distributed community visible, understandable, and connected, so that people and organisations can find each other and act on what they learn.</p>
+      <p>Memory, recall, and knowledge infrastructure are not the point of this lab — they are the <strong>tool</strong>. A shared agent that helps organisations collaborate has to remember what each one is doing, reason over it faithfully, attribute it correctly, and share it without confusing whose it is. That engineering problem — durable memory, defensible reasoning, a shared base agents can extend without stepping on each other — is where most of our research effort goes, in service of the collaboration the agent is actually for.</p>
+      <p>The work is grounded in two long-running research threads — <strong>The Coherence Company</strong> (transcript-native institutional intelligence, dreaming architectures, the Living Book) and <strong>Regentribe</strong> (decentralized knowledge infrastructure on Radicle and SurrealDB) — and in one live build, the <strong>ARC Community Agent</strong>, our first attempt to put agentic collaboration into practice.</p>
+    </div>
+  </section>
+
+  <!-- ───── §01 HACKATHON ───── -->
+  <section class="section" id="hackathon">
+    <div class="section__num">§ 01</div>
+    <div class="section__label">
+      Hackathon
+      <span class="sublabel">ARC Community Agent</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>The first build: <em>the ARC Community Agent</em>.</h2>
+      <p>Our flagship collaboration experiment is a hackathon to build the first working version of a shared AI agent for the ARC network — a community of people who participate through organisations. The agent's job is to make those organisations' public work visible, understandable, and connected, and to help members find each other and act on what they learn.</p>
+      <p>It has two connected functions. <strong>Updates:</strong> collecting and synthesising organisational information into general community intelligence and participant-specific digests. <strong>Relationship management:</strong> onboarding and engaging participants, maintaining their relationship with the community, and — in a later phase — surfacing worthwhile conversations between aligned people and organisations, always with consent.</p>
+      <p>The hackathon should produce one complete, observable loop:</p>
+<pre class="tree">Organisational public updates
+        <span class="arrow">↓</span>
+Collection and source-linked memory
+        <span class="arrow">↓</span>
+Cross-organisational synthesis
+        <span class="arrow">↓</span>
+Permission-controlled member delivery
+        <span class="arrow">↓</span>
+Member response, follow-up, and continued relationship
+        <span class="arrow">↓</span>
+Public learning and a pilot decision</pre>
+      <p>Memory shows up here too — a shared, source-linked knowledge store is what lets the agent answer questions across organisations instead of parroting one feed. But the loop isn't built to demonstrate memory. It is built to test whether a shared agent can make participating organisations more visible, connected, and useful to one another — the memory is just what makes that possible.</p>
+      <p>In scope for the hackathon: three to five participating organisations, scheduled collection from their public sources, a shared searchable knowledge store, source-linked question answering, a Telegram interface, a member onboarding and relationship loop, a candid build-in-public feed, and a documented process for adding another organisation.</p>
+      <p class="doc-cite">→ <a href="https://github.com/Vorski-Imagineering/ark/blob/main/proposal/hackathon-1/arc-community-agent-hackathon-proposal.md" target="_blank" rel="noopener noreferrer">proposal/hackathon-1/arc-community-agent-hackathon-proposal.md</a></p>
+      <p class="doc-cite">→ <a href="https://github.com/Vorski-Imagineering/ark/blob/main/proposal/hackathon-1/arc-community-agent-vision.md" target="_blank" rel="noopener noreferrer">proposal/hackathon-1/arc-community-agent-vision.md</a></p>
     </div>
   </section>
 
@@ -898,116 +806,13 @@
       <div class="plate__frame">
         <img src="./plate-ark.svg" alt="The Ark — a cyberpunk citadel rendered as a Codex Atlanticus pen-and-ink plate" class="plate__image" />
       </div>
-      <p class="plate__caption">A small craft for what is worth carrying forward.</p>
+      <p class="plate__caption">A small craft for carrying organisations' work forward, together.</p>
     </div>
   </section>
 
-  <!-- ───── §02 RESEARCH ───── -->
-  <section class="research-section" id="research" aria-label="research threads">
-    <div class="research-section__head reveal">
-      <div class="section__num">§ 02</div>
-      <div class="section__label">
-        Research
-        <span class="sublabel">Six Active Threads</span>
-      </div>
-      <div class="research-section__intro">
-        <h2>What we are studying <em>now</em>.</h2>
-        <p>Six threads are alive in the repository at the moment. Each is a working investigation, not a finished position — open questions are tagged in the source and welcome challenge.</p>
-      </div>
-    </div>
-
-    <div class="threads">
-
-      <article class="thread reveal">
-        <div class="thread__num">[ 01 ]</div>
-        <div class="thread__tag">
-          <span class="tag-line">Memory</span>
-          <span class="tag-line">Institutional intelligence</span>
-        </div>
-        <div class="thread__content">
-          <h3 class="thread__title">Transcript-native institutional intelligence.</h3>
-          <p class="thread__thesis">Conversations as the source of truth — not documents as the artifact.</p>
-          <p class="thread__body">Building institutional memory from transcripts is not primarily a tool-calling problem; it is a <strong>memory-compilation</strong> problem. Conversations are high-volume, low-signal raw material that needs to be turned into a temporal graph of <em>episodes, claims, contradictions, and unresolved questions</em> — something a future agent (or human) can actually reason over, not just retrieve from.</p>
-          <p class="thread__cite">→ research/The Coherence Company/agent-orchestration-and-memory-systems.md</p>
-        </div>
-      </article>
-
-      <article class="thread reveal">
-        <div class="thread__num">[ 02 ]</div>
-        <div class="thread__tag">
-          <span class="tag-line">Runtimes</span>
-          <span class="tag-line">Harness design</span>
-        </div>
-        <div class="thread__content">
-          <h3 class="thread__title">Agent runtimes &amp; the harness split.</h3>
-          <p class="thread__thesis">The 2026 convergence: harness, execution, memory — three planes, not one chatbot.</p>
-          <p class="thread__body">Serious agent systems are separating the <strong>control plane</strong> (turns, approvals, tracing) from the <strong>execution plane</strong> (sandbox, files, ports) from the <strong>memory plane</strong>. We compare live runtimes — <em>OpenClaw</em>, <em>HERMES</em>, <em>LangGraph</em>, the OpenAI Agents SDK, and Microsoft Agent Framework — against transcript-first institutional workloads.</p>
-          <p class="thread__cite">→ research/The Coherence Company/coco-openclaw-vs-hermes.md</p>
-        </div>
-      </article>
-
-      <article class="thread reveal">
-        <div class="thread__num">[ 03 ]</div>
-        <div class="thread__tag">
-          <span class="tag-line">Memory</span>
-          <span class="tag-line">Consolidation</span>
-        </div>
-        <div class="thread__content">
-          <h3 class="thread__title">Dreaming &amp; consolidation architectures.</h3>
-          <p class="thread__thesis">Periodic sweeps that promote evidence into durable knowledge — wake, sleep, replay.</p>
-          <p class="thread__body">The frontier of agent memory is no longer "store more"; it is <em>write-manage-read</em> with explicit consolidation, update, and forgetting policies. We track the lineage from Dyna and DreamCoder through Generative Agents, Reflexion, ReasoningBank, ReMe, and OpenClaw's core <em>Dreaming</em> subsystem — looking for trustworthy, governed consolidation rather than poetic generation.</p>
-          <p class="thread__cite">→ research/The Coherence Company/openclaw-dreams-and-hermes-dreaming-architecture.md</p>
-        </div>
-      </article>
-
-      <article class="thread reveal">
-        <div class="thread__num">[ 04 ]</div>
-        <div class="thread__tag">
-          <span class="tag-line">Substrate</span>
-          <span class="tag-line">Knowledge graphs</span>
-        </div>
-        <div class="thread__content">
-          <h3 class="thread__title">Compiled memory &amp; temporal graphs.</h3>
-          <p class="thread__thesis">Pages, not chunks. Provenance, not retrieval.</p>
-          <p class="thread__body">The cleanest memory model is not "retrieve better chunks" but <em>compile raw sources into a persistent, interlinked wiki</em> that compounds over time. We benchmark <strong>SurrealDB</strong>, <strong>Neo4j Agent Memory</strong>, <strong>Zep / Graphiti</strong>, <strong>Letta</strong>, and <strong>Mem0</strong> against the requirements for compiled, evidence-backed institutional knowledge with temporal facts and provenance.</p>
-          <p class="thread__cite">→ research/regentribe/surrealdb-alternatives-research.md</p>
-        </div>
-      </article>
-
-      <article class="thread reveal">
-        <div class="thread__num">[ 05 ]</div>
-        <div class="thread__tag">
-          <span class="tag-line">Infrastructure</span>
-          <span class="tag-line">Commons</span>
-        </div>
-        <div class="thread__content">
-          <h3 class="thread__title">Knowledge infrastructure for distributed communities.</h3>
-          <p class="thread__thesis">GitHub for authoring, queryable graph for retrieval, MCP for any tool.</p>
-          <p class="thread__body"><strong>Genesis Brain Light</strong> is a two-layer system: members edit markdown in their own AI tools and push to GitHub; an automatic pipeline lifts those changes into a SurrealDB knowledge graph exposed via <em>MCP</em>. The aim is a knowledge commons that any AI assistant can query, regardless of which tool the human is working in.</p>
-          <p class="thread__cite">→ research/regentribe/genesis-brain-light-design.md</p>
-        </div>
-      </article>
-
-      <article class="thread reveal">
-        <div class="thread__num">[ 06 ]</div>
-        <div class="thread__tag">
-          <span class="tag-line">Medium</span>
-          <span class="tag-line">Publishing</span>
-        </div>
-        <div class="thread__content">
-          <h3 class="thread__title">The Living Book.</h3>
-          <p class="thread__thesis">Knowledge that grows, not knowledge that ends.</p>
-          <p class="thread__body">A new medium for deep knowledge — where the <em>author maintains authoritative coherence</em>, the <em>community adds annotation and extension</em>, multiple coherence streams coexist as different lenses, and contributors are recognized for the value they add. The manifesto in the repo is one of the philosophical anchors for the rest of the work.</p>
-          <p class="thread__cite">→ research/The Coherence Company/living-book-manifesto.md</p>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ───── §03 LICENSE ───── -->
+  <!-- ───── §02 LICENSE ───── -->
   <section class="section" id="license">
-    <div class="section__num">§ 03</div>
+    <div class="section__num">§ 02</div>
     <div class="section__label">
       License
       <span class="sublabel">CC0 1.0</span>
@@ -1020,34 +825,34 @@
     </div>
   </section>
 
-  <!-- ───── §04 REPOSITORY ───── -->
+  <!-- ───── §03 REPOSITORY ───── -->
   <section class="section" id="repository">
-    <div class="section__num">§ 04</div>
+    <div class="section__num">§ 03</div>
     <div class="section__label">
       Repository
-      <span class="sublabel">Four Artifacts</span>
+      <span class="sublabel">Five Artifacts</span>
     </div>
     <div class="section__body reveal">
-      <h2>Four kinds of artifact.</h2>
-      <p>The repo is organized so the <em>kind of thinking</em> is obvious from the path. Research is durable, citable knowledge. Plans are design specs and workstream breakdowns. Needs are open invitations. Scripts and skills are the shared tooling.</p>
+      <p>The repo is organized so the <em>kind of thinking</em> is obvious from the path. Proposals are the collaboration builds themselves — the hackathon and what follows it. Research is durable, citable knowledge about the tools those builds depend on. Plans are design specs and workstream breakdowns. Needs are open invitations. Scripts and skills are the shared tooling.</p>
 <pre class="tree">ARK/
 ├── README.md           <span class="arrow">←</span> orientation
 ├── AGENT.md            <span class="arrow">←</span> operating instructions
 ├── LICENSE             <span class="arrow">←</span> CC0 public domain
 │
-├── research/           <span class="arrow">←</span> what we have learned
+├── proposal/           <span class="arrow">←</span> agentic collaboration builds (the hackathon)
+├── research/           <span class="arrow">←</span> the tools we have learned — memory, knowledge, runtimes
 ├── plan/               <span class="arrow">←</span> what we intend to build
 ├── needs/              <span class="arrow">←</span> who we are looking for
 ├── scripts/            <span class="arrow">←</span> repo-wide tooling
 └── skills/             <span class="arrow">←</span> shared agent skills</pre>
-      <p>Current research threads live under <code>research/The Coherence Company/</code> and <code>research/regentribe/</code>. The active design is in <code>plan/The Coherence Company/metis-hermes-01/</code> — a thirteen-part workstream covering everything from operating model to migration sequencing.</p>
+      <p>The current build lives in <code>proposal/hackathon-1/</code> — the ARC Community Agent proposal and vision. The research threads feeding it live under <code>research/The Coherence Company/</code> and <code>research/regentribe/</code>. The active design is in <code>plan/The Coherence Company/metis-hermes-01/</code> — a thirteen-part workstream covering everything from operating model to migration sequencing.</p>
       <p>Skills are reusable agent capabilities — packaged instructions an AI collaborator pulls in to do a specific job consistently across the group. The folder is intentionally young: if you build something twice, package it as a skill.</p>
     </div>
   </section>
 
-  <!-- ───── §05 METHOD ───── -->
+  <!-- ───── §04 METHOD ───── -->
   <section class="section" id="method">
-    <div class="section__num">§ 05</div>
+    <div class="section__num">§ 04</div>
     <div class="section__label">
       Method
       <span class="sublabel">Operating Guide</span>
@@ -1058,15 +863,15 @@
       <p>Next you notice that you are being treated as a <em>research collaborator, not an assistant</em>. The expectation is transparent, auditable work — explicit assumptions, structured markdown, inline citations, no hidden reasoning, no answer-first shortcuts. You write for the next person who will walk in cold.</p>
       <p>When you start a real research task, the work moves through a familiar arc. You <strong>scan</strong> first — what is already there, what can you cite or supersede. Then you <strong>decompose</strong> the question into sub-questions, written into a notes file <em>before</em> you go exploring. Then you <strong>explore</strong>, gathering data and citing inline. Then <strong>synthesize</strong> — pulling threads into a document that stands on its own. Then <strong>reflect</strong> — leaving open-question markers for what is still unclear. And finally <strong>persist</strong> — a short dated entry in the topic's log so the trail is visible to whoever comes next. You append; you do not silently overwrite.</p>
       <p>Throughout, citation and uncertainty are not optional. Load-bearing assumptions are tagged so the next reader can challenge them. You never fabricate a source — if you cannot verify it, you ask before citing it.</p>
-      <p>This is not a hackathon and it is not a Slack thread. It is closer to a <em>public lab notebook</em> that a small group keeps together — slow, append-only work over fast throwaway output; visible reasoning over polished conclusions; reproducibility for the next agent over efficiency for the current one.</p>
+      <p>This method governs the research: the slow, tool-building half of the lab's work. The hackathon itself runs to a tighter, event-scoped process (defined in <code>proposal/hackathon-1/</code>) — but its outputs, like everything else here, land back in a <em>public lab notebook</em> that a small group keeps together: append-only work over fast throwaway output; visible reasoning over polished conclusions; reproducibility for the next agent over efficiency for the current one.</p>
     </div>
   </section>
 
   <!-- ───── JOIN ───── -->
   <section class="join" id="join" aria-label="join the group">
     <p class="join__head">Open Channel · Telegram</p>
-    <h2 class="join__title reveal">Join <em>the&nbsp;node</em>.</h2>
-    <p class="join__lede reveal">A small group meets — mostly — in the channel. Slow conversations, shared notes, the occasional argument worth having. Drop in.</p>
+    <h2 class="join__title reveal">Join <em>the&nbsp;lab</em>.</h2>
+    <p class="join__lede reveal">A small group meets — mostly — in the channel: people building shared agents for their organisations, and the collaboration those agents are meant to unlock. Drop in.</p>
     <a class="join__cta reveal" href="https://t.me/+V776eqmvCCFiZmY0" target="_blank" rel="noopener noreferrer">
       <span>Join on Telegram</span>
       <span class="join__cta-arrow" aria-hidden="true">→</span>

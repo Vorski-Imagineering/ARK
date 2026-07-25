@@ -6,4 +6,4 @@ dist/
 scripts/__pycache__/
 .worktrees/
 .DS_Store
-.DS_Store
+.mcp.json
