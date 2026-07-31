@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>An Invitation · Audax Lab №1</title>
+<meta name="description" content="An invitation from The Coherence Company and SynchroLabs to join Audax Lab №1 — a two-day remote hackathon on August 18–19, 2026, building the first working version of the Community Weaving Agent." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:     #fbfaf3;
+    --paper-2:   #f7f5ec;
+    --ink:       #14130e;
+    --ink-soft:  #3a3830;
+    --ink-fade:  #807d72;
+    --rule:      #14130e;
+    --hairline:  rgba(20, 19, 14, 0.14);
+    --hair-soft: rgba(20, 19, 14, 0.08);
+    --accent:      #1f4d2e;
+    --accent-deep: #163322;
+    --accent-soft: #e2ebdd;
+
+    --col-num:   5.5rem;
+    --col-label: 11rem;
+    --col-body:  40rem;
+    --gutter:    3rem;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: 'Fraunces', 'Times New Roman', serif;
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+    font-variation-settings: "opsz" 18, "wght" 350;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 1.0625rem;
+    letter-spacing: -0.003em;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* page-edge frame */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 1.25rem;
+    border: 1px solid var(--hair-soft);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+    font-feature-settings: "kern" 1;
+  }
+
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  a { color: inherit; }
+
+  /* TOPBAR */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.875rem 2rem;
+    background: rgba(246, 244, 238, 0.86);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--hairline);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .topbar__group { display: flex; align-items: center; gap: 1.25rem; }
+
+  .topbar__sep {
+    width: 0.25rem; height: 0.25rem; border-radius: 50%;
+    background: var(--ink); opacity: 0.35;
+    display: inline-block;
+  }
+
+  .topbar a { text-decoration: none; color: var(--ink); }
+  .topbar a:hover { opacity: 0.55; }
+
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .live__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: live-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.25); }
+  }
+
+  /* HERO */
+  main { position: relative; z-index: 3; }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    padding: 5.5rem 2rem 3rem;
+    position: relative;
+  }
+
+  .hero__meta {
+    align-self: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 1.5rem;
+  }
+
+  .hero__meta-block { display: flex; flex-direction: column; gap: 0.4rem; line-height: 1.4; }
+  .hero__meta-block--right { text-align: right; }
+  .hero__meta-key { color: var(--ink-fade); }
+
+  .hero__center {
+    align-self: center;
+    text-align: center;
+    padding: 2rem 0;
+    max-width: 44rem;
+    margin: 0 auto;
+  }
+
+  .sigil {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "wght" 300;
+    font-size: 1.25rem;
+    color: var(--accent);
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    animation: sigil-spin 90s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes sigil-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .hero__greeting {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "wght" 260;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+    opacity: 0;
+    animation: rise 1.4s cubic-bezier(0.18, 0.85, 0.22, 1) 0.15s forwards;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(0.4em); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero__sub {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fade 1s ease-out 0.9s forwards;
+  }
+  @keyframes fade { to { opacity: 1; } }
+
+  .hero__sub a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    padding-bottom: 2px;
+  }
+  .hero__sub a:hover { border-bottom-color: var(--accent); }
+
+  .hero__lede {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 24, "wght" 380;
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 36rem;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fade 1s ease-out 1.15s forwards;
+  }
+
+  .hero__bottom {
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 0.5rem;
+    opacity: 0;
+    animation: fade 1s ease-out 1.4s forwards;
+  }
+
+  .hero__enter {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 3px;
+    transition: opacity 0.2s ease, letter-spacing 0.4s ease;
+  }
+  .hero__enter:hover { opacity: 0.55; letter-spacing: 0.24em; }
+
+  /* rules at hero edges */
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    left: 2rem; right: 2rem;
+    height: 1px;
+    background: var(--ink);
+    opacity: 0;
+    animation: rule-extend 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  .hero::before { top: 5.5rem; }
+  .hero::after  { bottom: 3rem; }
+
+  @keyframes rule-extend {
+    to { opacity: 1; transform: scaleX(1); }
+  }
+
+  /* SECTIONS */
+  .section {
+    border-top: 1px solid var(--rule);
+    padding: 5.5rem 2rem;
+    max-width: calc(var(--col-num) + var(--col-label) + var(--col-body) + var(--gutter) * 2 + 4rem);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: var(--col-num) var(--col-label) minmax(0, var(--col-body));
+    gap: var(--gutter);
+    align-items: start;
+  }
+
+  .section__num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    padding-top: 0.35rem;
+  }
+
+  .section__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-top: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    line-height: 1.4;
+  }
+
+  .sublabel {
+    color: var(--ink-fade);
+    font-weight: 400;
+  }
+
+  .section__body h2 {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 60, "wght" 320;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.75rem;
+    color: var(--ink);
+  }
+
+  .section__body h2 em {
+    font-style: italic;
+    color: var(--accent-deep);
+    font-variation-settings: "opsz" 60, "wght" 340;
+  }
+
+  .section__body p {
+    margin-bottom: 1.15rem;
+    max-width: 40rem;
+  }
+
+  .section__body p:last-child { margin-bottom: 0; }
+
+  .section__body strong {
+    font-variation-settings: "opsz" 24, "wght" 520;
+    color: var(--ink);
+  }
+
+  .section__body a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    transition: border-color 0.2s ease;
+  }
+  .section__body a:hover { border-bottom-color: var(--accent); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.2, 0.85, 0.25, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* schedule table */
+  .schedule {
+    margin-top: 1rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .schedule__row {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1.25rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+
+  .schedule__date {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 0.15rem;
+  }
+
+  .schedule__body {
+    font-family: 'Fraunces', serif;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .schedule__label {
+    font-variation-settings: "opsz" 24, "wght" 480;
+    color: var(--ink);
+  }
+
+  .schedule__desc {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "wght" 380;
+    margin-top: 0.15rem;
+  }
+
+  /* commitment lists */
+  .list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.75rem;
+  }
+
+  .list li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.55;
+  }
+
+  .list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+  }
+
+  .list--soft li::before {
+    content: "◦";
+    color: var(--ink-fade);
+    top: 0.05rem;
+  }
+
+  .subhead {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  /* pipeline / tree */
+  .tree {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    background: var(--paper-2);
+    padding: 1.5rem 1.75rem;
+    border-left: 2px solid var(--accent);
+    margin: 1.5rem 0;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .tree .arrow { color: var(--accent); }
+
+  /* CTA block */
+  .cta {
+    max-width: calc(var(--col-num) + var(--col-label) + var(--col-body) + var(--gutter) * 2 + 4rem);
+    margin: 0 auto;
+    padding: 5.5rem 2rem 7rem;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .cta__sigil {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .cta__title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "wght" 280;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .cta__body {
+    max-width: 34rem;
+    margin: 0 auto 2.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--accent-deep);
+    transition: background 0.2s ease, transform 0.3s ease;
+  }
+  .cta__button:hover {
+    background: var(--accent-deep);
+    transform: translateY(-1px);
+  }
+
+  .cta__second {
+    display: block;
+    margin-top: 1.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .cta__second:hover { color: var(--accent-deep); }
+
+  .cta__deadline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-top: 2.5rem;
+  }
+  .cta__deadline strong { color: var(--accent-deep); font-weight: 500; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding: 4rem 2rem 6rem;
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .footer__hosts {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "wght" 360;
+    font-size: 1.125rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .footer__hosts strong {
+    font-style: normal;
+    font-variation-settings: "opsz" 24, "wght" 500;
+  }
+
+  .footer__meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__meta .topbar__sep {
+    background: var(--ink-fade);
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .section {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 4rem 1.5rem;
+    }
+    .section__num, .section__label {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+    .section__label { padding-top: 0; }
+    .topbar { padding: 0.75rem 1.25rem; font-size: 0.625rem; }
+    .topbar__group { gap: 0.75rem; }
+    .hero { padding: 5rem 1.25rem 2.5rem; }
+    .hero__meta { font-size: 0.625rem; gap: 1rem; padding-top: 0.75rem; }
+    .hero::before, .hero::after { left: 1.25rem; right: 1.25rem; }
+    .schedule__row { grid-template-columns: 1fr; gap: 0.4rem; }
+    .cta { padding: 4rem 1.5rem 5rem; }
+    body::after { inset: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar" aria-label="masthead">
+  <div class="topbar__group">
+    <span>Audax Lab №1</span>
+    <span class="topbar__sep" aria-hidden="true"></span>
+    <span>An Invitation</span>
+  </div>
+  <div class="topbar__group">
+    <span class="live"><span class="live__dot" aria-hidden="true"></span>Open Until Aug 10</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="invitation">
+    <div class="hero__meta">
+      <div class="hero__meta-block">
+        <span class="hero__meta-key">Filed under</span>
+        <span>Invitation / Public Domain</span>
+      </div>
+      <div class="hero__meta-block hero__meta-block--right">
+        <span class="hero__meta-key">Issued</span>
+        <span>July 2026 · CC0</span>
+      </div>
+    </div>
+
+    <div class="hero__center">
+      <div class="sigil" aria-hidden="true">⁕</div>
+      <h1 class="hero__greeting">You are invited.</h1>
+      <p class="hero__sub">
+        Building the Community Weaving Agent · A Hackathon
+      </p>
+      <p class="hero__lede">
+        An open invitation from <strong>The Coherence Company</strong> and <strong>SynchroLabs</strong> to help build the first working version of a shared AI agent for a network of organisations — a two-day remote hackathon on <strong>August 18–19, 2026</strong>, with two weeks of collaborative preparation before it.
+      </p>
+    </div>
+
+    <div class="hero__bottom">
+      <a href="#what" class="hero__enter">↓ Read the invitation</a>
+    </div>
+  </section>
+
+  <!-- §00 WHAT THIS IS -->
+  <section class="section" id="what">
+    <div class="section__num">§ 00</div>
+    <div class="section__label">
+      What This Is
+      <span class="sublabel">Coming together</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>A small group of organisations, learning together, in the <em>open</em>.</h2>
+      <p>Audax Lab №1 is the first coming-together of a small working group — three to five organisations building a shared AI agent that helps a distributed community stay aware of each other's work. Everything we do is <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a>. Everything is in the open.</p>
+      <p>The point isn't the memory technology or the models — those are the tools. The point is learning, together, how organisations can actually collaborate through agents. This is an experiment in inter-organisational agentic collaboration, built by the participants for the participants, with a real thing to show at the end.</p>
+      <p>It is convened by two organisations — <strong>The Coherence Company</strong> and <strong>SynchroLabs</strong> — as the inviting hosts. The lab itself belongs to everyone who shows up.</p>
+    </div>
+  </section>
+
+  <!-- §01 WHAT WE'RE BUILDING -->
+  <section class="section" id="build">
+    <div class="section__num">§ 01</div>
+    <div class="section__label">
+      The Build
+      <span class="sublabel">Community Weaving Agent</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>One shared AI agent for a network of <em>organisations</em>.</h2>
+      <p>The <strong>Community Weaving Agent</strong> is the concrete thing we're building — a shared AI companion whose job is to weave the public work of participating organisations into one visible, connected picture, and to maintain the relationship between the community and the people who care about it.</p>
+      <p>The hackathon should produce one complete, observable loop:</p>
+<pre class="tree">Organisational public updates
+        <span class="arrow">↓</span>
+Collection and source-linked memory
+        <span class="arrow">↓</span>
+Cross-organisational synthesis
+        <span class="arrow">↓</span>
+Permission-controlled member delivery
+        <span class="arrow">↓</span>
+Public learning and a pilot decision</pre>
+      <p>We are not building a finished platform in two days. We are building enough of it that we can point at something real, and honestly decide whether it deserves a short pilot afterwards. If it does, we do that together. If it doesn't, we've learned something and can walk away without bad feelings.</p>
+      <p class="mono" style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-fade); margin-top: 2rem;">
+        Full vision and proposal: <a href="https://github.com/Vorski-Imagineering/ARK/tree/main/proposal/hackathon-1" target="_blank" rel="noopener noreferrer">proposal/hackathon-1</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- §02 SCHEDULE -->
+  <section class="section" id="schedule">
+    <div class="section__num">§ 02</div>
+    <div class="section__label">
+      Schedule
+      <span class="sublabel">Two weeks + two days</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Two weeks of preparation, then two days of <em>build</em>.</h2>
+      <p>The event is remote. All sessions run on video with the working agent alongside. Preparation sessions and precise times will be confirmed with committed participants after RSVP; times will be chosen to accommodate the range of participants' timezones.</p>
+
+      <div class="schedule">
+        <div class="schedule__row">
+          <div class="schedule__date">Early Aug</div>
+          <div class="schedule__body">
+            <span class="schedule__label">Orientation &amp; Commitment</span>
+            <span class="schedule__desc">60 minutes · everyone. Use the working agent, meet each other, agree the direction.</span>
+          </div>
+        </div>
+        <div class="schedule__row">
+          <div class="schedule__date">Mid Aug</div>
+          <div class="schedule__body">
+            <span class="schedule__label">Source Review &amp; Design Lock</span>
+            <span class="schedule__desc">90 minutes · everyone. Look at actual sources, lock the two-day scope and demo.</span>
+          </div>
+        </div>
+        <div class="schedule__row">
+          <div class="schedule__date">Aug 17</div>
+          <div class="schedule__body">
+            <span class="schedule__label">Technical Readiness</span>
+            <span class="schedule__desc">60 minutes · builders and core team. Verify agent, access, and demo path.</span>
+          </div>
+        </div>
+        <div class="schedule__row">
+          <div class="schedule__date">Aug 18</div>
+          <div class="schedule__body">
+            <span class="schedule__label">Hackathon · Day 1</span>
+            <span class="schedule__desc">Full day. Make the shared information useful.</span>
+          </div>
+        </div>
+        <div class="schedule__row">
+          <div class="schedule__date">Aug 19</div>
+          <div class="schedule__body">
+            <span class="schedule__label">Hackathon · Day 2</span>
+            <span class="schedule__desc">Full day. Complete, test, demonstrate, and decide together what happens next.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §03 WHAT WE ASK -->
+  <section class="section" id="ask">
+    <div class="section__num">§ 03</div>
+    <div class="section__label">
+      What We Ask
+      <span class="sublabel">From each org</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Bring what you have. Show up prepared. Help us <em>learn</em>.</h2>
+      <p>Every participating organisation shows up as itself, brings the public work it's already doing, and helps us test whether a shared agent can make that work more visible and connected. There's no pre-existing product to demo, no pitch to sit through. This is a working group.</p>
+
+      <span class="subhead">Required</span>
+      <ul class="list">
+        <li>Nominate <strong>one representative</strong> who can explain and verify your organisation's public work.</li>
+        <li>Provide a <strong>short public profile</strong> and one to three <strong>public sources</strong> (a website section, feed, repo, or approved snapshot).</li>
+        <li>Join the two preparation sessions in early and mid-August.</li>
+        <li>Cover the two build days — fully where possible, or at the opening, midpoint, and final demo checkpoints.</li>
+        <li>Review the prototype for accuracy — tell us where it gets your work wrong.</li>
+        <li>Use the working agent during preparation and report gaps and errors.</li>
+        <li>Join the continuation decision and a short post-event review.</li>
+      </ul>
+
+      <span class="subhead">Welcome (not required)</span>
+      <ul class="list list--soft">
+        <li>A technical, design, facilitation, or documentation contributor.</li>
+        <li>A <strong>$17 contribution</strong> per participant — all of which goes directly to funding the agent's infrastructure and models.</li>
+        <li>Suggestions for additional sources once the core is working.</li>
+      </ul>
+
+      <p>Your representative's <strong>source knowledge, product judgment, testing, and corrections</strong> are the necessary contribution. Everything else is welcome bonus.</p>
+    </div>
+  </section>
+
+  <!-- §04 WHAT YOU RECEIVE -->
+  <section class="section" id="receive">
+    <div class="section__num">§ 04</div>
+    <div class="section__label">
+      What You Receive
+      <span class="sublabel">In return</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Direct hands on a real thing being built <em>with</em> you.</h2>
+      <ul class="list">
+        <li><strong>Early access</strong> to a working agent during the two-week preparation period — use it, poke at it, watch it change.</li>
+        <li><strong>Direct influence</strong> over the first working version of the agent, and over the shape of any pilot that follows.</li>
+        <li>A <strong>shared prototype</strong> built from your own material and the material of other participating organisations.</li>
+        <li>Better <strong>visibility</strong> into what participating organisations are doing, and where your work naturally connects with theirs.</li>
+        <li>Reusable <strong>public documentation, code, and process</strong> — everything CC0, everything portable.</li>
+        <li><strong>Honest evidence</strong> about the effort, the limits, and whether the pattern is worth continuing.</li>
+      </ul>
+      <p>The immediate decision isn't whether to fund a permanent platform or sign onto anything long-term. It's whether to join one focused experiment and decide, together, what the evidence supports.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="rsvp">
+    <div class="cta__sigil">⁕</div>
+    <h2 class="cta__title">If this is a <em>yes</em>, we'd love to have you.</h2>
+    <p class="cta__body">
+      RSVP is a two-step. First, <strong>join our Telegram</strong> — we're gathering there so we can meet and answer any questions before you commit. Second, once you're in, <strong>open a pull request on the repo</strong> — even a tiny one to your organisation's source pack. That's how we know you're really in. If you're not sure, come to Telegram first and we'll talk.
+    </p>
+
+    <a href="https://t.me/+FUb2i03MyH01YTA0" class="cta__button" target="_blank" rel="noopener noreferrer">
+      Join the Telegram
+    </a>
+
+    <a href="https://github.com/Vorski-Imagineering/ARK" class="cta__second" target="_blank" rel="noopener noreferrer">
+      → Explore the repo
+    </a>
+
+    <p class="cta__deadline">RSVP by <strong>August 10, 2026</strong> — open until then</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer__hosts">
+      With gratitude for your work,<br />
+      <strong>Victor Vorski</strong> · The Coherence Company<br />
+      <strong>Zach Miltz</strong> · SynchroLabs
+    </p>
+    <div class="footer__meta">
+      <span>No Rights Reserved</span>
+      <span class="topbar__sep" aria-hidden="true"></span>
+      <span>CC0 1.0 Universal</span>
+      <span class="topbar__sep" aria-hidden="true"></span>
+      <span>Est. 2026</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
