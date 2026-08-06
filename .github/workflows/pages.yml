@@ -1,0 +1,47 @@
+name: Deploy Pages
+
+# Publishes docs/ to GitHub Pages (ark.audax.earth).
+#
+# Replaces the legacy branch-source builder, which ran Jekyll over docs/ and
+# began failing on 2026-08-06 with an opaque "Page build failed." docs/ is
+# plain static HTML/SVG with no Jekyll config, so there is nothing to build —
+# upload-pages-artifact just packages the directory and deploy-pages ships it.
+#
+# Requires Settings -> Pages -> Source = "GitHub Actions".
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Queue deploys rather than letting a new push cancel one in flight — several
+# runs on 2026-08-06 were cancelled mid-deploy by the next push.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy docs/ to Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+
+      - id: deployment
+        uses: actions/deploy-pages@v5
