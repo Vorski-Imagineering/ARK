@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>An Invitation · Audax Lab №1</title>
-<meta name="description" content="An invitation from The Coherence Company and SynchroLabs to join Audax Lab №1 — a two-day remote hackathon on August 18–19, 2026, building the first working version of the Community Weaving Agent." />
+<meta name="description" content="An invitation from The Coherence Company and SynchroLabs to join Audax Lab №1 — a two-day remote hackathon on August 18–19, 2026, building ARKo the Agent: a shared field agent that helps a small ecosystem of organisations sense what is happening across the field." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -110,6 +110,13 @@
     background: var(--ink); opacity: 0.35;
     display: inline-block;
   }
+
+  .brand-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.18s ease;
+  }
+  .brand-link:hover { opacity: 0.55; }
 
   .topbar a { text-decoration: none; color: var(--ink); }
   .topbar a:hover { opacity: 0.55; }
@@ -339,13 +346,17 @@
     color: var(--ink);
   }
 
-  .section__body a {
+  .section__body a,
+  .hero__lede a,
+  .footer__hosts a {
     color: var(--accent-deep);
     text-decoration: none;
     border-bottom: 1px solid var(--accent-soft);
     transition: border-color 0.2s ease;
   }
-  .section__body a:hover { border-bottom-color: var(--accent); }
+  .section__body a:hover,
+  .hero__lede a:hover,
+  .footer__hosts a:hover { border-bottom-color: var(--accent); }
 
   .reveal {
     opacity: 0;
@@ -440,6 +451,46 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
     display: block;
+  }
+
+  /* plate (image) */
+  .plate {
+    border-top: 1px solid var(--rule);
+    padding: 4.5rem 2rem 5rem;
+    text-align: center;
+  }
+  .plate__head {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2.25rem;
+  }
+  .plate__head::before, .plate__head::after {
+    content: "—";
+    margin: 0 0.85rem;
+    color: var(--ink-fade);
+  }
+  .plate__frame {
+    display: inline-block;
+    padding: 0.75rem;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .plate__image {
+    display: block;
+    max-width: 100%;
+    width: 22rem;
+    height: auto;
+  }
+  .plate__caption {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "wght" 360;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 1.5rem;
   }
 
   /* pipeline / tree */
@@ -576,7 +627,196 @@
     background: var(--ink-fade);
   }
 
+  /* anchor offset for the fixed masthead */
+  .section, .contents, .plate, .cta { scroll-margin-top: 4rem; }
+
+  /* SCROLL PROGRESS */
+  .progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px; width: 0;
+    background: var(--accent);
+    z-index: 60;
+    transition: width 0.12s linear;
+  }
+
+  /* TOPBAR NAV */
+  .topbar__nav { display: flex; gap: 0.875rem; align-items: center; }
+  .topbar__nav a {
+    color: var(--ink);
+    text-decoration: none;
+    padding: 2px 0;
+    opacity: 0.6;
+    border-bottom: 1px solid transparent;
+    transition: opacity 0.18s ease, border-color 0.18s ease;
+  }
+  .topbar__nav a:hover { opacity: 1; }
+  .topbar__nav a.is-active { opacity: 1; border-bottom-color: var(--accent); }
+  .topbar__nav .topbar__nav-cta {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 4px 10px 3px;
+    margin-left: 0.35rem;
+    opacity: 1;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .topbar__nav .topbar__nav-cta:hover { background: var(--accent); color: var(--paper); }
+
+  /* CONTENTS INDEX */
+  .contents {
+    border-top: 1px solid var(--rule);
+    max-width: calc(var(--col-num) + var(--col-label) + var(--col-body) + var(--gutter) * 2 + 4rem);
+    margin: 0 auto;
+    padding: 3.5rem 2rem 4rem;
+  }
+
+  .contents__head {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-bottom: 1.5rem;
+  }
+
+  .contents__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0 3rem;
+  }
+
+  .contents__item {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    gap: 0.5rem;
+    align-items: baseline;
+    padding: 0.8rem 0.5rem 0.85rem 0;
+    border-top: 1px solid var(--hairline);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.25s ease, background 0.25s ease;
+  }
+  .contents__item:hover { background: var(--paper-2); padding-left: 0.5rem; }
+
+  .contents__num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-fade);
+  }
+
+  .contents__title {
+    font-variation-settings: "opsz" 24, "wght" 480;
+    font-size: 1rem;
+    line-height: 1.3;
+    display: block;
+  }
+
+  .contents__desc {
+    display: block;
+    font-size: 0.875rem;
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "wght" 350;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    margin-top: 0.1rem;
+  }
+
+  /* CARD GRID */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    margin: 1.75rem 0;
+  }
+
+  .card { background: var(--paper); padding: 1.2rem 1.25rem 1.35rem; }
+
+  .card__num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+  }
+
+  .card__title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 24, "wght" 500;
+    font-size: 1.0625rem;
+    line-height: 1.25;
+    margin: 0.4rem 0 0.45rem;
+  }
+
+  .card__body {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .card--yes .card__num { color: var(--accent); }
+  .card--no .card__num { color: var(--ink-fade); }
+  .card--no .card__body { font-style: italic; }
+
+  /* PULL QUOTE */
+  .pull {
+    border-left: 2px solid var(--accent);
+    padding: 0.15rem 0 0.15rem 1.5rem;
+    margin: 1.75rem 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 60, "wght" 320;
+    font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 40rem;
+  }
+
+  /* small aside */
+  .aside {
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "wght" 350;
+    color: var(--ink-fade);
+    font-size: 0.95rem;
+  }
+
+  /* two-column list */
+  .list--cols { columns: 2; column-gap: 2.5rem; }
+  .list--cols li { break-inside: avoid; margin-bottom: 0.5rem; }
+
+  /* chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+  .chip {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border: 1px solid var(--hairline);
+    padding: 0.3rem 0.6rem 0.25rem;
+    white-space: nowrap;
+  }
+
   /* Mobile */
+  @media (max-width: 1180px) {
+    .topbar .live { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    .topbar__nav a:not(.topbar__nav-cta) { display: none; }
+    .contents { padding: 3rem 1.5rem; }
+    .contents__grid { grid-template-columns: 1fr; gap: 0; }
+    .list--cols { columns: 1; }
+    .pull { padding-left: 1.1rem; }
+  }
+
   @media (max-width: 900px) {
     .section {
       grid-template-columns: 1fr;
@@ -602,11 +842,22 @@
 <body>
 
 <!-- TOPBAR -->
+<div class="progress" id="progress" aria-hidden="true"></div>
 <nav class="topbar" aria-label="masthead">
   <div class="topbar__group">
-    <span>Audax Lab №1</span>
+    <a class="brand-link" href="./index.html">← Audax Lab №1</a>
     <span class="topbar__sep" aria-hidden="true"></span>
     <span>An Invitation</span>
+  </div>
+  <div class="topbar__group topbar__nav" id="secnav">
+    <a href="#question">Question</a>
+    <a href="#build">ARK</a>
+    <a href="#public">Public</a>
+    <a href="#signals">Signals</a>
+    <a href="#tracks">Tracks</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#ask">Ask</a>
+    <a href="#rsvp" class="topbar__nav-cta">→ RSVP</a>
   </div>
   <div class="topbar__group">
     <span class="live"><span class="live__dot" aria-hidden="true"></span>Open Until Aug 10</span>
@@ -632,43 +883,173 @@
       <div class="sigil" aria-hidden="true">⁕</div>
       <h1 class="hero__greeting">You are invited.</h1>
       <p class="hero__sub">
-        Building the Community Weaving Agent · A Hackathon
+        Building ARKo the Agent · A Hackathon
       </p>
       <p class="hero__lede">
-        An open invitation from <strong>The Coherence Company</strong> and <strong>SynchroLabs</strong> to help build the first working version of a shared AI agent for a network of organisations — a two-day remote hackathon on <strong>August 18–19, 2026</strong>, with two weeks of collaborative preparation before it.
+        An open invitation from <strong><a href="https://coherence.tv/" target="_blank" rel="noopener noreferrer">The Coherence Company</a></strong> and <strong><a href="https://synchrolabs.ai/" target="_blank" rel="noopener noreferrer">SynchroLabs</a></strong> to help build the first working version of a shared AI agent for a network of organisations — a two-day remote hackathon on <strong>August 18–19, 2026</strong>, with two weeks of collaborative preparation before it.
       </p>
     </div>
 
     <div class="hero__bottom">
-      <a href="#what" class="hero__enter">↓ Read the invitation</a>
+      <a href="#question" class="hero__enter">↓ Read the invitation</a>
     </div>
   </section>
 
-  <!-- §00 WHAT THIS IS -->
-  <section class="section" id="what">
+  <!-- §00 THE QUESTION -->
+  <section class="section" id="question">
     <div class="section__num">§ 00</div>
+    <div class="section__label">
+      The Question
+      <span class="sublabel">Why this, now</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>What becomes possible when organisations can sense the <em>whole field</em>?</h2>
+      <p>Purpose-driven organisations are already surrounded by potential allies. They attend the same gatherings, know many of the same people, work on adjacent problems, and share values, tools, methods, and ambitions.</p>
+      <p>Yet one organisation is looking for a technical partner while another has already built most of what it needs. One project is searching for a pilot site while another is looking for a meaningful use case. Learning appears in updates, repos, podcasts and feeds — then quietly disappears beneath the next wave.</p>
+      <p><strong>Networks help organisations find one another. They do not automatically help them sense, remember, and act together.</strong></p>
+      <p class="pull">Can a shared agent help a small ecosystem of aligned organisations understand what is happening across the field, discover opportunities for collaboration, and develop a more coherent shared narrative?</p>
+      <p>That is the one bounded challenge behind ARK — the first concrete experiment of <strong>Audax Labs</strong>, the experimental engine of Audax OS. This is not yet an attempt to build a complete inter-organisational operating system. It is the first practical step toward one.</p>
+    </div>
+  </section>
+
+  <!-- CONTENTS -->
+  <section class="contents" id="contents" aria-label="contents">
+    <p class="contents__head">Contents — eleven short sections</p>
+    <div class="contents__grid">
+      <a class="contents__item" href="#question">
+        <span class="contents__num">§ 00</span>
+        <span>
+          <span class="contents__title">The Question</span>
+          <span class="contents__desc">Why networks aren't enough.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#what">
+        <span class="contents__num">§ 01</span>
+        <span>
+          <span class="contents__title">What This Is</span>
+          <span class="contents__desc">A small working group, in the open.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#build">
+        <span class="contents__num">§ 02</span>
+        <span>
+          <span class="contents__title">What ARK Is</span>
+          <span class="contents__desc">Researcher, librarian, matchmaker.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#public">
+        <span class="contents__num">§ 03</span>
+        <span>
+          <span class="contents__title">The Public Field</span>
+          <span class="contents__desc">We start with what you already publish.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#signals">
+        <span class="contents__num">§ 04</span>
+        <span>
+          <span class="contents__title">The Signals</span>
+          <span class="contents__desc">Six questions an update answers.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#tracks">
+        <span class="contents__num">§ 05</span>
+        <span>
+          <span class="contents__title">The Tracks</span>
+          <span class="contents__desc">What the two days actually test.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#schedule">
+        <span class="contents__num">§ 06</span>
+        <span>
+          <span class="contents__title">Schedule</span>
+          <span class="contents__desc">Two weeks, then two days.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#who">
+        <span class="contents__num">§ 07</span>
+        <span>
+          <span class="contents__title">Who This Is For</span>
+          <span class="contents__desc">Fields, and dispositions.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#ask">
+        <span class="contents__num">§ 08</span>
+        <span>
+          <span class="contents__title">What We Ask</span>
+          <span class="contents__desc">One representative, a public source.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#receive">
+        <span class="contents__num">§ 09</span>
+        <span>
+          <span class="contents__title">What You Receive</span>
+          <span class="contents__desc">Early access, influence, evidence.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#learning">
+        <span class="contents__num">§ 10</span>
+        <span>
+          <span class="contents__title">Action Learning</span>
+          <span class="contents__desc">Small builds before master plans.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#rsvp">
+        <span class="contents__num">§ ⁕</span>
+        <span>
+          <span class="contents__title">RSVP</span>
+          <span class="contents__desc">By August 10, 2026.</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- §01 WHAT THIS IS -->
+  <section class="section" id="what">
+    <div class="section__num">§ 01</div>
     <div class="section__label">
       What This Is
       <span class="sublabel">Coming together</span>
     </div>
     <div class="section__body reveal">
       <h2>A small group of organisations, learning together, in the <em>open</em>.</h2>
-      <p>Audax Lab №1 is the first coming-together of a small working group — three to five organisations building a shared AI agent that helps a distributed community stay aware of each other's work. Everything we do is <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a>. Everything is in the open.</p>
+      <p>Audax Lab №1 is the first coming-together of a small working group — three to five organisations building a shared AI agent that helps a distributed community stay aware of each other's work. We practice <a href="https://buildinpublic.xyz/" target="_blank" rel="noopener noreferrer">Build In Public</a>.</p>
       <p>The point isn't the memory technology or the models — those are the tools. The point is learning, together, how organisations can actually collaborate through agents. This is an experiment in inter-organisational agentic collaboration, built by the participants for the participants, with a real thing to show at the end.</p>
-      <p>It is convened by two organisations — <strong>The Coherence Company</strong> and <strong>SynchroLabs</strong> — as the inviting hosts. The lab itself belongs to everyone who shows up.</p>
+      <p>It is convened by two organisations — <strong><a href="https://coherence.tv/" target="_blank" rel="noopener noreferrer">The Coherence Company</a></strong> and <strong><a href="https://synchrolabs.ai/" target="_blank" rel="noopener noreferrer">SynchroLabs</a></strong> — as the inviting hosts. The lab itself belongs to everyone who shows up.</p>
+    </div>
+  </section>
+
+  <!-- PLATE II -->
+  <section class="plate" aria-label="plate">
+    <div class="plate__head">Plate II — The Weave</div>
+    <div class="reveal">
+      <div class="plate__frame">
+        <img src="./plate-convergence.svg" alt="The Weave — three organisation spires converging on a shared agent, rendered as a Codex Atlanticus pen-and-ink plate" class="plate__image" />
+      </div>
+      <p class="plate__caption">Three organisations, learning to weave their work together.</p>
     </div>
   </section>
 
   <!-- §01 WHAT WE'RE BUILDING -->
   <section class="section" id="build">
-    <div class="section__num">§ 01</div>
+    <div class="section__num">§ 02</div>
     <div class="section__label">
-      The Build
-      <span class="sublabel">Community Weaving Agent</span>
+      What ARK Is
+      <span class="sublabel">ARKo the Agent</span>
     </div>
     <div class="section__body reveal">
       <h2>One shared AI agent for a network of <em>organisations</em>.</h2>
-      <p>The <strong>Community Weaving Agent</strong> is the concrete thing we're building — a shared AI companion whose job is to weave the public work of participating organisations into one visible, connected picture, and to maintain the relationship between the community and the people who care about it.</p>
+      <p><strong>ARKo the Agent</strong> is the concrete thing we're building — a shared field agent for a micro-ecosystem working in AI for good, collaboration technology, organisational innovation, collective intelligence, regeneration, and adjacent public-purpose fields.</p>
+      <p>Its first role is not to decide anything on behalf of participating organisations. It is to help the ecosystem:</p>
+      <ul class="list list--cols">
+        <li>understand who is doing what;</li>
+        <li>follow what organisations are learning;</li>
+        <li>surface emerging needs and offers;</li>
+        <li>identify possible collaborations;</li>
+        <li>connect people working on related problems;</li>
+        <li>preserve useful knowledge across projects;</li>
+        <li>and keep a living narrative of what is changing.</li>
+      </ul>
+      <p class="aside">Part researcher, part librarian, part matchmaker, part ecosystem storyteller. A diplomatic octopus, ideally with excellent provenance.</p>
       <p>The hackathon should produce one complete, observable loop:</p>
 <pre class="tree">Organisational public updates
         <span class="arrow">↓</span>
@@ -686,9 +1067,143 @@ Public learning and a pilot decision</pre>
     </div>
   </section>
 
-  <!-- §02 SCHEDULE -->
+  <!-- §03 THE PUBLIC FIELD -->
+  <section class="section" id="public">
+    <div class="section__num">§ 03</div>
+    <div class="section__label">
+      The Public Field
+      <span class="sublabel">Where we start</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>We begin with what you already want the world to <em>know</em>.</h2>
+      <p>The first ARK experiment works only with information participating organisations are willing to make public. No confidential data room, no private consortium, no hidden shared memory. Those may become valuable later — they require far stronger protocols for consent, access, security, governance, and revocation.</p>
+      <p class="pull">Can we create meaningful inter-organisational intelligence from what organisations already want the world to know?</p>
+      <p>So each participant brings one of two things: an <strong>organisational agent</strong> that can publish and exchange updates, or a <strong>consistent public feed</strong> ARK can read — a website feed, project journal, newsletter, public database, GitHub activity stream, social feed, or API.</p>
+      <p>The technology is secondary. The requirement is a <strong>regular public signal</strong>.</p>
+    </div>
+  </section>
+
+  <!-- §04 THE SIGNALS -->
+  <section class="section" id="signals">
+    <div class="section__num">§ 04</div>
+    <div class="section__label">
+      The Signals
+      <span class="sublabel">A light protocol</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Six questions an update should <em>answer</em>.</h2>
+      <p>Most organisational communication is either promotional or unstructured. ARK needs something more useful than polished announcements, and lighter than formal reporting.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card__num">01</div>
+          <div class="card__title">What changed?</div>
+          <p class="card__body">Progress, decisions, launches, pivots, new directions.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">02</div>
+          <div class="card__title">What are we learning?</div>
+          <p class="card__body">Discoveries, insights, failures, emerging patterns.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">03</div>
+          <div class="card__title">What do we need?</div>
+          <p class="card__body">People, expertise, tools, introductions, pilots, feedback.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">04</div>
+          <div class="card__title">What can we offer?</div>
+          <p class="card__body">Knowledge, code, infrastructure, methods, capacity.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">05</div>
+          <div class="card__title">What are we exploring?</div>
+          <p class="card__body">Open questions where peer review would be valuable.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">06</div>
+          <div class="card__title">What may be relevant to others?</div>
+          <p class="card__body">Reusable components, standards, events, research, datasets.</p>
+        </div>
+      </div>
+
+      <p>The hackathon tests how these signals get structured, tagged, verified, and connected — without imposing an exhausting new reporting burden. The feed must serve the organisation first. <strong>If maintaining it becomes administrative compost, the experiment has failed.</strong></p>
+    </div>
+  </section>
+
+  <!-- §05 THE TRACKS -->
+  <section class="section" id="tracks">
+    <div class="section__num">§ 05</div>
+    <div class="section__label">
+      The Tracks
+      <span class="sublabel">What we test</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Not a demo. The minimum infrastructure for an ecosystem to become <em>aware of itself</em>.</h2>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card__num">Track 01</div>
+          <div class="card__title">A shared update grammar</div>
+          <p class="card__body">Can different organisations express activity, needs, offers, and questions in a format that stays human-friendly while being agent-readable? Shared tags, light schemas, common vocabularies.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">Track 02</div>
+          <div class="card__title">Public-feed ingestion</div>
+          <p class="card__body">Can ARK consume several formats without forcing everyone onto one platform? The aim is not to build another little digital castle and demand that everyone move in.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">Track 03</div>
+          <div class="card__title">Ecosystem synthesis</div>
+          <p class="card__body">A weekly brief, theme maps, shared technical learning, unresolved questions. Synthesis must preserve disagreement — not one authorised story with the dissent quietly ironed out.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">Track 04</div>
+          <div class="card__title">Opportunity detection</div>
+          <p class="card__body">One organisation's need meeting another's offer. Duplicated work, shared questions, complementary capability, possible pilots — and organisations moving through similar stages of the Coherence Journey.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">Track 05</div>
+          <div class="card__title">Matchmaking with human judgment</div>
+          <p class="card__body">Agents can reveal possibilities. Humans decide whether there is genuine purpose alignment, trust, capacity, and relational fit.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">Track 06</div>
+          <div class="card__title">Provenance &amp; inspectability</div>
+          <p class="card__body">Every synthesis shows the source, the interpretation, the agent's confidence, what may be missing, and how to correct the record.</p>
+        </div>
+      </div>
+
+      <span class="subhead">The line ARK does not cross</span>
+      <div class="cards">
+        <div class="card card--yes">
+          <div class="card__num">ARK may say</div>
+          <p class="card__body">Organisation A is looking for a public-interest AI evaluation method. Organisation B has recently published related work. Both are exploring community-governed infrastructure.</p>
+        </div>
+        <div class="card card--no">
+          <div class="card__num">ARK may not say</div>
+          <p class="card__body">These organisations should collaborate.</p>
+        </div>
+      </div>
+
+      <p>Protocols must come before autonomy. Otherwise the ecosystem gets a black-box bureaucracy with friendlier typography.</p>
+    </div>
+  </section>
+
+  <!-- PLATE III -->
+  <section class="plate" aria-label="plate">
+    <div class="plate__head">Plate III — The Almanac</div>
+    <div class="reveal">
+      <div class="plate__frame">
+        <img src="./plate-almanac.svg" alt="The Almanac — a two-week and two-day schedule rendered as a Codex Atlanticus astronomical dial" class="plate__image" />
+      </div>
+      <p class="plate__caption">Two weeks of preparation, then two days of build.</p>
+    </div>
+  </section>
+
+  <!-- §06 SCHEDULE -->
   <section class="section" id="schedule">
-    <div class="section__num">§ 02</div>
+    <div class="section__num">§ 06</div>
     <div class="section__label">
       Schedule
       <span class="sublabel">Two weeks + two days</span>
@@ -737,9 +1252,35 @@ Public learning and a pilot decision</pre>
     </div>
   </section>
 
-  <!-- §03 WHAT WE ASK -->
+  <!-- §07 WHO THIS IS FOR -->
+  <section class="section" id="who">
+    <div class="section__num">§ 07</div>
+    <div class="section__label">
+      Who This Is For
+      <span class="sublabel">Fields &amp; dispositions</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Builders, and organisations willing to work in the <em>open</em>.</h2>
+      <p>This is primarily an invitation to technical builders and organisations working on:</p>
+      <div class="chips">
+        <span class="chip">Agentic AI</span>
+        <span class="chip">AI for public benefit</span>
+        <span class="chip">Collective intelligence</span>
+        <span class="chip">Collaboration infrastructure</span>
+        <span class="chip">Knowledge systems</span>
+        <span class="chip">Open protocols</span>
+        <span class="chip">Regenerative technology</span>
+        <span class="chip">Distributed org tools</span>
+        <span class="chip">Agent governance &amp; trust</span>
+      </div>
+      <p>But technical capability is not the only requirement. The strongest participants have meaningful work they are excited to share, an active interest in learning with peers, a willingness to surface needs as well as achievements — and enough humility to let their unfinished questions be visible.</p>
+      <p>We are not proposing a clinical definition of “public good” at this stage. The invitation is for organisations trying to contribute beyond their own growth. And <strong>openness does not mean compulsory vulnerability</strong> — it means sharing what is appropriate, useful, and willingly offered, while being honest enough that others can meaningfully understand the work.</p>
+    </div>
+  </section>
+
+  <!-- §08 WHAT WE ASK -->
   <section class="section" id="ask">
-    <div class="section__num">§ 03</div>
+    <div class="section__num">§ 08</div>
     <div class="section__label">
       What We Ask
       <span class="sublabel">From each org</span>
@@ -770,9 +1311,9 @@ Public learning and a pilot decision</pre>
     </div>
   </section>
 
-  <!-- §04 WHAT YOU RECEIVE -->
+  <!-- §09 WHAT YOU RECEIVE -->
   <section class="section" id="receive">
-    <div class="section__num">§ 04</div>
+    <div class="section__num">§ 09</div>
     <div class="section__label">
       What You Receive
       <span class="sublabel">In return</span>
@@ -788,6 +1329,36 @@ Public learning and a pilot decision</pre>
         <li><strong>Honest evidence</strong> about the effort, the limits, and whether the pattern is worth continuing.</li>
       </ul>
       <p>The immediate decision isn't whether to fund a permanent platform or sign onto anything long-term. It's whether to join one focused experiment and decide, together, what the evidence supports.</p>
+    </div>
+  </section>
+
+  <!-- §10 ACTION LEARNING -->
+  <section class="section" id="learning">
+    <div class="section__num">§ 10</div>
+    <div class="section__label">
+      Action Learning
+      <span class="sublabel">Not master planning</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Action learning before <em>master planning</em>.</h2>
+      <p>We are deliberately not beginning with a vast grant-shaped masterplan describing a mature ecosystem that does not yet exist.</p>
+      <p>Build something small. Put it into contact with real organisations. Observe where the information is unclear, where trust becomes necessary, where the agent makes weak inferences, where the update burden becomes too high — and where an unexpected connection creates genuine value. Then improve the protocols.</p>
+      <p>The real test of the framework is not whether the architecture is intellectually elegant. It is whether people and organisations can use it to collaborate more effectively, protect human agency, learn from their work, and move meaningful commitments forward.</p>
+      <p>So the hackathon is the beginning of a <strong>continuing Lab</strong> — not an isolated weekend of enthusiastic code followed by a repository entering its monastic phase.</p>
+      <p class="mono" style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-fade); margin-top: 2rem;">
+        The threads we are already pulling on: <a href="./action-learning.html">Action Learning</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- PLATE IV -->
+  <section class="plate" aria-label="plate">
+    <div class="plate__head">Plate IV — The Seal</div>
+    <div class="reveal">
+      <div class="plate__frame">
+        <img src="./plate-seal.svg" alt="The Seal — two interlocking rings and a quill signature, rendered as a Codex Atlanticus pen-and-ink plate" class="plate__image" />
+      </div>
+      <p class="plate__caption">A small yes, and a real thing built together.</p>
     </div>
   </section>
 
@@ -814,8 +1385,8 @@ Public learning and a pilot decision</pre>
   <footer class="footer">
     <p class="footer__hosts">
       With gratitude for your work,<br />
-      <strong>Victor Vorski</strong> · The Coherence Company<br />
-      <strong>Zach Miltz</strong> · SynchroLabs
+      <strong>Victor Vorski</strong> · <a href="https://coherence.tv/" target="_blank" rel="noopener noreferrer">The Coherence Company</a><br />
+      <strong>Zach Miltz</strong> · <a href="https://synchrolabs.ai/" target="_blank" rel="noopener noreferrer">SynchroLabs</a>
     </p>
     <div class="footer__meta">
       <span>No Rights Reserved</span>
@@ -830,16 +1401,56 @@ Public learning and a pilot decision</pre>
 
 <script>
   // reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  })();
 
-  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  // scroll progress + active section in the masthead nav
+  (function () {
+    const bar = document.getElementById('progress');
+    const links = Array.from(document.querySelectorAll('#secnav a[href^="#"]'));
+    const targets = links
+      .map((a) => ({ link: a, el: document.querySelector(a.getAttribute('href')) }))
+      .filter((t) => t.el);
+
+    let ticking = false;
+
+    function update() {
+      ticking = false;
+
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+
+      let current = null;
+      for (const t of targets) {
+        if (t.el.getBoundingClientRect().top <= 140) current = t.link;
+      }
+      links.forEach((a) => a.classList.toggle('is-active', a === current));
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
 </script>
 
 </body>

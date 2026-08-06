@@ -427,6 +427,133 @@
   }
 
   /* ─────────────────────────────────────────────
+     ENQUIRIES · interstitial bands + margin notes
+     ───────────────────────────────────────────── */
+  .enquiry {
+    border-top: 1px solid var(--rule);
+    padding: 4.75rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+  }
+  .enquiry__inner { max-width: 46rem; margin: 0 auto; }
+
+  .enquiry__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-bottom: 1.6rem;
+  }
+  .enquiry__eyebrow::before, .enquiry__eyebrow::after {
+    content: "·";
+    margin: 0 0.8rem;
+    color: var(--ink-fade);
+  }
+
+  .enquiry__q {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 96, "wght" 320;
+    font-size: clamp(1.375rem, 2.7vw, 2rem);
+    line-height: 1.24;
+    letter-spacing: -0.016em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .enquiry__q .q__mark { font-style: normal; color: var(--accent); }
+
+  .enquiry__gloss {
+    margin-top: 1.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+  }
+
+  /* the lead enquiry — the question behind the lab */
+  .enquiry--lead {
+    background: var(--paper-2);
+    padding: 6rem 2rem 6.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .enquiry--lead .enquiry__eyebrow { color: var(--accent); }
+  .enquiry--lead .enquiry__eyebrow::before,
+  .enquiry--lead .enquiry__eyebrow::after { color: var(--accent); }
+  .enquiry--lead .enquiry__inner { max-width: 52rem; }
+  .enquiry--lead .enquiry__q {
+    font-variation-settings: "opsz" 144, "wght" 300;
+    font-size: clamp(1.625rem, 3.6vw, 2.75rem);
+    line-height: 1.16;
+    letter-spacing: -0.024em;
+  }
+  .enquiry--lead .enquiry__gloss { color: var(--accent); }
+
+  /* hairline flourishes above and below the question */
+  .enquiry__rule {
+    width: 2.5rem;
+    height: 1px;
+    background: var(--hairline);
+    margin: 1.75rem auto 0;
+  }
+  .enquiry--lead .enquiry__rule { background: var(--accent); opacity: 0.5; }
+
+  /* closing pair — two enquiries side by side */
+  .enquiry--pair { padding-bottom: 5.5rem; }
+  .enquiry__pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.5rem;
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .enquiry__col { border-top: 1px solid var(--hairline); padding-top: 1.5rem; }
+  .enquiry__num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-bottom: 1rem;
+  }
+  .enquiry--pair .enquiry__q {
+    font-size: clamp(1.1875rem, 1.9vw, 1.4375rem);
+    line-height: 1.3;
+  }
+  .enquiry--pair .enquiry__gloss { margin-top: 1.1rem; }
+
+  /* margin note — a quiet enquiry set in the label column */
+  .margin-q {
+    display: block;
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hairline);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .margin-q__key {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    margin-bottom: 0.6rem;
+  }
+  .margin-q__text {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 18, "wght" 340;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .margin-q__text .q__mark { font-style: normal; color: var(--accent); }
+
+  /* ─────────────────────────────────────────────
      PLATE (image)
      ───────────────────────────────────────────── */
   .plate {
@@ -685,6 +812,11 @@
     .section__label { display: inline-block; }
     .section__body p + p { text-indent: 0; }
 
+    .enquiry { padding: 3.5rem 1.25rem 3.75rem; }
+    .enquiry--lead { padding: 4.25rem 1.25rem 4.5rem; }
+    .margin-q { display: block; margin-top: 1.25rem; max-width: 26rem; }
+    .enquiry__pair { grid-template-columns: 1fr; gap: 2rem; }
+
     .plate { padding: 4rem 1.25rem; }
     .plate__image { width: 100%; }
 
@@ -714,8 +846,8 @@
   <div class="topbar__group topbar__nav">
     <a href="#mandate">About</a>
     <a href="#hackathon">Hackathon</a>
+    <a href="./invitation.html">Invitation</a>
     <a href="./action-learning.html">Action Learning</a>
-    <a href="#method">Method</a>
     <a href="#join" class="topbar__nav-cta">→ Join</a>
   </div>
   <div class="topbar__group">
@@ -748,54 +880,19 @@
 
     <div class="hero__bottom">
       <p class="hero__lede">
-        An open lab for agentic collaboration between organisations — shared AI agents that make a distributed community's work visible, connected, and easy to act on. First build: the ARC Community Agent.
+        An open lab for agentic collaboration between organisations — shared AI agents that make a distributed community's work visible, connected, and easy to act on. First build: ARKo the Agent.
       </p>
       <a href="#mandate" class="hero__enter">↓ Enter the Lab</a>
     </div>
   </section>
 
-  <!-- ───── §00 MANDATE ───── -->
-  <section class="section" id="mandate">
-    <div class="section__num">§ 00</div>
-    <div class="section__label">
-      Mandate
-      <span class="sublabel">What &amp; Why</span>
-    </div>
-    <div class="section__body reveal">
-      <h2>A lab for <em>agentic collaboration</em>.</h2>
-      <p><a href="https://audax.earth/" target="_blank" rel="noopener noreferrer">Audax</a> Lab №1 is a small working group building <strong>agentic collaboration between organisations</strong> — shared AI agents that make the public work of a distributed community visible, understandable, and connected, so that people and organisations can find each other and act on what they learn.</p>
-      <p>Memory, recall, and knowledge infrastructure are not the point of this lab — they are the <strong>tool</strong>. A shared agent that helps organisations collaborate has to remember what each one is doing, reason over it faithfully, attribute it correctly, and share it without confusing whose it is. That engineering problem — durable memory, defensible reasoning, a shared base agents can extend without stepping on each other — is where most of our research effort goes, in service of the collaboration the agent is actually for.</p>
-      <p>The work is grounded in two long-running research threads — <strong>The Coherence Company</strong> (transcript-native institutional intelligence, dreaming architectures, the Living Book) and <strong>Regentribe</strong> (decentralized knowledge infrastructure on Radicle and SurrealDB) — and in one live build, the <strong>ARC Community Agent</strong>, our first attempt to put agentic collaboration into practice.</p>
-    </div>
-  </section>
-
-  <!-- ───── §01 HACKATHON ───── -->
-  <section class="section" id="hackathon">
-    <div class="section__num">§ 01</div>
-    <div class="section__label">
-      Hackathon
-      <span class="sublabel">ARC Community Agent</span>
-    </div>
-    <div class="section__body reveal">
-      <h2>The first build: <em>the ARC Community Agent</em>.</h2>
-      <p>Our flagship collaboration experiment is a hackathon to build the first working version of a shared AI agent for the ARC network — a community of people who participate through organisations. The agent's job is to make those organisations' public work visible, understandable, and connected, and to help members find each other and act on what they learn.</p>
-      <p>It has two connected functions. <strong>Updates:</strong> collecting and synthesising organisational information into general community intelligence and participant-specific digests. <strong>Relationship management:</strong> onboarding and engaging participants, maintaining their relationship with the community, and — in a later phase — surfacing worthwhile conversations between aligned people and organisations, always with consent.</p>
-      <p>The hackathon should produce one complete, observable loop:</p>
-<pre class="tree">Organisational public updates
-        <span class="arrow">↓</span>
-Collection and source-linked memory
-        <span class="arrow">↓</span>
-Cross-organisational synthesis
-        <span class="arrow">↓</span>
-Permission-controlled member delivery
-        <span class="arrow">↓</span>
-Member response, follow-up, and continued relationship
-        <span class="arrow">↓</span>
-Public learning and a pilot decision</pre>
-      <p>Memory shows up here too — a shared, source-linked knowledge store is what lets the agent answer questions across organisations instead of parroting one feed. But the loop isn't built to demonstrate memory. It is built to test whether a shared agent can make participating organisations more visible, connected, and useful to one another — the memory is just what makes that possible.</p>
-      <p>In scope for the hackathon: three to five participating organisations, scheduled collection from their public sources, a shared searchable knowledge store, source-linked question answering, a Telegram interface, a member onboarding and relationship loop, a candid build-in-public feed, and a documented process for adding another organisation.</p>
-      <p class="doc-cite">→ <a href="https://github.com/Vorski-Imagineering/ark/blob/main/proposal/hackathon-1/arc-community-agent-hackathon-proposal.md" target="_blank" rel="noopener noreferrer">proposal/hackathon-1/arc-community-agent-hackathon-proposal.md</a></p>
-      <p class="doc-cite">→ <a href="https://github.com/Vorski-Imagineering/ark/blob/main/proposal/hackathon-1/arc-community-agent-vision.md" target="_blank" rel="noopener noreferrer">proposal/hackathon-1/arc-community-agent-vision.md</a></p>
+  <!-- ───── ENQUIRY Nº 01 ───── -->
+  <section class="enquiry enquiry--lead" aria-label="open enquiry 01">
+    <div class="enquiry__inner reveal">
+      <p class="enquiry__eyebrow">Open Enquiry Nº 01</p>
+      <p class="enquiry__q">How can AI help a group of independent, purpose-aligned organisations move from being a network of connected projects to becoming an ecosystem capable of sensing, learning, and acting together<span class="q__mark">?</span></p>
+      <div class="enquiry__rule" aria-hidden="true"></div>
+      <p class="enquiry__gloss">The question behind the lab</p>
     </div>
   </section>
 
@@ -810,12 +907,112 @@ Public learning and a pilot decision</pre>
     </div>
   </section>
 
-  <!-- ───── §02 LICENSE ───── -->
-  <section class="section" id="license">
+  <!-- ───── §00 FIELD ───── -->
+  <section class="section" id="field">
+    <div class="section__num">§ 00</div>
+    <div class="section__label">
+      Field
+      <span class="sublabel">Sensing Ecosystem</span>
+      <span class="margin-q">
+        <span class="margin-q__key">Open Enquiry Nº 02</span>
+        <span class="margin-q__text">What becomes visible when scattered public signals — updates, repositories, talks, transcripts — are read as one body of work<span class="q__mark">?</span></span>
+      </span>
+    </div>
+    <div class="section__body reveal">
+      <h2>From connected organisations to a <em>sensing ecosystem</em>.</h2>
+      <p>Purpose-driven organisations are already surrounded by potential allies.</p>
+      <p>They attend the same gatherings. They know many of the same people. They work on adjacent problems. They share values, tools, methods, funders, technologies, and ambitions.</p>
+      <p>Yet collaboration remains difficult.</p>
+      <p>One organisation is looking for a technical partner while another has already built most of what it needs. One project is searching for a pilot site while another is looking for a meaningful use case. Several teams encounter the same organisational problem but solve it separately. Important learning appears in project updates, blog posts, podcasts, GitHub repositories, and social feeds, then quietly disappears beneath the next wave of information.</p>
+      <p>Networks help organisations find one another.</p>
+      <p>They do not automatically help them sense, remember, and act together.</p>
+      <p>Audax OS has been exploring the possibility that agentic inter-organisational communication could create a new collective-intelligence layer: agents distilling public signals, sharing relevant context, surfacing needs and offers, and helping organisations recognise opportunities they would otherwise miss.</p>
+      <p>ARK is the first attempt to make that proposition tangible.</p>
+    </div>
+  </section>
+
+  <!-- ───── ENQUIRY Nº 03 ───── -->
+  <section class="enquiry" aria-label="open enquiry 03">
+    <div class="enquiry__inner reveal">
+      <p class="enquiry__eyebrow">Open Enquiry Nº 03</p>
+      <p class="enquiry__q">What happens when aligned organisations become more legible to one another, and their agents begin helping them discover where shared action is possible<span class="q__mark">?</span></p>
+      <div class="enquiry__rule" aria-hidden="true"></div>
+      <p class="enquiry__gloss">Legibility · shared action</p>
+    </div>
+  </section>
+
+  <!-- ───── §01 MANDATE ───── -->
+  <section class="section" id="mandate">
+    <div class="section__num">§ 01</div>
+    <div class="section__label">
+      Mandate
+      <span class="sublabel">What &amp; Why</span>
+      <span class="margin-q">
+        <span class="margin-q__key">Open Enquiry Nº 04</span>
+        <span class="margin-q__text">Can a shared agent hold what many organisations are doing without confusing whose work is whose<span class="q__mark">?</span></span>
+      </span>
+    </div>
+    <div class="section__body reveal">
+      <h2>A lab for <em>agentic collaboration</em>.</h2>
+      <p><a href="https://audax.earth/" target="_blank" rel="noopener noreferrer">Audax</a> Lab №1 is a small working group building <strong>agentic collaboration between organisations</strong> — shared AI agents that make the public work of a distributed community visible, understandable, and connected, so that people and organisations can find each other and act on what they learn.</p>
+      <p>Memory and knowledge infrastructure aren't the point — they're the <strong>tool</strong>. A shared agent has to remember what each organisation is doing, reason over it faithfully, and share it without confusing whose it is; that engineering problem is where most of our research effort goes, in service of the collaboration the agent is actually for.</p>
+      <p>The work is grounded in two long-running research threads — <strong><a href="https://coherence.tv/" target="_blank" rel="noopener noreferrer">The Coherence Company</a></strong> (transcript-native institutional intelligence, dreaming architectures, the Living Book) and <strong>Regentribe</strong> (decentralized knowledge infrastructure on Radicle and SurrealDB) — and in one live build, <strong>ARKo the Agent</strong>, our first attempt to put agentic collaboration into practice.</p>
+    </div>
+  </section>
+
+  <!-- ───── ENQUIRY Nº 05 ───── -->
+  <section class="enquiry" aria-label="open enquiry 05">
+    <div class="enquiry__inner reveal">
+      <p class="enquiry__eyebrow">Open Enquiry Nº 05</p>
+      <p class="enquiry__q">Can agents make the public voices of organisations more mutually intelligible — and more useful to one another<span class="q__mark">?</span></p>
+      <div class="enquiry__rule" aria-hidden="true"></div>
+      <p class="enquiry__gloss">Intelligibility · mutual use</p>
+    </div>
+  </section>
+
+  <!-- ───── §02 HACKATHON ───── -->
+  <section class="section" id="hackathon">
     <div class="section__num">§ 02</div>
+    <div class="section__label">
+      Hackathon
+      <span class="sublabel">ARKo the Agent</span>
+      <span class="margin-q">
+        <span class="margin-q__key">Open Enquiry Nº 06</span>
+        <span class="margin-q__text">Can an agent surface a collaboration that no one in the network had yet noticed<span class="q__mark">?</span></span>
+      </span>
+    </div>
+    <div class="section__body reveal">
+      <h2>The first build: <em>ARKo the Agent</em>.</h2>
+      <p>What might become possible when organisations do not only communicate through meetings, newsletters, Slack channels, and the occasional heroic connector, but also through agents capable of sensing opportunities across the wider field?</p>
+      <p>This is the question behind the ARK Hackathon, the first concrete experiment of Audax Labs.</p>
+      <p>Audax Labs is the experimental engine of Audax OS: an open environment where organisations, builders, researchers, and practitioners can test the infrastructure required for distributed, fractional, purposeful, and increasingly agentic collaboration.</p>
+      <p>ARK begins with one bounded challenge:</p>
+      <p>Can a shared agent help a small ecosystem of aligned organisations understand what is happening across the field, discover opportunities for collaboration, and develop a more coherent shared narrative?</p>
+      <p>This is not yet an attempt to build a complete inter-organisational operating system. It is the first practical step toward one.</p>
+      <p><a href="./invitation.html"><strong>→ Read the invitation</strong></a> — what we're building, the schedule, what we ask of participating organisations, and how to RSVP.</p>
+    </div>
+  </section>
+
+  <!-- ───── ENQUIRY Nº 07 ───── -->
+  <section class="enquiry" aria-label="open enquiry 07">
+    <div class="enquiry__inner reveal">
+      <p class="enquiry__eyebrow">Open Enquiry Nº 07</p>
+      <p class="enquiry__q">Can agents identify meaningful collaboration opportunities rather than merely superficial thematic overlap<span class="q__mark">?</span></p>
+      <div class="enquiry__rule" aria-hidden="true"></div>
+      <p class="enquiry__gloss">Discernment · signal over surface</p>
+    </div>
+  </section>
+
+  <!-- ───── §03 LICENSE ───── -->
+  <section class="section" id="license">
+    <div class="section__num">§ 03</div>
     <div class="section__label">
       License
       <span class="sublabel">CC0 1.0</span>
+      <span class="margin-q">
+        <span class="margin-q__key">Open Enquiry Nº 08</span>
+        <span class="margin-q__text">What has to be true before an organisation trusts an agent to speak about its work in public<span class="q__mark">?</span></span>
+      </span>
     </div>
     <div class="section__body reveal">
       <h2>A commons <em>and</em> a portfolio.</h2>
@@ -825,45 +1022,20 @@ Public learning and a pilot decision</pre>
     </div>
   </section>
 
-  <!-- ───── §03 REPOSITORY ───── -->
-  <section class="section" id="repository">
-    <div class="section__num">§ 03</div>
-    <div class="section__label">
-      Repository
-      <span class="sublabel">Five Artifacts</span>
-    </div>
-    <div class="section__body reveal">
-      <p>The repo is organized so the <em>kind of thinking</em> is obvious from the path. Proposals are the collaboration builds themselves — the hackathon and what follows it. Research is durable, citable knowledge about the tools those builds depend on. Plans are design specs and workstream breakdowns. Needs are open invitations. Scripts and skills are the shared tooling.</p>
-<pre class="tree">ARK/
-├── README.md           <span class="arrow">←</span> orientation
-├── AGENT.md            <span class="arrow">←</span> operating instructions
-├── LICENSE             <span class="arrow">←</span> CC0 public domain
-│
-├── proposal/           <span class="arrow">←</span> agentic collaboration builds (the hackathon)
-├── research/           <span class="arrow">←</span> the tools we have learned — memory, knowledge, runtimes
-├── plan/               <span class="arrow">←</span> what we intend to build
-├── needs/              <span class="arrow">←</span> who we are looking for
-├── scripts/            <span class="arrow">←</span> repo-wide tooling
-└── skills/             <span class="arrow">←</span> shared agent skills</pre>
-      <p>The current build lives in <code>proposal/hackathon-1/</code> — the ARC Community Agent proposal and vision. The research threads feeding it live under <code>research/The Coherence Company/</code> and <code>research/regentribe/</code>. The active design is in <code>plan/The Coherence Company/metis-hermes-01/</code> — a thirteen-part workstream covering everything from operating model to migration sequencing.</p>
-      <p>Skills are reusable agent capabilities — packaged instructions an AI collaborator pulls in to do a specific job consistently across the group. The folder is intentionally young: if you build something twice, package it as a skill.</p>
-    </div>
-  </section>
-
-  <!-- ───── §04 METHOD ───── -->
-  <section class="section" id="method">
-    <div class="section__num">§ 04</div>
-    <div class="section__label">
-      Method
-      <span class="sublabel">Operating Guide</span>
-    </div>
-    <div class="section__body reveal">
-      <h2>How we collaborate.</h2>
-      <p>When you sit down to contribute, the first thing you feel is the weight of this being <em>public and permanent</em>. Every word can be read, cited, and forked by anyone, forever. So you carry a quiet checklist with you: no PII, no names of private individuals — you use roles instead — no private chat excerpts, no credentials, no NDA-bound material. If it would be inappropriate on a public website, it does not belong here.</p>
-      <p>Next you notice that you are being treated as a <em>research collaborator, not an assistant</em>. The expectation is transparent, auditable work — explicit assumptions, structured markdown, inline citations, no hidden reasoning, no answer-first shortcuts. You write for the next person who will walk in cold.</p>
-      <p>When you start a real research task, the work moves through a familiar arc. You <strong>scan</strong> first — what is already there, what can you cite or supersede. Then you <strong>decompose</strong> the question into sub-questions, written into a notes file <em>before</em> you go exploring. Then you <strong>explore</strong>, gathering data and citing inline. Then <strong>synthesize</strong> — pulling threads into a document that stands on its own. Then <strong>reflect</strong> — leaving open-question markers for what is still unclear. And finally <strong>persist</strong> — a short dated entry in the topic's log so the trail is visible to whoever comes next. You append; you do not silently overwrite.</p>
-      <p>Throughout, citation and uncertainty are not optional. Load-bearing assumptions are tagged so the next reader can challenge them. You never fabricate a source — if you cannot verify it, you ask before citing it.</p>
-      <p>This method governs the research: the slow, tool-building half of the lab's work. The hackathon itself runs to a tighter, event-scoped process (defined in <code>proposal/hackathon-1/</code>) — but its outputs, like everything else here, land back in a <em>public lab notebook</em> that a small group keeps together: append-only work over fast throwaway output; visible reasoning over polished conclusions; reproducibility for the next agent over efficiency for the current one.</p>
+  <!-- ───── ENQUIRIES Nº 09 · 10 ───── -->
+  <section class="enquiry enquiry--pair" aria-label="open enquiries 09 and 10">
+    <p class="enquiry__eyebrow">Still Open</p>
+    <div class="enquiry__pair reveal">
+      <div class="enquiry__col">
+        <p class="enquiry__num">Nº 09</p>
+        <p class="enquiry__q">Can agents reduce duplicated work by revealing where organisations are solving similar problems independently<span class="q__mark">?</span></p>
+        <p class="enquiry__gloss">Duplication · parallel effort</p>
+      </div>
+      <div class="enquiry__col">
+        <p class="enquiry__num">Nº 10</p>
+        <p class="enquiry__q">How can agents support mutual learning, peer review, and the exchange of technical and organisational practices across value-aligned organisations<span class="q__mark">?</span></p>
+        <p class="enquiry__gloss">Learning · peer review · practice exchange</p>
+      </div>
     </div>
   </section>
 
@@ -887,8 +1059,7 @@ Public learning and a pilot decision</pre>
   <div class="end-mark" aria-hidden="true">⁂</div>
   <div class="end-text">
     End of Transmission<br />
-    <span class="strong">No Rights Reserved</span> · CC0 1.0 Universal · MMXXVI<br />
-    This work is dedicated to the public domain
+    MMXXVI
   </div>
 </footer>
 
