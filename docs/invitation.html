@@ -755,6 +755,26 @@
     color: var(--ink-soft);
   }
 
+  /* linked cards (document index) */
+  a.card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease;
+  }
+  a.card:hover { background: var(--paper-2); }
+  a.card:hover .card__title { color: var(--accent-deep); }
+  a.card .card__title { transition: color 0.2s ease; }
+  a.card .card__path {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-fade);
+    margin-top: 0.6rem;
+    word-break: break-word;
+  }
+
   .card--yes .card__num { color: var(--accent); }
   .card--no .card__num { color: var(--ink-fade); }
   .card--no .card__body { font-style: italic; }
@@ -857,6 +877,7 @@
     <a href="#tracks">Tracks</a>
     <a href="#schedule">Schedule</a>
     <a href="#ask">Ask</a>
+    <a href="#design">Design</a>
     <a href="#rsvp" class="topbar__nav-cta">→ RSVP</a>
   </div>
   <div class="topbar__group">
@@ -914,7 +935,7 @@
 
   <!-- CONTENTS -->
   <section class="contents" id="contents" aria-label="contents">
-    <p class="contents__head">Contents — eleven short sections</p>
+    <p class="contents__head">Contents — twelve short sections</p>
     <div class="contents__grid">
       <a class="contents__item" href="#question">
         <span class="contents__num">§ 00</span>
@@ -991,6 +1012,13 @@
         <span>
           <span class="contents__title">Action Learning</span>
           <span class="contents__desc">Small builds before master plans.</span>
+        </span>
+      </a>
+      <a class="contents__item" href="#design">
+        <span class="contents__num">§ 11</span>
+        <span>
+          <span class="contents__title">Detailed Design</span>
+          <span class="contents__desc">The working documents, in full.</span>
         </span>
       </a>
       <a class="contents__item" href="#rsvp">
@@ -1347,6 +1375,80 @@ Public learning and a pilot decision</pre>
       <p>So the hackathon is the beginning of a <strong>continuing Lab</strong> — not an isolated weekend of enthusiastic code followed by a repository entering its monastic phase.</p>
       <p class="mono" style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-fade); margin-top: 2rem;">
         The threads we are already pulling on: <a href="./action-learning.html">Action Learning</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- §11 DETAILED DESIGN -->
+  <section class="section" id="design">
+    <div class="section__num">§ 11</div>
+    <div class="section__label">
+      Detailed Design
+      <span class="sublabel">The working documents</span>
+    </div>
+    <div class="section__body reveal">
+      <h2>Everything above, written out in <em>full</em>.</h2>
+      <p>This invitation is the short version. The design itself lives in the open repository, as plain markdown you can read, quote, fork, or argue with. Two documents carry the product thinking; the rest are the working execution pack for the two days.</p>
+
+      <span class="subhead">The product</span>
+      <div class="cards">
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/arc-community-agent-vision.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">Doc 01</div>
+          <div class="card__title">Vision &amp; Functionality</div>
+          <p class="card__body">The enduring purpose of the agent — who it serves, what it does, its operating model, governance boundaries, and longer-term direction. The canonical source for <em>what</em> the agent should do.</p>
+          <span class="card__path">arc-community-agent-vision.md</span>
+        </a>
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/arc-community-agent-hackathon-proposal.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">Doc 02</div>
+          <div class="card__title">Hackathon Proposal</div>
+          <p class="card__body">The event itself — challenge, scope, MVP, format, roles, deliverables, success criteria, and the decision process at the end. The canonical source for <em>how</em> the first version gets built and tested.</p>
+          <span class="card__path">arc-community-agent-hackathon-proposal.md</span>
+        </a>
+      </div>
+
+      <span class="subhead">The execution pack</span>
+      <div class="cards">
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/00-start-here.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">00</div>
+          <div class="card__title">Start Here</div>
+          <p class="card__body">The spine: two-week ramp-up, mandatory owners, readiness gates, and the minimal remote workspace.</p>
+          <span class="card__path">execution/00-start-here.md</span>
+        </a>
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/01-participant-invitation.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">01</div>
+          <div class="card__title">Participant Invitation</div>
+          <p class="card__body">The source text this page is drawn from, with the organiser checklist that precedes sending it.</p>
+          <span class="card__path">execution/01-participant-invitation.md</span>
+        </a>
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/02-participation-and-source-pack.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">02</div>
+          <div class="card__title">Participation &amp; Source Pack</div>
+          <p class="card__body">What each organisation submits: the minimum commitment, the public sources, and the public-repository safety rules. 30–45 minutes to complete.</p>
+          <span class="card__path">execution/02-participation-and-source-pack.md</span>
+        </a>
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/04-run-of-show.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">04</div>
+          <div class="card__title">Run of Show</div>
+          <p class="card__body">Two-day timetable, checkpoints, decision rights, conflict handling, working hours, and the retrospective format.</p>
+          <span class="card__path">execution/04-run-of-show.md</span>
+        </a>
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/05-technical-specification.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">05</div>
+          <div class="card__title">Technical Specification</div>
+          <p class="card__body">The two-hour bootstrap spec and the baseline everyone builds on top of — architecture, ingestion, delivery, and a deliberately small budget ceiling.</p>
+          <span class="card__path">execution/05-technical-specification.md</span>
+        </a>
+        <a class="card" href="https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/06-roles-and-readiness.md" target="_blank" rel="noopener noreferrer">
+          <div class="card__num">06</div>
+          <div class="card__title">Roles &amp; Readiness</div>
+          <p class="card__body">Coordination channels, push and PR cadence, and how someone joining after Day 1 gets onboarded mid-sprint.</p>
+          <span class="card__path">execution/06-roles-and-readiness.md</span>
+        </a>
+      </div>
+
+      <p>Several of these are still marked <strong>draft</strong>, and carry <span class="mono" style="font-size:0.85em;">[TO SET]</span> placeholders where dates, owners, and tooling are not yet fixed. That is deliberate: those are the decisions the group makes together, not ones the hosts make in advance. If you read something you'd design differently, that is a good reason to come.</p>
+      <p class="mono" style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-fade); margin-top: 2rem;">
+        Browse the whole folder: <a href="https://github.com/Vorski-Imagineering/ARK/tree/main/proposal/hackathon-1" target="_blank" rel="noopener noreferrer">proposal/hackathon-1</a>
       </p>
     </div>
   </section>
