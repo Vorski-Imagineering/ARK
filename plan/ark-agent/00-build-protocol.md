@@ -189,10 +189,10 @@ A blocker is a successful outcome for a session. Reporting one honestly is bette
 
 ## 8. Git discipline
 
-- Work on a branch named `build/phase-<n>-unit-<n>` or similar. Never commit directly to the default branch.
+- Work on a branch named `build/phase-<n>-unit-<m>`. Never commit directly to the default branch.
 - Open a draft pull request when you begin a unit, before code exists. This follows the established contribution cadence. [see: proposal/hackathon-1/execution/06-roles-and-readiness.md]
 - Commit after the gate passes, not before.
-- One commit per unit. Message format: `phase-<n> unit-<n>: <title>`.
+- One commit per unit. Message format: `phase-<n> unit-<m>: <title>`.
 - Never force-push. Never delete a branch that has an open pull request.
 - Never merge your own pull request. A human merges.
 

@@ -107,7 +107,7 @@ Raw agent conversation transcripts are never committed here.
 
 ## Git discipline
 
-Branch per unit (`build/phase-1-unit-3`). Open a draft pull request when you begin, before code exists. Commit after the gate passes, one commit per unit, message `phase-1 unit-<n>: <title>`. Never force-push. Never merge your own pull request.
+Branch per unit, named `build/phase-<n>-unit-<m>`. Open a draft pull request when you begin, before code exists. Commit after the gate passes, one commit per unit, message `phase-<n> unit-<m>: <title>`. Never force-push. Never merge your own pull request.
 
 ---
 

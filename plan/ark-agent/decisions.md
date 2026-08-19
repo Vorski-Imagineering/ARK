@@ -2,6 +2,9 @@
 
 Append-only record of decisions that shape the build. Newest at the bottom.
 
+**Source for the open-decision numbers (§2 to §7) referenced throughout:** the hackathon working document, now committed at `proposal/hackathon-1/hackathon-working-doc-2026-08-18.md` (redacted for public publication). [see: proposal/hackathon-1/hackathon-working-doc-2026-08-18.md]
+
+
 Every decision records what was chosen, what was rejected, why, and who ruled. A decision that is later reversed gets a new entry marked `SUPERSEDES` — the original entry is never edited or deleted.
 
 Format:

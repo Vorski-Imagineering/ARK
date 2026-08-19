@@ -2,6 +2,9 @@
 
 Unresolved questions that affect the build. Uses the repository's standard greppable markers. [see: AGENTS.md#5-citation-uncertainty--provenance-markers]
 
+**Source for the open-decision numbers (§2 to §7) referenced throughout:** the hackathon working document, now committed at `proposal/hackathon-1/hackathon-working-doc-2026-08-18.md` (redacted for public publication). [see: proposal/hackathon-1/hackathon-working-doc-2026-08-18.md]
+
+
 Each entry records who owns the answer and what it blocks. When a question is answered, move it to the Resolved section with the date and the ruling — do not delete it.
 
 ---
