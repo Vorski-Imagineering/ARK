@@ -53,6 +53,28 @@ Carried forward from the execution synthesis and `00-start-here.md`, where every
 
 ---
 
+## Source freshness and re-approval
+
+`[OPEN QUESTION: When a weekly re-capture finds that a source has changed, does the agent keep serving the last representative-approved snapshot until the new one is signed off, or does it index the new snapshot immediately and flag it as unreviewed? Owner: product lead plus organisation representatives.]`
+
+Context. Sources are captured to snapshots and re-captured weekly, because the underlying pages change. `content_hash` on the Source record already makes change detection deterministic, and the technical specification already requires hashing normalised content and ingesting only changed snapshots. What it does not settle is what happens to a representative's approval when the content moves underneath it.
+
+Permission and accuracy are granted against a specific capture, not against a URL in perpetuity. A representative who confirmed "yes, that describes us accurately" reviewed particular words. When those words change, that confirmation no longer covers what the agent will say.
+
+Two candidate behaviours:
+
+**Serve last-approved until re-approved.** The index keeps the previously signed-off snapshot. The new capture is staged and waits. Nothing the agent says is ever unreviewed. Cost: the corpus can go stale while waiting on a human, and staleness is invisible unless surfaced.
+
+**Index immediately, mark unreviewed.** The new capture goes live and every claim drawn from it is flagged as not yet confirmed. Cost: the agent can state something no representative has checked, which is precisely the failure the accuracy gate exists to prevent.
+
+The first is the current lean. It maps cleanly onto machinery the build already has: the index is built into a staging path and promoted atomically only after checks pass, so "representative has approved this snapshot" becomes one more promotion gate rather than new architecture. It also matches the existing rule that a failed ingestion leaves the active index untouched. [see: proposal/hackathon-1/execution/05-technical-specification.md#datastore-and-filesystem-boundary]
+
+Whichever is chosen, the staleness has to be visible. A corpus quietly serving three-week-old approved content is a different failure from one quietly serving unreviewed fresh content, and both are worse than either being stated plainly.
+
+`[ASSUMPTION: weekly is the right cadence. It is a guess, not a measurement. Revisit once there is evidence of how often these four sources actually change.]`
+
+---
+
 ## Operational items with an owner and a date
 
 `[OPEN QUESTION: When and how does the server's local working repository get connected to this public repository? Owner: technical lead. Target: the day after the hackathon.]`
