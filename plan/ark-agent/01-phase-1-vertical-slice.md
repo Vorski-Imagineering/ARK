@@ -1077,16 +1077,37 @@ def build_index(chunks: list[Chunk], embedder: Embedder, root: Path) -> Path: ..
 def promote(staging_path: Path, root: Path) -> None: ...
 def list_indexes(root: Path) -> list[Path]: ...
 
+@dataclass(frozen=True)
+class StoredChunk:
+    chunk_id: str
+    source_id: str
+    organisation_id: str
+    heading_path: list[str]
+    text: str
+    start_offset: int
+    end_offset: int
+    embedding: list[float] = field(default_factory=list)
+
 class Index:
     @classmethod
     def open(cls, path: Path) -> "Index": ...
+    @classmethod
+    def create_empty(cls, path: Path) -> "Index": ...
     def count(self) -> int: ...
     def get(self, chunk_id: str) -> StoredChunk: ...
     def all(self) -> list[StoredChunk]: ...
     def fingerprint(self) -> str: ...
 ```
 
-SQLite, one table, embeddings stored as blobs. `build_index` writes to a timestamped staging file and raises `IndexBuildError` on an empty chunk list. `promote` renames the staging file to `active.sqlite3`, moving any existing active index aside with its build timestamp, and deletes the oldest so at most four remain. `fingerprint` is a sha256 over chunk identifiers and vectors in sorted order — it must not include timestamps or file paths.
+SQLite, one table, embeddings stored as blobs. `build_index` writes to a staging file and raises `IndexBuildError` on an empty chunk list. `promote` renames the staging file to `active.sqlite3`, moving any existing active index aside, and deletes the oldest so at most four remain. `fingerprint` is a sha256 over chunk identifiers and vectors in sorted order — it must not include timestamps or file paths.
+
+**Three details that will bite if you miss them:**
+
+`embedding` defaults to an empty list and must stay optional. Unit 8's prompt tests construct `StoredChunk` objects by hand to exercise the untrusted-content boundary, and they have no vectors to supply. Making the field required would break tests you have not written yet. Import `field` from `dataclasses`.
+
+`create_empty` builds a valid but empty index. It exists so the insufficient-evidence tests in Unit 9 have something to query. It deliberately bypasses the non-empty guard in `build_index`, which is why it is a separate constructor rather than a flag.
+
+Staging and archive filenames must not collide when two builds happen in the same second. Use a monotonic counter, not a bare second-resolution timestamp — `index-0001.sqlite3`, `index-0002.sqlite3`, derived from the highest number already present in the directory. A test in this unit promotes six times in a row and will fail intermittently if you use `strftime` alone.
 
 **Run:** `./scripts/test tests/test_index.py`
 

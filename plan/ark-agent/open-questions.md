@@ -50,6 +50,23 @@ Carried forward from the execution synthesis and `00-start-here.md`, where every
 
 ---
 
+## Operational items with an owner and a date
+
+`[OPEN QUESTION: When and how does the server's local working repository get connected to this public repository? Owner: technical lead. Target: the day after the hackathon.]`
+
+As of 2026-08-20 the server holds two git repositories, both created during this session:
+
+- `~/ark-local` — local-only, holds raw transcripts and unredacted notes, has no remote and must never gain one. [see: D-5]
+- `~/ark` — a read-only clone of this repository, where the agent runs build units.
+
+`~/ark` can fetch but cannot push: repository write authentication from the server is unresolved and is logged as an open blocker on the server, owner product lead. Until it is resolved the agent cannot open a pull request, so a human relays its commits. That is workable for a day and is not workable as a standing arrangement.
+
+`[OPEN QUESTION: Should the agent's existing self-built artefacts on the server — the blocker log, the journal structure, and the local search scripts — be version-controlled in the local working repository, and should any of them be generalised into this repository as shared skills? Owner: technical lead.]`
+
+None of them were under version control before 2026-08-20. The blocker log in particular is now load-bearing for the build protocol and is currently a single unversioned file in a home directory.
+
+---
+
 ## Findings that may need a ruling
 
 `[CONTRADICTS: proposal/hackathon-1/execution/06-roles-and-readiness.md]` That document cites three GitHub Actions workflows — `telegram-issues.yml`, `telegram-main-merge.yml`, and `telegram-tag-deploy.yml` — that were removed from the repository on 2026-08-06 in commit `8247400` ("Remove orphaned CI workflows"). The only workflow now present is `pages.yml`. The document's coordination guidance that depends on those workflows is stale. Owner: technical lead.
