@@ -23,6 +23,7 @@ This file is the build's memory. An agent starting cold reads this file first to
 |---|---|---|---|---|---|---|---|
 | 2026-08-20 | 0 | Scaffold and test harness | DONE | pyproject.toml, app/__init__.py, tests/test_smoke.py, scripts/setup, scripts/test, .env.example, .gitignore | ./scripts/test | 2 passed | RED confirmed first (1 failed, AttributeError on `app.__version__`). Three spec corrections recorded in the unit: explicit setuptools package list, uv-preferred setup, `*.egg-info/` ignored. Built on Python 3.13 via uv; server runs 3.11.16 and is unverified until the phase gate. |
 | 2026-08-20 | 1 | Source pack schema and validator | DONE | app/schema.py, app/source_pack.py, tests/test_source_schema.py, tests/fixtures/source-packs/{valid-org,bad-permission,bad-source-id}.md | ./scripts/test tests/test_source_schema.py | 8 passed | RED confirmed (ModuleNotFoundError). No spec corrections needed. One implementation note: YAML parses an unquoted ISO date into a date object, so published_at is coerced to string to honour the contract. |
+| 2026-08-20 | 2 | Source loader | DONE | app/source_loader.py, tests/test_source_loader.py, tests/fixtures/snapshots/{valid-org-about.md,valid-org-updates.md,sample-page.html} | ./scripts/test tests/test_source_loader.py | 8 passed | RED confirmed. No spec corrections. Standard library only; no network access in the loader. |
 
 ---
 
