@@ -1518,8 +1518,42 @@ class FakeLLM:
     call_count: int
 
 class HermesLLM:
-    """Calls the configured Hermes model. Never used in tests."""
+    """Calls the configured Hermes model by subprocess. Never used in tests."""
 ```
+
+### How `HermesLLM` actually reaches the model
+
+Verified on the server, 2026-08-20. Do not invent a different transport.
+
+```
+hermes -z "<prompt>" --usage-file <path>
+```
+
+The generated text goes to stdout. Token accounting is written to the JSON file at `--usage-file`, which contains at least:
+
+```json
+{
+  "input_tokens": 119,
+  "output_tokens": 2,
+  "estimated_cost_usd": 0.0,
+  "cost_status": "unknown",
+  "model": "MiniMax-M3",
+  "provider": "minimax-oauth",
+  "total_tokens": 121
+}
+```
+
+Read `input_tokens`, `output_tokens`, and `model` from that file to populate `LLMResponse` and `Usage`. Write the usage file to a temporary path per call and delete it after reading.
+
+**Three things that are true and will save you a session each:**
+
+`estimated_cost_usd` is often `0.0` with `cost_status: "unknown"`, because the current provider is an OAuth subscription rather than a metered API. Do not treat a zero as an error. Unit 11's `estimate_cost` exists precisely to compute a figure from a local rate table when the provider does not supply one.
+
+**The local proxy is not an option.** `hermes proxy` only supports Nous Portal and xAI upstreams, and neither is authenticated on this server. The authenticated provider is not a proxy upstream. Subprocess is the only working path today.
+
+**Do not pass `-t none`.** It suppresses the reply entirely — the call returns empty. Leave the toolset flags alone.
+
+`[ASSUMPTION: observed input_tokens for a trivial prompt varied between 119 and 19,831 across calls, which suggests prompt caching or session-dependent system-prompt loading. Measure real per-call usage in Unit 9 against an actual evidence-bearing prompt rather than assuming either figure. If the high number is typical, the cost model in Unit 11 needs revisiting before the evaluation harness runs.]`
 
 ```python
 # app/answer.py
