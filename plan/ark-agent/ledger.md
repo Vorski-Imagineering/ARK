@@ -21,7 +21,7 @@ This file is the build's memory. An agent starting cold reads this file first to
 
 | Date | Unit | Title | Status | Files | Command | Result | Notes |
 |---|---|---|---|---|---|---|---|
-| — | — | *No units attempted yet. Start at Unit 0.* | — | — | — | — | — |
+| 2026-08-20 | 0 | Scaffold and test harness | DONE | pyproject.toml, app/__init__.py, tests/test_smoke.py, scripts/setup, scripts/test, .env.example, .gitignore | ./scripts/test | 2 passed | RED confirmed first (1 failed, AttributeError on `app.__version__`). Three spec corrections recorded in the unit: explicit setuptools package list, uv-preferred setup, `*.egg-info/` ignored. Built on Python 3.13 via uv; server runs 3.11.16 and is unverified until the phase gate. |
 
 ---
 

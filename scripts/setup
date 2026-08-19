@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Install the project environment into ./.venv
+# Prefers uv (fast, reproducible, produces a lockfile). Falls back to venv+pip.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+if command -v uv >/dev/null 2>&1; then
+  echo "using uv"
+  uv venv --python ">=3.11" .venv
+  VIRTUAL_ENV=.venv uv pip install -e ".[dev]"
+else
+  echo "uv not found, falling back to venv + pip"
+  python3 -m venv .venv
+  ./.venv/bin/pip install --upgrade pip
+  ./.venv/bin/pip install -e ".[dev]"
+fi
+
+echo "setup complete. run ./scripts/test"

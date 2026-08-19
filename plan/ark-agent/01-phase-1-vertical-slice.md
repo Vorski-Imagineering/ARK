@@ -300,9 +300,21 @@ evals/outputs/
 ./scripts/test
 ```
 
-**GATE:** `2 passed`. Both scripts are executable. `git status` shows no `.venv` and no `__pycache__`.
+**GATE:** `2 passed`. Both scripts are executable. `git status` shows no `.venv`, no `__pycache__`, and no `*.egg-info`.
 
 **Forbidden:** do not add dependencies beyond those listed. Do not create `app/` modules other than `__init__.py`.
+
+### Corrections from the first run of this unit, 2026-08-20
+
+Three things in the original text of this unit were wrong or incomplete. They are fixed above and recorded here so nobody rediscovers them.
+
+**`pyproject.toml` needs an explicit package list.** Without `[tool.setuptools] packages = ["app"]`, setuptools sees a flat layout containing both `app/` and `tests/` and cannot decide what to install. Included above.
+
+**`scripts/setup` prefers `uv`.** The original used `python3 -m venv` plus `pip`. On a machine running Python 3.14 that fails outright — `ensurepip` returns a non-zero exit and no environment is created. `uv` is already present on the ARK server and resolves this, installs far faster, and gives the locked dependency file the technical specification asks for. The script falls back to `venv` and `pip` when `uv` is absent, so neither path is a hard requirement. [see: proposal/hackathon-1/execution/05-technical-specification.md#3-decisions-that-must-be-made-before-the-event]
+
+**`.gitignore` needs `*.egg-info/` and `.pytest_cache/`.** An editable install creates `ark_agent.egg-info/` at the repository root, which showed up as untracked on the first run.
+
+`[ASSUMPTION: the specification names Python 3.12 and the ARK server runs 3.11.16, while this unit was first built on 3.13 via uv. The project declares requires-python >=3.11 and nothing so far depends on version-specific behaviour. Confirm the suite is green on the server before the Phase 1 gate, which the gate already requires by asking for a clean run on a second machine.]`
 
 ---
 

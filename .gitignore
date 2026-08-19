@@ -7,3 +7,12 @@ scripts/__pycache__/
 .worktrees/
 .DS_Store
 .mcp.json
+
+.venv/
+__pycache__/
+*.pyc
+index/
+*.sqlite3
+evals/outputs/
+*.egg-info/
+.pytest_cache/
