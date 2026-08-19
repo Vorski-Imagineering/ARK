@@ -17,7 +17,7 @@
 
 ## TL;DR
 
-Day 1 stood up the foundation: Contabo VPS with Hermes installed, wildcard DNS on `*.ark.audax.earth`, a shared project inbox, SSH access provisioned for two operators, MiniMax connected to the first Hermes profile, and the bot live in Telegram in mentions-only mode (thanks to the technical lead working after the call). A contributor's second Hermes profile using their Claude Code Max seat is still to come. **Agent name and image are open — the product lead is working on this.**
+Day 1 stood up the foundation: Contabo VPS with Hermes installed, wildcard DNS on `*.ark.audax.earth`, SSH access provisioned for two operators, MiniMax connected to the first Hermes profile, and the bot live in Telegram in mentions-only mode (thanks to the technical lead working after the call). A contributor's second Hermes profile using their Claude Code Max seat is still to come. **Agent name and image are open — the product lead is working on this.**
 
 Day 2 opens with the full roadmap now visible. The **[vision doc](https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/arc-community-agent-vision.md)** is the north star; the **[tech spec's](https://github.com/Vorski-Imagineering/ARK/blob/main/proposal/hackathon-1/execution/05-technical-specification.md)** evidence-based sequencing keeps us honest about what actually ships. The hackathon-scoped commitment is the **source-to-answer-to-digest** vertical slice (Phase 1). Everything beyond that is stretch or post-hackathon — buildable this weekend if the group has energy and dependencies clear, but not required to declare success.
 
@@ -36,7 +36,6 @@ Day 2 opens with the full roadmap now visible. The **[vision doc](https://github
 - **Telegram bot live** in the ARK group, mentions-only mode
 - **SSH access:** provisioned for two operators
 - **Wildcard DNS:** `*.ark.audax.earth` pointing to VPS (via the product lead's AUDAX domain)
-- **Shared email:** a shared project inbox created, forwards to the event lead and the product lead
 - **Backup path considered:** Google Drive via cron job (the technical lead's pattern from a prior project, not yet implemented)
 
 **Decisions locked:**
@@ -60,7 +59,6 @@ Day 2 opens with the full roadmap now visible. The **[vision doc](https://github
 | Telegram bot | ✅ Live (mentions-only) | the technical lead |
 | Claude Code Max profile | ⏳ Not yet connected | a contributor |
 | DNS (`*.ark.audax.earth`) | ✅ Live | the product lead |
-| Email (shared project inbox) | ✅ Live | the product lead |
 | Agent name and image | ⏳ In progress | the product lead |
 | GitHub repo access | ❌ Not connected | TBD |
 | Identity/system prompt file | ❌ Doesn't exist yet | TBD |
@@ -197,7 +195,7 @@ Each decision below has context, options, and a recommendation where I have a st
 
 ### 1. Agent name and image
 
-**Context:** the product lead is working on both. The infrastructure names are set (`ark.audax.earth`, a shared project inbox), but the agent's user-facing name and avatar are still TBD. Any previous naming (ARC, Community Weaving Agent, Arco) is off the table.
+**Context:** the product lead is working on both. The infrastructure name is set (`ark.audax.earth`), but the agent's user-facing name and avatar are still TBD. Any previous naming (ARC, Community Weaving Agent, Arco) is off the table.
 
 **When needed:** Phase 0 completion (identity file).
 
@@ -314,7 +312,7 @@ A living doc that captures every step of standing up the agent from scratch. Som
 1. **Prerequisites** — accounts, credentials, tools you need before starting
 2. **VPS provisioning** — Contabo instructions with alternatives noted
 3. **DNS setup** — wildcard DNS pattern for `*.your-domain`
-4. **Email forwarding** — shared inbox for account signups
+4. **Email forwarding** — a route for account signups
 5. **SSH access** — key management for multiple contributors
 6. **Hermes install** — step-by-step
 7. **LLM connection** — MiniMax pattern; alternatives (Claude Max, ChatGPT Plus, local models) noted

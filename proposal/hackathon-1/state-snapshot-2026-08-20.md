@@ -15,7 +15,6 @@ Role labels are used throughout. This repository is public and permanent. [see: 
 | Model access | One OAuth provider connected, valid into 2027. Gateway running. |
 | Telegram bot | Live in the working group, mentions-only. No ambient monitoring. |
 | Wildcard DNS | Live, pointing at the server. |
-| Shared inbox | Live, forwarding to two operators. |
 | Operator access | SSH provisioned for two operators using individual keys. |
 
 ## Infrastructure — not yet in place

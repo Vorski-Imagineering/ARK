@@ -87,7 +87,7 @@ Each is a `SKILL.md` with frontmatter, readable by common agent runtimes without
 
 Phase 1 is specified and ready. **No application code exists yet** — the ledger is empty and Unit 0 is the next action.
 
-Live infrastructure: a server with the agent runtime installed and one profile configured, a Telegram bot in mentions-only mode, wildcard DNS, and a shared inbox.
+Live infrastructure: a server with the agent runtime installed and one profile configured, a Telegram bot in mentions-only mode, and wildcard DNS.
 
 Known gaps that will bite if ignored:
 
