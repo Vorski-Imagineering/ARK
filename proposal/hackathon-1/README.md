@@ -27,6 +27,25 @@ This is a prepared build event, not a cold start. A basic agent must already be 
 | [execution/02-participation-and-source-pack.md](execution/02-participation-and-source-pack.md) | Collects each organisation's participation commitment and approved public sources | Complete one pack per organisation |
 | [execution/05-technical-specification.md](execution/05-technical-specification.md) | Defines the runtime bootstrap, minimal architecture, access control, data boundaries, recovery, infrastructure, acceptance tests, and budget | Technical preparation and readiness authority |
 
+## Event records
+
+Written during and after the build event. Records of what happened, not plans for what should.
+
+| Document | Purpose | Current use |
+|---|---|---|
+| [hackathon-working-doc-2026-08-18.md](hackathon-working-doc-2026-08-18.md) | The two-day working record: what was accomplished, the phase shelf, open decisions, and proposed design principles | Redacted for public publication. Role labels replace personal names |
+| [state-snapshot-2026-08-20.md](state-snapshot-2026-08-20.md) | Factual state after the event: what is live, what is missing, what was ruled, what blocks | Supersedes the Day 1 status table where the two disagree |
+
+## Implementation
+
+Build specifications live outside this folder, in [`plan/ark-agent/`](../../plan/ark-agent/), because the execution series here is participant-facing and the root README assigns `plan/` to design specs and implementation sequencing.
+
+| Document | Purpose |
+|---|---|
+| [`plan/ark-agent/README.md`](../../plan/ark-agent/README.md) | Entry point for the build track |
+| [`plan/ark-agent/00-build-protocol.md`](../../plan/ark-agent/00-build-protocol.md) | Test-driven build protocol, unit gates, and blocker handling |
+| [`plan/ark-agent/01-phase-1-vertical-slice.md`](../../plan/ark-agent/01-phase-1-vertical-slice.md) | Phase 1, executable. Fourteen units with pre-written tests |
+
 ## Documents to create after participants commit
 
 Do not create these prematurely. They should reflect actual participants, sources, decisions, and availability rather than guesses.
