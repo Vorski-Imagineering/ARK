@@ -764,7 +764,16 @@ class Document:
 def normalise(raw: RawDocument, source: Source, retrieved_at: str) -> Document: ...
 ```
 
-Normalisation rules, applied in this order: strip leading and trailing whitespace from the whole text; collapse runs of spaces and tabs to one space; collapse three or more newlines to exactly two; strip trailing whitespace from each line. Then, **if `permission_mode == "link-and-summarise"`, replace `text` with `""`** while retaining all metadata. The `content_hash` is the sha256 of the final stored `text`.
+Normalisation rules, applied in this order:
+
+1. Collapse runs of spaces and tabs to one space.
+2. Strip horizontal whitespace from **both ends of every line**, not only the trailing end.
+3. Collapse three or more consecutive newlines to exactly two.
+4. Strip the whole result.
+
+Then, **if `permission_mode == "link-and-summarise"`, replace `text` with `""`** while retaining all metadata. The `content_hash` is the sha256 of the final stored `text`.
+
+Step 2 is the one that catches people. An earlier draft of this unit said "strip trailing whitespace from each line", which fails `test_whitespace_is_collapsed_deterministically` — the fixture `"a  \n\n\n  b\t\tc   \n"` must normalise to `"a\n\nb c"`, and a leading-space-only rule leaves `"a\n\n b c"`. Indented source text would otherwise carry a leading space into both the stored document and its content hash, which quietly breaks re-ingestion determinism. Corrected 2026-08-20 after the test caught it.
 
 **Run:** `./scripts/test tests/test_normalise.py`
 
