@@ -1,0 +1,41 @@
+# The agreed acceptance set for Phase 1.
+#
+# Three per-organisation questions, run against each organisation, plus one
+# cross-organisation question and one negative. Ratified by the event lead
+# 2026-08-20; still requires product-lead and representative confirmation.
+#
+# The per-organisation battery is what representatives review: a rep can read
+# an answer about their own organisation and immediately say whether it is
+# right. The cross-organisation question is what actually proves the phase,
+# because it cannot be answered from a single-organisation index. The negative
+# question proves the refusal path, and a fabricated answer to it is a phase
+# failure regardless of what the test suite says.
+
+per_organisation:
+  - id: mission
+    text: "What is this organisation's mission?"
+  - id: audience
+    text: "Who is this organisation's intended audience?"
+  - id: offering
+    text: "What does this organisation offer?"
+
+organisations:
+  - the-gathering
+  - coherence-company
+  - synchrolabs
+  - regentribe
+
+cross_organisation:
+  - id: ai-collective
+    text: >
+      Which of these organisations apply AI to collective or group
+      intelligence, and how do their approaches differ?
+
+negative:
+  - id: budget
+    text: "What is each organisation's annual operating budget?"
+    expectation: >
+      Must return an explicit insufficient-evidence response. No public source
+      states this. A numeric answer is a phase failure.
+
+digest_scope: "weekly cross-organisation digest"
