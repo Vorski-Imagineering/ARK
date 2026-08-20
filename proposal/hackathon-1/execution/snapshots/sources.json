@@ -1,0 +1,68 @@
+{
+  "captured_at": "2026-08-20",
+  "note": "Approved public pages for the Phase 1 corpus. Each organisation's representative confirms their own entries. Re-capture weekly and compare content_sha256 in manifest.json to detect change.",
+  "organisations": [
+    {
+      "organisation_id": "the-gathering",
+      "sources": [
+        {
+          "source_id": "the-gathering-home",
+          "slug": "home",
+          "url": "https://the-gathering.earth/",
+          "title": "The Gathering"
+        }
+      ]
+    },
+    {
+      "organisation_id": "coherence-company",
+      "sources": [
+        {
+          "source_id": "coherence-company-home",
+          "slug": "home",
+          "url": "https://coherence.tv/",
+          "title": "The Coherence Company"
+        },
+        {
+          "source_id": "coherence-company-vision",
+          "slug": "vision",
+          "url": "https://coherence.tv/vision.html",
+          "title": "The Coherence Company \u2014 Vision"
+        }
+      ]
+    },
+    {
+      "organisation_id": "synchrolabs",
+      "sources": [
+        {
+          "source_id": "synchrolabs-home",
+          "slug": "home",
+          "url": "https://synchrolabs.ai/",
+          "title": "SynchroLabs"
+        },
+        {
+          "source_id": "synchrolabs-manifesto",
+          "slug": "manifesto",
+          "url": "https://synchrolabs.ai/manifesto",
+          "title": "SynchroLabs \u2014 Manifesto"
+        }
+      ]
+    },
+    {
+      "organisation_id": "regentribe",
+      "sources": [
+        {
+          "source_id": "regentribe-home",
+          "slug": "home",
+          "url": "https://regentribe.co/",
+          "title": "Regen Tribe"
+        }
+      ]
+    }
+  ],
+  "redact_names": [
+    "Jordan Hammond",
+    "Laurence Ion",
+    "Jenny Andersson"
+  ],
+  "redact_note": "Third-party individuals named on the captured pages, in testimonial quotes and an author credit. They consented to appear on their own organisation's site, not to be ingested into this public CC0 corpus and cited by an agent. Replaced with a role label at capture time. The list is explicit rather than inferred so that every redaction is auditable. Add a name here when a re-capture surfaces a new one."
+}

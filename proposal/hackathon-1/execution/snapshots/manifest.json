@@ -1,0 +1,59 @@
+{
+  "captured_at": "2026-08-20",
+  "snapshots": [
+    {
+      "organisation_id": "the-gathering",
+      "source_id": "the-gathering-home",
+      "source_url": "https://the-gathering.earth/",
+      "snapshot_path": "proposal/hackathon-1/execution/snapshots/the-gathering/home.md",
+      "captured_at": "2026-08-20",
+      "content_sha256": "ed0cc63e81fa956e3f28cfb024a181a46a018866959b14e44e7229b9ccde94f9",
+      "rendered_words": 1235
+    },
+    {
+      "organisation_id": "coherence-company",
+      "source_id": "coherence-company-home",
+      "source_url": "https://coherence.tv/",
+      "snapshot_path": "proposal/hackathon-1/execution/snapshots/coherence-company/home.md",
+      "captured_at": "2026-08-20",
+      "content_sha256": "9118c9a42697ad858bc140093a6e7f1faa9e965205b35db3ca7d3f8653bfa47c",
+      "rendered_words": 1339
+    },
+    {
+      "organisation_id": "coherence-company",
+      "source_id": "coherence-company-vision",
+      "source_url": "https://coherence.tv/vision.html",
+      "snapshot_path": "proposal/hackathon-1/execution/snapshots/coherence-company/vision.md",
+      "captured_at": "2026-08-20",
+      "content_sha256": "0a121f39f02394378f6dbbeab01b59c5af3b1bac977376b5cd7aef9bcdbb97fc",
+      "rendered_words": 1319
+    },
+    {
+      "organisation_id": "synchrolabs",
+      "source_id": "synchrolabs-home",
+      "source_url": "https://synchrolabs.ai/",
+      "snapshot_path": "proposal/hackathon-1/execution/snapshots/synchrolabs/home.md",
+      "captured_at": "2026-08-20",
+      "content_sha256": "ff19cc23bc05d7f7785161cc0b0fe8680af796905948990bf20166f5678fd92b",
+      "rendered_words": 393
+    },
+    {
+      "organisation_id": "synchrolabs",
+      "source_id": "synchrolabs-manifesto",
+      "source_url": "https://synchrolabs.ai/manifesto",
+      "snapshot_path": "proposal/hackathon-1/execution/snapshots/synchrolabs/manifesto.md",
+      "captured_at": "2026-08-20",
+      "content_sha256": "5352d854ae657cf1077106db6f19bc78179c13781c5ee316b50366c732e4b528",
+      "rendered_words": 1684
+    },
+    {
+      "organisation_id": "regentribe",
+      "source_id": "regentribe-home",
+      "source_url": "https://regentribe.co/",
+      "snapshot_path": "proposal/hackathon-1/execution/snapshots/regentribe/home.md",
+      "captured_at": "2026-08-20",
+      "content_sha256": "53d472e62e69d1d87b4f53a7e995022052764337bb3a128e9bf51bfdb11d32ad",
+      "rendered_words": 744
+    }
+  ]
+}
