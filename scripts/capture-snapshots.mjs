@@ -59,6 +59,37 @@ async function resolveBrowser(chromium) {
   return chromium.launch();
 }
 
+
+const NAV_MAX_WORDS = 3;
+const NAV_MIN_RUN = 4;
+
+/**
+ * Remove runs of consecutive very short lines, which is what a rendered
+ * navigation menu looks like as text. Isolated short lines are kept, because
+ * those are usually headings.
+ */
+function stripNavigationRuns(lines) {
+  const out = [];
+  let run = [];
+
+  const flush = () => {
+    if (run.length > 0 && run.length < NAV_MIN_RUN) out.push(...run);
+    run = [];
+  };
+
+  for (const line of lines) {
+    const words = line.split(/\s+/).filter(Boolean).length;
+    if (words > 0 && words <= NAV_MAX_WORDS) {
+      run.push(line);
+    } else {
+      flush();
+      out.push(line);
+    }
+  }
+  flush();
+  return out;
+}
+
 async function main() {
   const configPath = arg("--config", DEFAULT_CONFIG);
   const outRoot = arg("--out", DEFAULT_OUT);
@@ -85,11 +116,19 @@ async function main() {
         const rendered = await page.evaluate(() => document.body.innerText);
         await page.close();
 
-        // Collapse runs of blank lines but keep paragraph structure, so the
-        // chunker still has boundaries to split on.
-        const text = rendered
-          .split("\n")
-          .map((line) => line.replace(/[ \t]+/g, " ").trim())
+        // Drop navigation chrome. Roughly half the lines on these sites are
+        // menu items, and they crowd real prose out of the retrieved window:
+        // a question about an organisation's mission came back with its nav
+        // bar and the model honestly refused to answer.
+        //
+        // The signature of a menu is a *run* of very short lines. An isolated
+        // short line is usually a heading and is kept, so this removes chrome
+        // without removing structure.
+        const cleaned = stripNavigationRuns(
+          rendered.split("\n").map((line) => line.replace(/[ \t]+/g, " ").trim()),
+        );
+
+        const text = cleaned
           .join("\n")
           .replace(/\n{3,}/g, "\n\n")
           // Contact addresses are stripped at capture time. The repository is

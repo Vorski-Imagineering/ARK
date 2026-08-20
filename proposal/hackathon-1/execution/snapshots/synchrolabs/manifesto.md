@@ -1,18 +1,5 @@
 # SynchroLabs — Manifesto
 
-Synchro
-Labs
-.ai
-AUGMENTED COLLECTIVE INTELLIGENCE
-Home
-Explore
-The Network
-Manifesto
-EN
-Sign In
-Get Started
-SynchroLabs Manifesto
-
 A thesis for the age of coordination
 
 We start with a simple observation: there is an extraordinary amount of intelligence, talent, and purpose unfolding across the world. People creating valuable initiatives in every corner of the planet. What is missing — and its absence distorts everything — is the connective tissue capable of articulating it.
@@ -133,18 +120,7 @@ The question is how you want to be part of it.
 
 SynchroLabs — Living infrastructure for the age of coordination.
 
-Synchro
-Labs
-.ai
-AUGMENTED COLLECTIVE INTELLIGENCE
-
 Augmented Collective Intelligence infrastructure, designed to create and connect ecosystems, amplify human capabilities, and shape a new era of consciousness, sovereignty, and regeneration.
-
-NAVIGATION
-Explore
-The Network
-Manifesto
-COMMUNITY
 
 Coming soon...
 

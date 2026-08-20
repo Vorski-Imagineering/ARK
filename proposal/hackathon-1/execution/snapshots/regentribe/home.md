@@ -1,12 +1,5 @@
 # Regen Tribe
 
-AGENCY
-TOOLS
-TRIBES PLATFORM
-ABOUT US
-BLOG
-JOIN THE MOVEMENT
-
 REGENERATIVE NEIGHBORHOOD ACCELERATOR
 
 create, grow & find Regenerative Neighborhoods
@@ -16,15 +9,6 @@ The Regen Tribe ecosystem connects people, projects, & solutions to accelerate r
 regenerative neighborhood /noun/ – community land development with resilient systems for water, food, shelter, energy, waste management, nature & human connection.
 
 JOIN THE TRIBES PLATFORM
-About our ecosystem
-○
-GLOBAL NETWORK
-△
-AGENCY
-□
-EDUCATION
-○
-LAND DEVELOPMENT
 
 OUR WHY
 
@@ -38,14 +22,6 @@ Read our documentation
 The solution.
 
 Community land developments with resilient systems provide our core needs:
-
-WATER
-FOOD
-ENERGY
-WASTE
-HUMAN CONNECTION
-NATURE
-CLEAN AIR
 
 We call these places regenerative neighborhoods – because they have a positive effect on humans, the environment, & can adapt to change. Let's build more.
 
@@ -140,12 +116,6 @@ MORE ABOUT US
 
 PARTNERS IN OUR ECOSYSTEM
 
-Free Cities Foundation
-REGENS
-#TEAM PLASTIC POSITIVE
-cohere
-ECOLECTA
-
 WHAT THE COMMUNITY SAYS
 
 What the community
@@ -204,23 +174,9 @@ SUBSCRIBE TO OUR NEWSLETTER
 
 Apart from the general newsletter I want to receive special updates about:
 
-Regen Tribe Agency
-Real Estate opportunities
-Agent Program
-land development
-Recruitment
-events invites
-SUBSCRIBE
-
 Building a global ecosystem of regenerative neighborhoods – for people and planet.
 
 OUR ECOSYSTEM
-
-Tribes Platform
-Agency
-Tools
-Blog
-About Us
 
 COMMUNITY
 

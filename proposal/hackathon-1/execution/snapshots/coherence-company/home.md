@@ -1,18 +1,6 @@
 # The Coherence Company
 
-Humans & AI
-Wiser Together
-About
-Vision
-Coherence Conversations
 Who Is This For?
-›
-Overview
-Events
-Organizations
-Ecosystems
-Civic Ecosystems
-Join Us
 Now in Closed Beta. Host a Coherence Conversations event for your community. Learn more
 Now in Closed Beta. Host a Coherence Conversations event for your community. Learn more
 Now in Closed Beta. Host a Coherence Conversations event for your community. Learn more
@@ -138,10 +126,6 @@ bring others together.
 Coherence Conversations is for people responsible for helping groups become more than a list of names, a room full of attendees, an org chart, or a mailing list. The first four markets are different, but the pattern is the same: valuable people are already present. Their insight, relationships, and capacity to act are under-activated.
 
 WHICH OF THESE IS YOU?
-Events
-Organizations
-Ecosystems
-Civic
 You run gatherings where who-meets-whom matters as much as the content.
 Scheduled program
 →
@@ -191,19 +175,5 @@ Are you building an event, company gathering, transformation program, member net
 Start a Conversation
 THE COHERENCE COMPANY
 AI-powered collaboration infrastructure for collective sensemaking, coherent gatherings & coordinated action.
-EXPLORE
-About
-Vision
-Coherence Conversations
-Closed Beta
-Who For
-Join Us
-GET IN TOUCH
-Start a Conversation
-LinkedIn
-Newsletter
-LEGAL
-Privacy & Consent
-Terms of Use
 © 2026 The Coherence Company · Early-stage. Building in public.
 coherence.tv

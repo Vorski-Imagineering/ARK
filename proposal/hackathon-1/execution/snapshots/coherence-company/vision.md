@@ -1,18 +1,6 @@
 # The Coherence Company — Vision
 
-Humans & AI
-Wiser Together
-About
-Vision
-Coherence Conversations
 Who Is This For?
-›
-Overview
-Events
-Organizations
-Ecosystems
-Civic Ecosystems
-Join Us
 THE COHERENCE COMPANY · HUMANS & AI · WISER TOGETHER
 VISION
 Humans and AI,
@@ -177,19 +165,5 @@ Whether you want to join the build, pilot Coherence Conversations, partner, or i
 Start a Conversation
 THE COHERENCE COMPANY
 AI-powered collaboration infrastructure for collective sensemaking, coherent gatherings & coordinated action.
-EXPLORE
-About
-Vision
-Coherence Conversations
-Closed Beta
-Who For
-Join Us
-GET IN TOUCH
-Start a Conversation
-LinkedIn
-Newsletter
-LEGAL
-Privacy & Consent
-Terms of Use
 © 2026 The Coherence Company · Early-stage. Building in public.
 coherence.tv

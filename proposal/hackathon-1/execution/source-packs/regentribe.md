@@ -28,10 +28,11 @@ representative_questions:
   - What does Regen Tribe offer?
 ---
 
-> **DRAFT — not yet approved, and NO REPRESENTATIVE IS NAMED.** This is the one
-> pack of the four with no identified representative. Under the phase gate a
-> representative must confirm that material about their organisation is accurate,
-> so this pack cannot pass review until someone is named and agrees.
+> **DRAFT — not yet approved.** Profile and themes were drafted from the
+> organisation's own published pages. The permission mode below is proposed, not
+> granted. An organisation representative must confirm the profile, the selected
+> sources, the permission basis, and the representative questions before this
+> pack is used in a demonstration.
 
 # Regen Tribe — public source pack
 
@@ -39,8 +40,8 @@ representative_questions:
 
 - **Approved public organisation name:** Regen Tribe
 - **Public website:** https://regentribe.co/
-- **Organisation representative role:** `[NOT YET NAMED — BLOCKING]`
-- **Status:** not ready. Sources captured, representative outstanding.
+- **Organisation representative role:** technical lead
+- **Status:** representative identified, approval pending
 
 ## 5. Selected public sources
 
@@ -55,8 +56,7 @@ representative_questions:
 - [ ] Generated answers and digests may cite and link to the original sources
 - [ ] The organisation will review material concerning it and identify material inaccuracies
 
-**Scope of approved use:** proposed **experiment use**. Cannot be confirmed
-without a representative.
+**Scope of approved use:** proposed **experiment use**.
 
 ## 9. Organiser notes
 

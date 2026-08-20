@@ -1,19 +1,5 @@
 # SynchroLabs
 
-Synchro
-Labs
-.ai
-AUGMENTED COLLECTIVE INTELLIGENCE
-Home
-Explore
-The Network
-Manifesto
-EN
-Sign In
-Get Started
-We Synchronize Technology
-and Human Purpose
-
 Augmented Collective Intelligence
 
 for a new era of consciousness, sovereignty, and regeneration
@@ -54,19 +40,9 @@ Active Nodes
 Synchronic Connections
 
 Click to explore the graph
-Builders
-Capital
-Comunidades
-ONLINE
 The portal is open!
 
 I’m here to accompany you across the threshold, so you can begin to take part in this new era.
-
-Create an ecosystem
-Deploy an app
-Explore ecosystems
-Offer my skills
-I need guidance
 
 OUR THESIS
 
@@ -75,18 +51,8 @@ Technology with Purpose.
 We build the connective tissue for a new humanity.
 
 READ THE FULL MANIFESTO
-Synchro
-Labs
-.ai
-AUGMENTED COLLECTIVE INTELLIGENCE
 
 Augmented Collective Intelligence infrastructure, designed to create and connect ecosystems, amplify human capabilities, and shape a new era of consciousness, sovereignty, and regeneration.
-
-NAVIGATION
-Explore
-The Network
-Manifesto
-COMMUNITY
 
 Coming soon...
 
