@@ -5,8 +5,11 @@
 >
 > **Representatives:** review only your own organisation's section. For each
 > answer, read it, follow the cited sources, and complete the Accurate and
-> Material misrepresentation fields. Phase 1 closes when representatives find no
-> unresolved material misrepresentation — not when the harness runs.
+> Material misrepresentation fields. Then complete the sign-off block in your
+> organisation's source pack under `proposal/hackathon-1/execution/source-packs/`.
+>
+> Phase 1 closes when representatives find no unresolved material
+> misrepresentation — not when the harness runs.
 >
 > | Organisation | Representative role |
 > |---|---|
@@ -15,9 +18,9 @@
 > | SynchroLabs | event lead, plus a confirming contributor |
 > | Regen Tribe | technical lead |
 
-# Phase 1 evaluation — 20260820T003825Z
+# Phase 1 evaluation — 20260820T025103Z
 
-Index: `index/active.sqlite3`  ·  chunks: 54  ·  k=6
+Index: `index/active.sqlite3`  ·  chunks: 60  ·  k=6
 
 A representative reviews only their own organisation's section. Mark Accurate as yes or no and note any material misrepresentation.
 
@@ -31,26 +34,32 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> The Gathering's mission is to "connect for action" — to catalyse the emergence of ecosystems of collaboration by bringing together companies, communities, villages, tribes, DAOs, and other organisations (formal and informal) dedicated to systems change and building a better future [the-gathering-home].
+> The Gathering's mission, per its own site, is to catalyse ecosystems of collaboration among systems-change movements and to spread regenerative events, projects, organisations, and business models worldwide.
 > 
-> It is also described as "an action-learning prototype for 'regenerative scaling' — a search for a model how to globally spread regenerative events, projects, organisation and business models" [the-gathering-home].
+> Concretely:
 > 
-> How it pursues that mission:
-> - A festival, conference, fair, university, and accelerator rolled into one [the-gathering-home]
-> - Each participant is a co-creator; everything is welcome — workshops, music, dance, questions, art [the-gathering-home]
-> - Held in nature as a primary participant, with nature as host and guide [the-gathering-home]
-> - Weaves together systems change movements across the full spectrum of organisations re-imagining societal systems [the-gathering-home]
-> - Fosters a culture of "connect-for-action," asking "what's the next best thing we can do together?" [the-gathering-home]
+> - It is "an action-learning prototype for 'regenerative scaling' — a search for a model [for] how to globally spread regenerative events, projects, organisation and business models." [the-gathering-home]
+> - The Vision: "Catalyse the emergence of ecosystems of collaboration." [the-gathering-home]
+> - It exists because "Human ecosystems need gatherings to nourish them, we come together to build connection, relationships, and collaborations." [the-gathering-home]
+> - It invites participants to "connect-for-action" — bringing together "companies, communities, villages, tribes, DAOs - organisations, formal and informal, dedicated to building a better future, to taking humanity on a journey to becoming a wise species." [the-gathering-home]
 > 
-> The Vision in one line: "Catalyse the emergence of ecosystems of collaboration" [the-gathering-home].
+> Each participant is a co-creator of The Gathering. The Gathering is a festival, a conference, a fair, a university and an accelerator. [the-gathering-home]
+> 
+> (The closest a one-liner: connect people who want to "connect for action" so ecosystems of collaboration emerge and regenerative models spread.)
+> 
+> Sources: [the-gathering-home]
 
 **Cited sources**
 
 - `the-gathering-home` — https://the-gathering.earth/
 
+**Limitations recorded by the system**
+
+- the model cited 'for', which is not a source in the index; the citation was dropped
+
 **Refused as insufficient evidence:** False
 
-**Usage:** in=1296 out=256 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=21452 out=263 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -64,9 +73,13 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> The Gathering's intended audience consists of visionary people, organisations, and movements dedicated to systems change and building a better future. More specifically, it brings together companies, communities, villages, tribes, and DAOs — both formal and informal organisations — working on reimagining and reinventing societal systems [the-gathering-home].
+> The Gathering's intended audience is "companies, communities, villages, tribes, DAOs — organisations, formal and informal, dedicated to building a better future" [the-gathering-home] and "systems change movements" — "the whole spectrum of organisations seeking to re-imagine and re-invent our societal systems" [the-gathering-home].
 > 
-> Each participant is invited to be a co-creator rather than a spectator, contributing from their own community, organisation, movement, or tribe. The event is designed for those seeking to connect-for-action, build ecosystems of collaboration, and engage in regenerative work across areas like art, dance, wellness, dialogue, ecosystem building, workshops, and think tanks [the-gathering-home].
+> It is also explicitly framed for individuals within those movements: "A wave of visionary people, organisations and movements is emerging…" [the-gathering-home], with "no spectators" — every participant is expected to co-create, contribute, and ask "what's the next best thing we can do together" [the-gathering-home].
+> 
+> In short: the visionary people, organisations, and movements working on systems change and regeneration — companies, communities, villages, tribes, and DAOs — and the individuals inside them who want to connect, learn, and act together.
+> 
+> (The phrasing on the page is broad enough that the precise intended demographic — age, geography, sector — is not pinned down in the evidence beyond "bioregional" and the upcoming USA, Portugal, Czechia, and Mexico editions.)
 
 **Cited sources**
 
@@ -74,7 +87,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=1357 out=139 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=1233 out=229 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -88,19 +101,21 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> The Gathering offers an action-learning prototype for "regenerative scaling," combining elements of a festival, conference, fair, catalyst, university, and accelerator [the-gathering-home].
+> The Gathering is an action-learning prototype for regenerative scaling — a festival, conference, fair, catalyst, university and accelerator for companies, communities, villages, tribes, DAOs and other formal and informal organisations working on systems change [the-gathering-home].
 > 
-> It provides:
+> It offers a co-created programme — "No Spectators" — where each participant is a co-creator, contributing workshops, music, dance, art, questions, projects or whatever else they wish to share [the-gathering-home].
 > 
-> - Co-creation: a "No Spectators" event where every participant contributes to the program [the-gathering-home]
-> - Mind and body activities: Art, Dance, Circles, Celebration, Wellness, Mindfulness, Fitness [the-gathering-home]
-> - Questions and dialogue [the-gathering-home]
-> - Ecosystem building and network weaving, including workshops, case clinics, project presentations, think tanks, and masterclasses [the-gathering-home]
-> - A 5–7 day immersive camping experience in nature [the-gathering-home]
-> - A space to connect companies, communities, villages, tribes, and DAOs dedicated to systems change [the-gathering-home]
-> - Upcoming editions in the USA (Oct 12–18, 2026), Mexico (Oct 23–27, 2026), Portugal (2027), and Czechia (2027) [the-gathering-home]
+> It offers action-focused programming in mind & body, being & doing: Art, Dance, Circles, Celebration, Wellness, Mindfulness, Fitness, Questions & Dialogue, Ecosystem Building & Network Weaving, Workshops, Case Clinics, Project Presentations, Think Tanks, Masterclasses and a Co-Created Programme [the-gathering-home].
 > 
-> Its aim is to catalyse ecosystems of collaboration and foster a culture of "connect-for-action" [the-gathering-home].
+> It offers a 5–7 day immersive camp in nature, held bi-annually, designed as "a festival of communal connection with nature" where nature is "a primary participant in the co-creation" [the-gathering-home].
+> 
+> It offers serendipity and connection for action — a "high-energy collisional space" to get inspired, learn, build new relationships, find teachers, build community or a team, and answer the question "what's the next best thing we can do together?" [the-gathering-home].
+> 
+> It offers weaving of systems change movements across the full spectrum of organisations re-imagining societal systems [the-gathering-home].
+> 
+> Upcoming editions: USA (Oct 12–18, 2026), Mexico (Oct 23–27, 2026), Czechia and Portugal (both 2027) [the-gathering-home].
+> 
+> (Ironically, the document itself lists all of this under fragmented headings like a collage — fitting for a co-created festival.)
 
 **Cited sources**
 
@@ -108,7 +123,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=1 out=244 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=21584 out=361 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -126,22 +141,20 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
+> I cannot answer this from the provided evidence.
+> 
+> The evidence contains fragments of The Coherence Company's "Vision" page, including three horizons and a "CLEAR CENTER, OPEN EDGES — What we will not become" section, but no explicit mission statement appears in the supplied excerpts. The closest source is [coherence-company-vision], but it does not state the mission.
+> 
 > INSUFFICIENT EVIDENCE
-> 
-> The provided evidence does not contain a stated mission for The Coherence Company. The vision document describes aims, three horizons, and a "CLEAR CENTER, OPEN EDGES" section about what the company will not become, but the mission statement itself is not present in the excerpts provided.
-> 
-> Closest evidence found:
-> - [coherence-company-vision]
-> - [coherence-company-home]
+> Closest sources: [coherence-company-vision
 
 **Cited sources**
 
 - `coherence-company-vision` — https://coherence.tv/vision.html
-- `coherence-company-home` — https://coherence.tv/
 
-**Refused as insufficient evidence:** True
+**Refused as insufficient evidence:** False
 
-**Usage:** in=20287 out=87 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=20734 out=97 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -157,7 +170,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 > INSUFFICIENT EVIDENCE
 > 
-> Closest evidence found: [coherence-company-home].
+> The provided excerpts describe what The Coherence Company offers and its framing, but do not name an intended audience. The closest evidence is [coherence-company-home].
 
 **Cited sources**
 
@@ -165,7 +178,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** True
 
-**Usage:** in=20176 out=21 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=20633 out=41 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -179,9 +192,9 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> The Coherence Company offers Coherence Conversations, AI guides, and collaboration tools that turn dialogue into shared intelligence, the right relationships, and coordinated action [coherence-company-home].
+> The Coherence Company offers Coherence Conversations, AI guides, and collaboration tools that turn dialogue into shared intelligence, the right relationships, and coordinated action [coherence-company-home]. Their framing centers on "collaborative intelligence" — AI in service of the group rather than individual productivity — and they are early-stage, building in public with pilots open globally [coherence-company-home].
 > 
-> Their framing: humans and AI, wiser together. Early-stage, building in public, pilots open, remote and global. They position themselves around "collaborative intelligence" rather than speed or individual productivity — AI in service of the group, with human agency supported by AI [coherence-company-home].
+> The evidence is light on specifics (no pricing, no product tour, no case studies). What's there is positioning language, not a catalogue.
 
 **Cited sources**
 
@@ -189,7 +202,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=24 out=98 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=285 out=107 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -207,15 +220,30 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> SynchroLabs's mission is to act as "Living infrastructure for the age of coordination" [synchrolabs-manifesto]. More specifically, it is an "Augmented Collective Intelligence infrastructure, designed to create and connect ecosystems, amplify human capabilities, and shape a new era of consciousness, sovereignty, and regeneration" [synchrolabs-manifesto]. In practical terms, SynchroLabs is "a laboratory where we experiment with technology to synchronize, empower, and generate synergies among initiatives focused on life" [synchrolabs-manifesto].
+> SynchroLabs's mission, drawn from its own manifesto and home page:
+> 
+> SynchroLabs is a laboratory that experiments with technology to synchronize, empower, and generate synergies among initiatives focused on life — building "living infrastructure for the age of coordination" [synchrolabs-manifesto, synchrolabs-home].
+> 
+> The mission is articulated across three interlocking layers [synchrolabs-home]:
+> 
+> 1. Weaving the fabric: bringing scattered efforts into convergence within a living substrate designed for data sovereignty and interoperability, so people, projects, nodes, organizations, and territories can find one another and organize.
+> 2. Augmented Collective Intelligence: transforming curated knowledge into living intelligence that detects synchronicities, reveals opportunities, and coordinates action within and across ecosystems via agents and automated workflows.
+> 3. Deployment across living, intelligent ecosystems: apps, interfaces, and spaces to belong.
+> 
+> The core thesis is that intelligence, talent, and purpose already exist abundantly in the world, but lack "connective tissue capable of articulating it" — and that the next evolution of technology will be defined by its capacity to serve life, not by more powerful models or faster interfaces [synchrolabs-manifesto].
+> 
+> The stated values and promises are rigor, vision, listening to the field, depth in design, augmenting human capacities, and working for sovereignty, interoperability, and cooperation [synchrolabs-manifesto].
+> 
+> One line from the manifesto states the promise plainly: "Weaving infrastructure for cooperation" [synchrolabs-manifesto].
 
 **Cited sources**
 
+- `synchrolabs-home` — https://synchrolabs.ai/
 - `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=1449 out=115 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=21678 out=306 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -229,24 +257,28 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> SynchroLabs's intended audience is made up of four groups [synchrolabs-manifesto]:
+> SynchroLabs's intended audience is described in four groups in the manifesto [synchrolabs-manifesto]:
 > 
-> - People who build with code and with principles and want their work to contribute to the common good.
-> - People who carry a vision of the future and need a substrate for it to find resonance, alliances, and concrete form.
-> - People who feel the shift and are searching for where to anchor a new consciousness of sovereignty, regeneration, and belonging — including those who want to participate from where they are, with what they bring.
-> - People who sense that the most important intelligence of this era will be relational, shared, augmented, and oriented toward life.
+> - Those who build with code and with principles, and want their work to contribute to the common good.
+> - Those who carry a vision of the future and need a substrate where that vision can find resonance, alliances, and concrete form.
+> - Those who feel the shift and are searching for where to anchor a new consciousness of sovereignty, regeneration, and belonging to something greater — including those who want to participate from where they are, with what they bring.
+> - Those who sense that the most important intelligence of this era will be relational, shared, augmented, and oriented toward life.
 > 
-> The manifesto also describes SynchroLabs as a laboratory for "purpose-driven projects" to "organize into interconnected ecosystems" where "each person finds their place aligned with what they came to contribute" [synchrolabs-manifesto].
+> The manifesto also frames the laboratory as one that must "listen to the field and co-creat[e] with those who inhabit it" [synchrolabs-manifesto].
 > 
-> The four "who" lists read like one audience described from four angles.
+> (The Coherence Company evidence [coherence-company-home, coherence-company-vision] is about a different organisation and does not address SynchroLabs's audience.)
 
 **Cited sources**
 
 - `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
 
+**Limitations recorded by the system**
+
+- the model cited 'e', which is not a source in the index; the citation was dropped
+
 **Refused as insufficient evidence:** False
 
-**Usage:** in=21248 out=197 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=1285 out=210 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -260,19 +292,17 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> SynchroLabs positions itself as a laboratory for life-focused initiatives, building "Augmented Collective Intelligence infrastructure" to help scattered people, projects, and ecosystems find each other, connect, and organize [synchrolabs-manifesto].
+> From captured data to sovereign data. From isolation between platforms to interoperability.
 > 
-> What they build, per the manifesto:
+> SynchroLabs is a laboratory that experiments with technology to synchronize, empower, and generate synergies among life-focused initiatives [synchrolabs-manifesto]. They build infrastructure — the connective tissue — so scattered people, nodes, organizations, territories, and ecosystems can find each other and organize into interconnected, interoperable ecosystems [synchrolabs-manifesto].
 > 
-> - "Living infrastructure for the age of coordination" — connective tissue that articulates existing intelligence, talent, and purpose across communities [synchrolabs-manifesto].
-> - Tools across three dimensions: making the scattered visible, providing a substrate where initiatives can organize, and supporting a "way of organizing" built on sovereignty, interoperability, and cooperation [synchrolabs-manifesto].
-> - Aimed at three audiences: builders working with "code and principles," visionaries seeking resonance and alliances, and people drawn to sovereignty, regeneration, and belonging [synchrolabs-manifesto].
+> Three threads run through it: making the scattered visible, a way of organizing for builders, visionaries, and people feeling the shift, and an invitation to co-create [synchrolabs-manifesto]. Their taglines land the same point three ways: "Living infrastructure for the age of coordination," "Augmented Collective Intelligence infrastructure," and "Weaving infrastructure for cooperation" [synchrolabs-manifesto].
 > 
-> What they promise: rigor, listening to the field, depth in design, augmented human capacities, and tools that "open possibilities" [synchrolabs-manifesto].
+> They promise to build with rigor, design with depth, augment human capacities, and create tools for sovereignty, interoperability, and cooperation [synchrolabs-manifesto]. Concrete resources and the thing itself are marked "Coming soon" [synchrolabs-manifesto].
 > 
-> The manifesto explicitly notes that "RESOURCES" are "Coming soon..." — so the evidence doesn't enumerate concrete products or services [synchrolabs-manifesto].
+> The manifesto is the only source provided for SynchroLabs. The Coherence Company material in the evidence is separate [coherence-company-home] — useful to read, but not a SynchroLabs source.
 > 
-> (A separate source, The Coherence Company, describes a related-sounding offering called "Coherence Conversations" for group gatherings, but it is not explicitly attributed to SynchroLabs in the evidence provided [coherence-company-home].)
+> A laboratory, not a product yet. The connective tissue is "already pulsing." The rest is forthcoming.
 
 **Cited sources**
 
@@ -281,7 +311,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=21052 out=291 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=1 out=293 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -299,17 +329,13 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> Based on the evidence provided, Regen Tribe's mission is to develop regenerative neighborhoods globally.
+> Regen Tribe's mission is to build a global network of regenerative neighborhoods — community land developments with resilient systems for water, food, shelter, energy, waste, nature, and human connection. They describe themselves as "an open collective of community builders" [regentribe-home].
 > 
-> Their stated vision is "To create 53 million regenerative neighborhoods around the world collectively. Enough for each person (8 billion people) on the planet to have their core needs met & feel the sense of community." [regentribe-home]
+> Their stated vision: 53 million regenerative neighborhoods worldwide, enough for each person on the planet to have core needs met and feel a sense of community [regentribe-home].
 > 
-> Their stated goal is to "re.develop the society" [regentribe-home], and they describe their "WHY" as addressing urgent global challenges:
+> They're motivated by urgent global problems — resource scarcity, climate change, social inequality, and loneliness — and the belief that "the change starts in our neighborhood" [regentribe-home].
 > 
-> "We face urgent global challenges – resource scarcity, climate change, social inequality, and loneliness – demanding collective action to reshape our systems. Society's flawed development is making essential resources scarce – and the change starts in our neighborhood." [regentribe-home]
-> 
-> Their solution: "Community land developments with resilient systems provide our core needs" — they define regenerative neighborhoods as "community land development with resilient systems for water, food, shelter, energy, waste management, nature & human connection." [regentribe-home]
-> 
-> In short: Regen Tribe is an open collective of community builders working to accelerate the development of regenerative neighborhoods — resilient, intentional community land developments — to address global resource, climate, and social challenges at the neighborhood level.
+> One sentence, the whole idea: build neighborhoods that don't just sustain people but regenerate the land and the people on it.
 
 **Cited sources**
 
@@ -317,7 +343,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=1480 out=243 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=1357 out=153 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -331,7 +357,13 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> Regen Tribe's intended audience consists of four groups: individuals seeking community, visionaries with land, skilled professionals, and impact investors [regentribe-home].
+> Regen Tribe's intended audience is people who want to get involved in building regenerative neighborhoods. The home page names four roles explicitly:
+> 
+> "Whether you're an individual seeking community, a visionary with land, a skilled professional, or an impact investor – there is a vital role for you within Regen Tribe." [regentribe-home]
+> 
+> The site also mentions the Agent Program, which teaches community creation skills [regentribe-home], and a Tribe Ambassador invitation — "we are always looking for new ambassadors, collaborators and core team members" [regentribe-home].
+> 
+> A short answer: individuals, landowners, skilled professionals, and impact investors, plus people interested in joining the Agent Program or becoming ambassadors.
 
 **Cited sources**
 
@@ -339,7 +371,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=1427 out=33 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=1 out=140 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -353,16 +385,26 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Answer**
 
-> Per the evidence, Regen Tribe offers four things [regentribe-home]:
+> Regen Tribe is an open collective of community builders building a global ecosystem of regenerative neighborhoods [regentribe-home]. It runs a Regenerative Neighborhood Accelerator that "connects people, projects, & solutions to accelerate regenerative neighborhood development," with the vision of creating 53 million regenerative neighborhoods worldwide [regentribe-home].
 > 
->   - Global network — a growing network of people, neighborhoods, and solutions.
->   - Education — open source educational materials, guides, vocational programs, and tools.
->   - Agency — consultancy support for existing or new neighborhoods with regenerative goals.
->   - Land development — collaboration on a global network of microcommunities and 150-person Regenerative Neighborhoods.
+> A regenerative neighborhood is defined as "community land development with resilient systems for water, food, shelter, energy, waste management, nature & human connection" [regentribe-home].
 > 
-> All four live on the Tribes Platform, described as "the networking & education hub to develop regenerative neighborhoods" [regentribe-home].
+> Regen Tribe offers four things, "Find all of the above on Tribes Platform" [regentribe-home]:
 > 
-> (Two adjacent items appear in the evidence but were trimmed: The Gathering is a separate entity that "weaves systems change movements" and is linked from the ecosystem [the-gathering-home]; The Agent Program is referenced as an educational program, with a testimonial calling it "super well organized" [regentribe-home].)
+> - global network — connect to a growing network of people, neighborhoods and solutions around the world
+> - education — open source educational materials, guides, vocational programs, and tools
+> - agency — consultancy support for existing or new neighborhoods with regenerative goals
+> - land development — building a global network of microcommunities at partner projects and 150-person Regenerative Neighborhoods
+> 
+> The Tribes Platform is described as "the networking & education hub to develop regenerative neighborhoods" [regentribe-home].
+> 
+> Active projects listed: Community Lab X (Tulum, Mexico), Ekumal (Akumal, Mexico), Kuyabeh (Tulum, Mexico), Wildseeds Ranch (California, USA), and Ixchel (Tulum, Mexico) [regentribe-home].
+> 
+> The evidence also references an Agent Program that helped participants understand "the steps necessary in the community creation process," described as "super well organized, and as informative as it was interactive" [regentribe-home].
+> 
+> The team has been "researching, documenting and studying community land developments of various sizes and structures since 2022" and describes itself as "a collective of social entrepreneurs" seeking ambassadors, collaborators, and core team members [regentribe-home].
+> 
+> Note: The evidence includes content from a separate organisation, The Gathering, which is not part of Regen Tribe's offerings [the-gathering-home].
 
 **Cited sources**
 
@@ -371,7 +413,7 @@ A representative reviews only their own organisation's section. Mark Accurate as
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=21246 out=180 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=1 out=396 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -391,25 +433,28 @@ _This is the question that proves the phase. It cannot be answered from a single
 
 **Answer**
 
-> Two organisations in the evidence apply AI to collective or group intelligence: The Coherence Company and SynchroLabs.
+> Two of the three apply AI to collective or group intelligence. They differ in framing and mechanism.
 > 
-> **The Coherence Company** [coherence-company-home][coherence-company-vision] frames this as "collaborative intelligence" and "coordination infrastructure." Their approach centres on AI Guides embedded in group processes (conversations, events, networks, civic ecosystems). The Guides do sensemaking work inside groups: holding context across a group, listening to many voices, surfacing patterns, finding hidden connections, building shared understanding across difference, and turning dialogue into commitments and next steps [coherence-company-home]. Their first product, Coherence Conversations, is guided one-to-one dialogue that feeds a wider "Coherence Journey" moving groups from discovery through connection, convergence, seeding, and building [coherence-company-home]. The explicit frame is contrast with individual-productivity AI: "Most AI is being framed around speed, efficiency, and individual productivity... The deeper opportunity is coordination" [coherence-company-home].
+> **The Coherence Company** [coherence-company-home] [coherence-company-vision]
+> Frames the problem as a "coordination gap": communication scales, but the ability of groups to translate dialogue into shared understanding, trust, and action does not. Its AI product layer is "AI Guides" supporting "Coherence Conversations" — agents that hold context across a group, surface patterns across many voices, translate between contexts, identify relevant relationships, and turn dialogue into commitments and next steps. The explicit pitch is "AI in service of the group" rather than individual productivity, with a stated goal of "AI-native" sensemaking and trust-building.
 > 
-> **SynchroLabs** [synchrolabs-manifesto] frames the same problem as "augmented intelligence" oriented to "amplifying the natural capacities of people and groups." Their approach is a three-layer architecture: a substrate layer where people and projects already exist, an intelligence layer called the "Synchronicity Engine" that turns curated knowledge into coordination capacity by detecting affinities, synchronicities, and partnership opportunities, and an applications layer that exposes those as tools for managing, governing, and coordinating. Where Coherence focuses on conversation and sensemaking inside a group, SynchroLabs focuses on detecting non-obvious alignments across a wider ecosystem (projects, organisations, territories) and feeding those matches back to humans [synchrolabs-manifesto]. Both organisations also share a "data sovereignty" / trust orientation: SynchroLabs names it as a principle [synchrolabs-manifesto]; Coherence builds it in through consent protocols and a rejection of surveillance and extraction as the default path [coherence-company-vision].
+> **SynchroLabs** [synchrolabs-manifesto]
+> Uses the term "Augmented Intelligence" — explicitly not AI-as-replacement — to amplify group capacities. Its mechanism is the "Synchronicity Engine," which turns curated information into "coordination capacity" by detecting affinities, synchronicities between projects, partnership opportunities, and "complementarity radars." Where the Coherence Company emphasizes dialogue and sensemaking, SynchroLabs emphasizes matching and coordination across people, organizations, territories, and ecosystems, built on a "living substrate" with data sovereignty as a stated principle.
 > 
-> The differences, in short: Coherence works from the inside of a group outward (conversation → shared context → coordinated action), while SynchroLabs works from the wider field inward (a living substrate → affinity detection → coordination matches). Same target, different doors.
+> **Audax** [audax-home] does not fit the question. It treats AI agents as participants in redesigned organisations, but its focus is organisational operating-system design (roles, coordination, AI agents as collaborators) rather than AI applied to collective intelligence as such.
 > 
-> Both are early-stage; the evidence flags Coherence as "Building in public" with pilots open [coherence-company-home], and Synchrolabs' manifesto describes a thesis rather than a shipped product [synchrolabs-manifesto].
+> How the two approaches differ: The Coherence Company works from the inside of conversation outward — agents help a group listen, find shared meaning, and commit to action across an event or network. SynchroLabs works from the outside of an ecosystem inward — its engine detects affinities and synergies between existing entities and surfaces them as coordination opportunities. Same broad bet (AI serving groups, not individuals), different entry points: one to dialogue, one to matching.
 
 **Cited sources**
 
 - `coherence-company-home` — https://coherence.tv/
 - `coherence-company-vision` — https://coherence.tv/vision.html
 - `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
+- `audax-home` — https://audax.earth/
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=2687 out=528 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=2 out=417 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -430,19 +475,18 @@ _Expectation: Must return an explicit insufficient-evidence response. No public 
 **Answer**
 
 > INSUFFICIENT EVIDENCE
-> [synchrolabs-manifesto] [coherence-company-home] [the-gathering-home]
 > 
-> None of the provided pages state an annual operating budget.
+> [audax-home] [coherence-company-home] [synchrolabs-manifesto]
 
 **Cited sources**
 
-- `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
+- `audax-home` — https://audax.earth/
 - `coherence-company-home` — https://coherence.tv/
-- `the-gathering-home` — https://the-gathering.earth/
+- `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
 
 **Refused as insufficient evidence:** True
 
-**Usage:** in=20783 out=41 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=21277 out=30 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -460,34 +504,39 @@ _Expectation: Must return an explicit insufficient-evidence response. No public 
 
 **Answer**
 
-> Four organisations, all working on the same problem from different angles: the regenerative / impact space is full of good actors who can't find each other or act together.
+> Cross-organisation digest
 > 
-> The Gathering is the live, in-person layer. It's an action-learning prototype for regenerative scaling, designed to be locally adapted but held together by a shared "DNA" of patterns (celebration, belonging, mind & body, ecosystems, art) [the-gathering-home]. The framing is bold: humanity is in a "meta-poly-meaning crisis" and the event exists to catalyse ecosystems of collaboration among impact entrepreneurs, change makers, activists, and community builders [the-gathering-home]. Each participant is positioned as a co-creator of the programme, not an attendee [the-gathering-home].
+> Five organisations in this evidence are working the same seam: how to coordinate humans, organisations and ecosystems that the industrial model cannot hold. Each takes a different cut. Audax and the Coherence Company are the closest pair — same parent body, complementary layers. Synchrolabs, The Gathering and Regen Tribe sit one ring out: infrastructure, convening, and on-the-ground community.
 > 
-> Synchrolabs is the infrastructure layer underneath. It frames itself as the "connective tissue" that makes scattered regenerative efforts findable, interoperable, and coordinated. Three layers: a sovereign substrate for people, projects, nodes, and organisations to find each other; augmented collective intelligence (agents and workflows) to surface synchronicities and opportunities; and apps/interfaces to actually live in [synchrolabs-home]. Its manifesto diagnoses the exact gap The Gathering gestures at: "fragmented tools, lack of visibility, barriers to scaling what is valuable, absence of infrastructure that allows initiatives to recognize each other, articulate, and build momentum together" [synchrolabs-manifesto].
+> Audax and the Coherence Company share stewardship. Audax is "stewarded by The Coherence Company" [audax-home]. The two split the problem: Audax proposes an open organisational operating system for the agentic age, "a language, architecture, and set of principles that many people can build with" — explicitly modelled as a common grammar, not a product [audax-home]. The Coherence Company builds the human-side collaboration layer: turning "resonance into trust, and trust into coordinated action," with AI Guides surfacing patterns and holding context [coherence-company-home]. Its vision page makes the partnership thesis explicit: "The company itself must become an early proof of the thesis: the product emerges from the kind of company being built" [coherence-company-vision]. Read together, one is the OS, the other is the practice; they are designed to prove each other.
 > 
-> The Coherence Company is the mid-layer that turns conversations into coordination. It targets the specific people who bring groups together — conferences, summits, networks, civic ecosystems — and argues the bottleneck isn't people or platforms, it's the missing coordination layer that turns "intention to action" [coherence-company-home]. Its first product, Coherence Conversations, uses guided one-to-one dialogue (with AI Guides) to produce sensemaking, matchmaking, and next steps; the bigger arc is "coordination infrastructure for the agentic age" [coherence-company-home]. The thesis is explicitly anti-extraction: "the product emerges from the kind of company being built" [coherence-company-vision].
+> Synchrolabs is infrastructure a layer further down. It positions itself as "connective tissue" — "living infrastructure to synchronize people, organizations, territories, and ecosystems with purpose" [synchrolabs-manifesto]. Its three layers map almost directly onto the problems the others name: a sovereign substrate where nodes can find each other (Layer 1), collective-intelligence workflows that surface synchronicities (Layer 2), and deployment surfaces humans can actually use (Layer 3) [synchrolabs-home]. Its manifesto frames the gap as a fragmentation problem — "manage their network across five different platforms and still lose track of who is doing what" [synchrolabs-manifesto] — which is the same gap Audax and the Coherence Company are trying to close from the collaboration-design side.
 > 
-> Regen Tribe is the most concrete and physical of the four — land, neighbourhoods, homes. It is building toward 53 million regenerative neighbourhoods worldwide, defined as "resource resilient & intentional community land developments" providing "true sovereignty when created and run well" [regentribe-home]. The Tribes Platform is its connective layer for network, education, agency support, and land development partnerships; active projects sit in Tulum, Akumal, and California (Community Lab X, Ekumal, Kuyabeh, Wildseeds Ranch, Ixchel) [regentribe-home].
+> The Gathering is where these layers meet in a room. It calls itself "a festival, a conference, a fair, a university and an accelerator for companies, communities, villages, tribes, DAOs" [the-gathering-home]. Its stated job is "Catalyse the emergence of ecosystems of collaboration" [the-gathering-home] and it frames itself as "an action-learning prototype for 'regenerative scaling'" [the-gathering-home]. That is, it is not a one-off conference; it is a template that local editions adapt — "a global edition … whilst being a rich expression of local culture" [the-gathering-home]. The framing "every participant is a co-creator" [the-gathering-home] matches the Coherence Company's "agency at the edge" stance [coherence-company-vision].
 > 
-> How they relate. A plausible read of the stack: Regen Tribe supplies the physical places and the people building them; The Gathering supplies the periodic catalytic moment where those people (and adjacent movements) meet and weave; The Coherence Company supplies the relational practice that makes those meetings produce follow-through; Synchrolabs supplies the persistent substrate underneath all of it so the connections don't evaporate between editions. All four name the same villain — fragmentation of effort, tools, and visibility in the regenerative field — and all four lean on sovereignty, co-creation, and "ecosystem" as organising language [the-gathering-home] [synchrolabs-manifesto] [coherence-company-home] [regentribe-home]. None of the evidence shows an explicit partnership between them; the relationship here is inferred from the symmetry of the problem statements, not declared in the materials.
+> Regen Tribe is the most concrete. It aims to "create 53 million regenerative neighborhoods around the world collectively" — one per roughly 150 people on the planet [regentribe-home]. It runs an open collective, a Tribes Platform for networking and education, consultancy "agency" support for new and existing neighborhoods, and active land projects including Community Lab X, Ekumal, Kuyabeh, Wildseeds Ranch and Ixchel, all in Mexico and California [regentribe-home]. This is the only organisation in the set with named, on-the-ground projects in the evidence.
 > 
-> The shared blind spot worth naming: every organisation sells the connective layer, but the evidence contains no metrics, no user counts, no shipped product beyond Coherence Conversations' first release, and no case studies. It's a field of good blueprints in early construction.
+> A few tensions worth naming. Synchrolabs uses the words "consciousness, sovereignty, and regeneration" [synchrolabs-home]; Audax frames itself as an open OS "for the age of humans and agents" [audax-home]. Both reach for systemic language, but the centres of gravity differ: Audax is design-and-grammar, Synchrolabs is substrate-and-workflows. Regen Tribe is unmistakably place-based and physical. The Coherence Company sits between — design, with AI assistance, oriented to gatherings and organisers [coherence-company-home].
 > 
-> (The evidence is enough for a real digest — this is a "how do you think" ask dressed as a "summarise" one, and the source set was generous.)
+> The shared diagnosis across all five is unusually consistent: the old organisation form is failing, the building blocks of the next one exist but are scattered, and the missing work is connective — language, infrastructure, convening, and proof that the new forms actually coordinate. None of the evidence says these organisations formally coordinate with each other. What the evidence does support is that they are working the same problem from adjacent angles.
+> 
+> Source IDs cited: [audax-home], [coherence-company-home], [coherence-company-vision], [synchrolabs-home], [synchrolabs-manifesto], [the-gathering-home], [regentribe-home].
+> 
+> One small footnote: the Audax page lists "Sorrel, the camp agent" alongside the OS [audax-home] — a tell that the human/agent framing is product-shaped, not just rhetoric.
 
 **Cited sources**
 
-- `the-gathering-home` — https://the-gathering.earth/
-- `synchrolabs-home` — https://synchrolabs.ai/
-- `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
+- `audax-home` — https://audax.earth/
 - `coherence-company-home` — https://coherence.tv/
 - `coherence-company-vision` — https://coherence.tv/vision.html
+- `synchrolabs-manifesto` — https://synchrolabs.ai/manifesto
+- `synchrolabs-home` — https://synchrolabs.ai/
+- `the-gathering-home` — https://the-gathering.earth/
 - `regentribe-home` — https://regentribe.co/
 
 **Refused as insufficient evidence:** False
 
-**Usage:** in=3093 out=812 est_usd=0.000000  ·  model `MiniMax-M3`
+**Usage:** in=23070 out=1015 est_usd=0.000000  ·  model `MiniMax-M3`
 
 | Reviewer field | |
 |---|---|
@@ -500,7 +549,7 @@ _Expectation: Must return an explicit insufficient-evidence response. No public 
 ## Run totals
 
 - calls: 15
-- input tokens: 137606
-- output tokens: 3285
-- refusals: 3
+- input tokens: 154593
+- output tokens: 4058
+- refusals: 2
 - answers with no resolvable citation: 0
