@@ -14,7 +14,10 @@ from pathlib import Path
 import yaml
 
 from app.schema import (
+    DEFAULT_LICENSE,
+    LAWFUL_BASES,
     PERMISSION_MODES,
+    SENSITIVITIES,
     SOURCE_TYPES,
     Organisation,
     Source,
@@ -142,6 +145,18 @@ def _build_sources(data: dict, organisation_id: str) -> list[Source]:
             f"canonical_url must be an http or https URL, got {canonical_url!r}",
         )
 
+        lawful_basis = _as_optional_str(entry.get("lawful_basis")) or "legitimate-interest"
+        _require(
+            lawful_basis in LAWFUL_BASES,
+            f"lawful_basis must be one of {list(LAWFUL_BASES)}, got {lawful_basis!r}",
+        )
+
+        sensitivity = _as_optional_str(entry.get("sensitivity")) or "commons"
+        _require(
+            sensitivity in SENSITIVITIES,
+            f"sensitivity must be one of {list(SENSITIVITIES)}, got {sensitivity!r}",
+        )
+
         title = _as_optional_str(entry.get("title"))
         _require(bool(title and title.strip()), f"title is required for {source_id!r}")
 
@@ -155,6 +170,9 @@ def _build_sources(data: dict, organisation_id: str) -> list[Source]:
                 permission_mode=permission_mode,
                 published_at=_as_optional_str(entry.get("published_at")),
                 snapshot_path=_as_optional_str(entry.get("snapshot_path")),
+                license=_as_optional_str(entry.get("license")) or DEFAULT_LICENSE,
+                lawful_basis=lawful_basis,
+                sensitivity=sensitivity,
             )
         )
 

@@ -18,3 +18,10 @@ evals/outputs/
 .pytest_cache/
 
 proposal/hackathon-1/execution/source-packs-staging/
+
+# Third-party captured content. These are other organisations' words, held
+# under their own rights, and this repository is CC0 — a licence we have no
+# standing to apply to them. The capture script and sources.json stay tracked,
+# so the corpus is reproducible from fetch instructions rather than from
+# redistributed content.
+proposal/hackathon-1/execution/snapshots/*/

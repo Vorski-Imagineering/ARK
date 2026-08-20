@@ -9,6 +9,21 @@ from dataclasses import dataclass
 PERMISSION_MODES = ("open-reuse", "experiment-use", "link-and-summarise")
 SOURCE_TYPES = ("markdown", "text", "html", "rss")
 
+# Why a source may be held at all. Scraped organisational material rests on
+# legitimate interest rather than consent: you cannot obtain consent from people
+# whose published pages you read, and pretending otherwise produces a consent
+# record that means nothing. Consent is the right basis for material a person
+# actively submits.
+LAWFUL_BASES = ("legitimate-interest", "consent", "contract", "public-task")
+
+# Who may see a row. "commons" is shared across the ecosystem view; anything
+# else is scoped and must not leak into a cross-organisation answer.
+SENSITIVITIES = ("commons", "holon-private", "restricted")
+
+# The licence the SOURCE publishes under. This is recorded, never granted: this
+# repository's own CC0 dedication has no power over other people's material.
+DEFAULT_LICENSE = "unstated"
+
 
 @dataclass(frozen=True)
 class Organisation:
@@ -29,6 +44,10 @@ class Source:
     permission_mode: str
     published_at: str | None
     snapshot_path: str | None
+    # Governance, added 2026-08-20. Defaults keep older packs valid.
+    license: str = DEFAULT_LICENSE
+    lawful_basis: str = "legitimate-interest"
+    sensitivity: str = "commons"
 
 
 @dataclass(frozen=True)

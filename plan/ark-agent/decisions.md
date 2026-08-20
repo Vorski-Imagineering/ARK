@@ -83,6 +83,7 @@ Format:
 - **Rejected:** Organisations sharing links through Telegram; a conversational onboarding flow as the primary route.
 - **Why:** This resolves open decision §3 from the hackathon working document. Repository packs are versioned, transparent, reviewable, and portable, and they match the technical specification's canonical-corpus model. Frontmatter rather than prose parsing means the loader has an exact contract and its tests can assert on literal values instead of matching regular expressions against English. The conversational route is not rejected permanently — it becomes "the agent drafts a pull request adding a source pack," which is Phase 2 work.
 - **Affects:** Unit 1 (source pack schema), Unit 2 (loader)
+- **AMENDED 2026-08-20 by D-10.** The *pack* stays in the repository; the *captured content* does not. The two were conflated here and should not have been.
 - **Note:** The participation template suggests `source-packs/<slug>.md` and the technical specification shows `execution/source-packs/`. Both are satisfied by the path above. [see: proposal/hackathon-1/execution/02-participation-and-source-pack.md]
 
 ## D-7 · Agent skills use `SKILL.md` with frontmatter
@@ -116,4 +117,37 @@ Format:
 - **Why:** While the group is experimenting, the cost of a wrong organisation appearing is a one-line fix, and the cost of friction is that nobody tries it. Deleting the machinery would mean rebuilding it under time pressure later, when the trade has changed and the reasoning has been forgotten. Building it, proving it works, and switching it off keeps both the low friction and the option.
 - **Affects:** `scripts/add-org`, `scripts/activate-org`, `scripts/ark_operators.py`, the `ark-add-organisation` skill
 - **Note:** The operator list lives on the host and never in this repository — it holds platform user identifiers, which are personal data and do not belong in a public CC0 repository. How to switch the mode on is in `plan/ark-agent/permissions.md`.
+
+## D-10 · Captured third-party content leaves the public repository
+
+- **Date:** 2026-08-20
+- **Ruled by:** Event lead, after a challenge from a contributor
+- **Status:** ACTIVE. Supersedes the snapshot half of D-6.
+- **Decision:** Rendered snapshots of organisations' websites are not tracked here. They are held on the project server. The repository keeps the *instructions to fetch* — `sources.json`, the capture script, and the permission basis in each pack — so the corpus stays reproducible without redistributing anyone's content.
+- **Rejected:** Keeping the snapshots with a disclaimer; relying on the per-pack permission mode to carry the whole question.
+- **Why:** This repository is CC0. That dedication is ours to make only over material we authored. Roughly 6,500 words of four organisations' website text were committed under it, which asserts a relicensing power nobody here holds. Separately, a public aggregation of scraped pages is exactly the artefact that should not sit where every crawler can take it. The technical specification already anticipated this split: *"Git-tracked text/markdown where rights permit; otherwise reproducible fetch instructions."*
+- **Affects:** `.gitignore`, `NOTICE.md`, D-6, and any fresh clone — which can no longer ingest until a capture is run
+- **Note:** Git history still contains the removed files. Rewriting shared history needs a coordinated force-push that every clone holder must respond to, so it is the repository owner's call, not a unilateral fix. `NOTICE.md` records that no valid CC0 dedication was ever made over that content.
+
+## D-11 · The Source contract carries licence, lawful basis, and sensitivity
+
+- **Date:** 2026-08-20
+- **Ruled by:** Event lead
+- **Status:** ACTIVE
+- **Decision:** Every source records `license`, `lawful_basis`, and `sensitivity` alongside its existing provenance. Unstated values default to `unstated`, `legitimate-interest`, and `commons`, and an unrecognised value is rejected rather than warned about.
+- **Rejected:** Holding these as prose in the pack body; deferring until the storage move.
+- **Why:** Provenance is already structural here — a citation that does not resolve is dropped rather than shown. Governance should work the same way. A field the schema validates is a question answerable by query; a paragraph in a document is a question answerable by argument. `license` is recorded and never granted: what an organisation publishes under is a fact about them, not something this repository can confer.
+- **Affects:** `app/schema.py`, `app/source_pack.py`, Unit 1, and the ratified data contract in technical specification §5, which now needs the same amendment
+- **Note:** `[OPEN QUESTION: technical specification §5 defines the Source record and does not yet carry these three fields. Amending a ratified specification is a governance step. Owner: technical lead.]`
+
+## D-12 · Contributors and data subjects are separate populations
+
+- **Date:** 2026-08-20
+- **Ruled by:** Event lead
+- **Status:** ACTIVE
+- **Decision:** Two distinct records, never merged. **Contributors** are people who add material; their basis is participation, recorded as an agreement plus a timestamp when access is granted. **Data subjects** are people appearing inside captured material; their basis is legitimate interest, and consent is never sought from them.
+- **Rejected:** One consent record covering both.
+- **Why:** They are different relationships with different lawful bases, and merging them produces a consent record that means nothing — you cannot obtain consent from someone whose published page you read, and a system that pretends to has made compliance harder rather than easier. Keeping them apart also puts the onboarding terms exactly where they belong, on the contributor.
+- **Affects:** Phase 2's `Member` contract; `LAWFUL_BASES` in `app/schema.py`; onboarding design
+- **Note:** Enforced structurally rather than by documentation: `lawful_basis` is a validated field, `consent` and `legitimate-interest` are distinct values, and Phase 2's onboarding units write only contributor records. A data subject never acquires a consent row because nothing in the ingest path can write one.
 

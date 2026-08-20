@@ -67,3 +67,35 @@ def test_source_id_must_start_with_organisation_id():
 def test_missing_file_raises_source_pack_error():
     with pytest.raises(SourcePackError):
         load_source_pack(FIXTURES / "does-not-exist.md")
+
+
+# --- governance fields, added 2026-08-20 -------------------------------------
+
+
+def test_source_carries_governance_defaults_when_unstated():
+    """An older pack without the fields still validates, with safe defaults."""
+    pack = load_source_pack(FIXTURES / "valid-org.md")
+    first = pack.sources[0]
+    assert first.license == "unstated"
+    assert first.lawful_basis == "legitimate-interest"
+    assert first.sensitivity == "commons"
+
+
+def test_governance_fields_are_read_when_present():
+    pack = load_source_pack(FIXTURES / "governed-org.md")
+    first = pack.sources[0]
+    assert first.license == "CC-BY-4.0"
+    assert first.lawful_basis == "consent"
+    assert first.sensitivity == "holon-private"
+
+
+def test_unknown_lawful_basis_is_rejected():
+    with pytest.raises(SourcePackError) as excinfo:
+        load_source_pack(FIXTURES / "bad-lawful-basis.md")
+    assert "lawful_basis" in str(excinfo.value)
+
+
+def test_unknown_sensitivity_is_rejected():
+    with pytest.raises(SourcePackError) as excinfo:
+        load_source_pack(FIXTURES / "bad-sensitivity.md")
+    assert "sensitivity" in str(excinfo.value)
