@@ -1574,7 +1574,22 @@ Read `input_tokens`, `output_tokens`, and `model` from that file to populate `LL
 
 **Do not pass `-t none`.** It suppresses the reply entirely — the call returns empty. Leave the toolset flags alone.
 
-`[ASSUMPTION: observed input_tokens for a trivial prompt varied between 119 and 19,831 across calls, which suggests prompt caching or session-dependent system-prompt loading. Measure real per-call usage in Unit 9 against an actual evidence-bearing prompt rather than assuming either figure. If the high number is typical, the cost model in Unit 11 needs revisiting before the evaluation harness runs.]`
+**Measured 2026-08-20, assumption discharged.** A real evidence-bearing call through the
+finished pipeline reported **21,350 input tokens for 208 output tokens**. The high figure is
+the typical one: the runtime prepends its own system prompt and skill context to every
+one-shot invocation, and that dominates the ~1,200 tokens of retrieved evidence by an order
+of magnitude.
+
+Two consequences worth acting on rather than noting:
+
+Cost is driven by call count, not evidence size. Trimming `k` from 8 to 6 saves a few hundred
+tokens against a 21,000-token floor. Reducing the number of calls, or reusing one session
+across several questions, is where the saving is.
+
+The 15-call acceptance set costs roughly 320,000 input tokens per full run. Under the current
+OAuth subscription that reports no per-call price, so `estimated_cost_usd` stays at zero and
+the local rate table in Unit 11 is the only figure available. Anyone moving this to a metered
+provider should price a full evaluation run before doing so.
 
 ```python
 # app/answer.py
