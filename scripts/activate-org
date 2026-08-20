@@ -6,6 +6,15 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# Permission gate. Enforced here, not in the agent's instructions: an
+# instruction is a request the model may ignore, a check it cannot bypass is a
+# boundary. Identity comes from the messaging platform, not the message text.
+if ! ./.venv/bin/python scripts/ark_operators.py check; then
+  echo
+  echo "Ask a named operator to admit this organisation."
+  exit 1
+fi
+
 ORG="${1:-}"
 if [ -z "$ORG" ]; then
   echo "usage: ./scripts/activate-org <organisation-id>"
@@ -26,11 +35,15 @@ echo "reviewing ${STAGED} before admitting it:"
 echo "---"
 sed -n '1,25p' "$STAGED"
 echo "---"
-read -r -p "admit '${ORG}' into the query pool? [y/N] " reply
-case "$reply" in
-  [yY]) ;;
-  *) echo "aborted; nothing changed"; exit 1 ;;
-esac
+if [ -t 0 ] && [ "${ARK_ASSUME_YES:-}" != "1" ]; then
+  read -r -p "admit '${ORG}' into the query pool? [y/N] " reply
+  case "$reply" in
+    [yY]) ;;
+    *) echo "aborted; nothing changed"; exit 1 ;;
+  esac
+else
+  echo "(non-interactive caller; operator identity already verified)"
+fi
 
 mv "$STAGED" "$LIVE"
 echo "moved into the live pool: ${LIVE}"
