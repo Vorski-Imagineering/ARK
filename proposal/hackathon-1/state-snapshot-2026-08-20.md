@@ -37,7 +37,9 @@ The technical specification's §8 "Prepared vertical slice" — load a fixture, 
 
 An identity file exists on the server and gives the agent a consistent voice and self-knowledge across sessions, which was the Phase 0 requirement. Its current content scopes the agent to a single individual as its user and instructs it to anonymise everyone else.
 
-That scope conflicts with usage principle UP-U1, under which the agent's compute is for group work. The identity file needs rewriting for group scope. The operating decision is to keep one profile and rewrite the identity file; whether the participant-facing ARK Agent eventually earns its own separate profile is recorded as an open question. [see: plan/ark-agent/open-questions.md]
+That scope conflicted with usage principle UP-U1, under which the agent's compute is for group work.
+
+**Rewritten 2026-08-20.** The consequence was not theoretical. Asked in the group to add an organisation, the agent treated the request as a fact about a third party, researched the site by hand, and saved a memory note instead of running the corpus tooling — producing exactly the unsourced claim the corpus exists to prevent. The identity file now states that the agent serves the ARK group rather than one person, that participants are participants rather than topics, and that requests to add or query an organisation go through the corpus tooling. The previous file is retained as a timestamped backup on the host. The operating decision is to keep one profile and rewrite the identity file; whether the participant-facing ARK Agent eventually earns its own separate profile is recorded as an open question. [see: plan/ark-agent/open-questions.md]
 
 Useful infrastructure the agent has built for itself and which the build track now adopts rather than duplicates:
 
