@@ -293,11 +293,12 @@ def main() -> int:
         print("STAGED. The organisation is NOT in the query pool and will not")
         print("appear in any answer.")
         print()
-        print("To activate it, someone with shell access on this host runs:")
+        print("A named operator admits it with:")
         print(f"  ./scripts/activate-org {organisation_id}")
         print()
         print("Staging is the permission boundary. Anyone who can reach the agent")
-        print("can propose an organisation; only an operator can admit one.")
+        print("may propose an organisation; only a named operator may admit one.")
+        print("Identity comes from the messaging platform, not from what is typed.")
     return 0
 
 
