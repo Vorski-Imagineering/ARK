@@ -129,7 +129,10 @@ async function main() {
   const outRoot = arg("--out", DEFAULT_OUT);
 
   const config = JSON.parse(await readFile(configPath, "utf8"));
-  const { chromium } = await loadPlaywright();
+  const playwright = await loadPlaywright();
+  // A CommonJS module imported dynamically exposes its exports on .default.
+  const chromium = playwright.chromium ?? playwright.default?.chromium;
+  if (!chromium) throw new Error("playwright loaded but exposes no chromium export");
   const browser = await resolveBrowser(chromium);
 
   const manifest = [];
