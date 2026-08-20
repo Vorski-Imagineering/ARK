@@ -99,6 +99,24 @@ That is a proposal, not a decision. The group should amend or replace it.
 
 ---
 
+## Repository protection — a ratified requirement that is not met
+
+`[OPEN QUESTION: The default branch has no protection rules. The technical specification lists "Repository rules protect the default branch from force push and deletion" among the checks required before Day 1. Enabling it needs repository admin. Owner: a repository admin.]`
+
+Verified 2026-08-20: querying the branch-protection API for `main` returns 404,
+meaning no rules exist. Seven collaborators hold write access. Any of them can
+force-push or delete the default branch today, and nothing would stop it or
+record that it happened.
+
+This matters more than usual right now because a history rewrite is under
+discussion. Deciding whether to rewrite is a group decision. Being *able* to
+rewrite by accident is a different problem, and it is the one protection fixes.
+
+Recommended: require pull requests or at minimum block force-push and deletion
+on `main`. [see: proposal/hackathon-1/execution/05-technical-specification.md#9-acceptance-tests]
+
+---
+
 ## Data governance
 
 `[OPEN QUESTION: Does holding captured organisational material under legitimate interest meet EU requirements, and what does that oblige us to produce — a privacy notice, a legitimate-interest assessment, an erasure path? Owner: named by the product lead; unanswered.]`
