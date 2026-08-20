@@ -77,7 +77,7 @@ def resolve_citations(
     return resolved, limitations
 
 
-def _empty_answer(scope: str, model_id: str, reason: str) -> Answer:
+def insufficient_answer(scope: str, model_id: str, reason: str) -> Answer:
     return Answer(
         run_id=str(uuid.uuid4()),
         created_at=_now(),
@@ -130,12 +130,12 @@ def build_answer_record(
 
 def answer(question: str, index: Index, llm: LLM, k: int) -> Answer:
     """Answer one question from the index, or refuse."""
-    results = retrieve(question, index, _embedder_for(index), k)
+    results = retrieve(question, index, embedder_for(index), k)
 
     if not results:
         # No evidence at all. Do not call the model: there is nothing for it to
         # ground an answer in, and asking anyway invites invention.
-        return _empty_answer(
+        return insufficient_answer(
             question,
             getattr(llm, "model_id", "unknown"),
             "no evidence was retrieved for this question",
@@ -158,7 +158,7 @@ def answer(question: str, index: Index, llm: LLM, k: int) -> Answer:
     )
 
 
-def _embedder_for(index: Index):
+def embedder_for(index: Index):
     """Return an embedder matching the vectors stored in this index.
 
     The index records which model produced its vectors, so the query must be
