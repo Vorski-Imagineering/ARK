@@ -28,11 +28,12 @@ RECENT_FALLBACK_SECONDS = 900
 
 
 class Identity:
-    def __init__(self, user_id, user_name, platform, source):
+    def __init__(self, user_id, user_name, platform, source, chat_type="unknown"):
         self.user_id = user_id
         self.user_name = user_name
         self.platform = platform
         self.source = source
+        self.chat_type = chat_type
 
     def __str__(self):
         who = self.user_name or "unknown"
@@ -45,16 +46,18 @@ def _origin_for_session(session_id: str) -> dict | None:
     connection = sqlite3.connect(f"file:{STATE_DB}?mode=ro", uri=True)
     try:
         row = connection.execute(
-            "SELECT origin_json FROM sessions WHERE id = ?", (session_id,)
+            "SELECT origin_json, chat_type FROM sessions WHERE id = ?", (session_id,)
         ).fetchone()
     finally:
         connection.close()
     if not row or not row[0]:
         return None
     try:
-        return json.loads(row[0])
+        origin = json.loads(row[0])
     except json.JSONDecodeError:
         return None
+    origin["_chat_type"] = row[1] or origin.get("chat_type") or "unknown"
+    return origin
 
 
 def _latest_platform_origin() -> tuple[dict | None, str]:
@@ -89,6 +92,7 @@ def resolve_identity() -> Identity | None:
                 origin.get("user_name"),
                 origin.get("platform", "unknown"),
                 "session-id",
+                origin.get("_chat_type", "unknown"),
             )
 
     origin, why = _latest_platform_origin()
@@ -114,6 +118,17 @@ def load_operators() -> dict:
 def is_operator(identity: Identity | None) -> tuple[bool, str]:
     if identity is None or not identity.user_id:
         return False, "could not determine who is asking"
+
+    # A group thread is a shared session. Its recorded identity is whoever
+    # opened the thread, not whoever sent the current message, so anyone
+    # posting in an operator's thread would inherit that operator's rights.
+    # Identity is only unambiguous in a one-to-one chat.
+    if identity.chat_type in {"group", "forum", "channel", "supergroup"}:
+        return False, (
+            "this is a shared group thread, where the session identity belongs to "
+            "whoever opened the thread rather than to whoever sent this message. "
+            "Send me a direct message to approve an organisation."
+        )
 
     data = load_operators()
     for entry in data.get("operators", []):
