@@ -75,7 +75,29 @@ class HermesLLM:
         with tempfile.TemporaryDirectory() as work:
             usage_path = Path(work) / "usage.json"
             completed = subprocess.run(
-                [self._binary, "-z", prompt, "--usage-file", str(usage_path)],
+                [
+                    self._binary,
+                    "-z",
+                    prompt,
+                    "--usage-file",
+                    str(usage_path),
+                    # Answer from the evidence and nothing else. This skips
+                    # injection of the agent's own persona, memory, and skill
+                    # index into a call whose entire job is grounded
+                    # generation. Without it the answering model carries about
+                    # 20,000 tokens of unrelated context and a competing set of
+                    # style instructions, which is why sourced answers came
+                    # back formatted like chat replies.
+                    #
+                    # Scope: this flag applies to this short-lived subprocess
+                    # only. It does not affect the gateway agent, cron jobs, or
+                    # any other use of the runtime.
+                    #
+                    # Deliberately NOT --ignore-user-config: that discards
+                    # config.yaml, and while the model survives on credentials
+                    # alone today, relying on that is a trap.
+                    "--ignore-rules",
+                ],
                 capture_output=True,
                 text=True,
                 timeout=self._timeout,

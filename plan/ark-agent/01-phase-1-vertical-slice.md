@@ -1574,6 +1574,18 @@ Read `input_tokens`, `output_tokens`, and `model` from that file to populate `LL
 
 **Do not pass `-t none`.** It suppresses the reply entirely — the call returns empty. Leave the toolset flags alone.
 
+**Do pass `--ignore-rules`.** Measured 2026-08-20: without it a grounded call
+carries about 20,000 tokens of the agent's own persona, memory, and skill index,
+and answers come back shaped by a competing set of style instructions rather than
+by this unit's prompt. With it the same call sends 131 tokens of scaffolding, and
+both the citation contract and the refusal path still hold. The flag applies to
+that subprocess only and does not affect the gateway agent or any other use of
+the runtime.
+
+**Do not pass `--ignore-user-config`.** It discards `config.yaml`. The model
+happens to survive on stored credentials today, which makes it look harmless and
+makes it a trap.
+
 **Measured 2026-08-20, assumption discharged.** A real evidence-bearing call through the
 finished pipeline reported **21,350 input tokens for 208 output tokens**. The high figure is
 the typical one: the runtime prepends its own system prompt and skill context to every
