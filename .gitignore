@@ -16,3 +16,5 @@ index/
 evals/outputs/
 *.egg-info/
 .pytest_cache/
+
+proposal/hackathon-1/execution/source-packs-staging/
