@@ -25,6 +25,70 @@ Day 2 opens with the full roadmap now visible. The **[vision doc](https://github
 
 ---
 
+---
+
+# Addendum — 2026-08-20: Phase 1 built
+
+*Added after the session below. Where this addendum and the Day 1 / Day 2 text
+disagree, this is current.*
+
+**Phase 1 is built and evidenced.** The source-to-answer-to-digest slice runs
+end to end: four organisations' approved public material in one index, answers
+that carry a link to the public source behind every claim, an explicit refusal
+when the evidence does not support an answer, and a cross-organisation digest.
+92 automated tests pass from a clean checkout on a second machine.
+
+**You can use it from the group chat.** Ask the agent what an organisation does,
+how two of them differ, or for the digest. Add your own organisation and it
+becomes answerable immediately.
+
+**What is not done, and cannot be done by the build:** each organisation's
+representative has to confirm that what the agent says about them is accurate.
+That is the last Phase 1 criterion and it is deliberately a human one.
+
+## What changed against the plan below
+
+| Day 2 plan | What actually happened |
+|---|---|
+| Open decision §2, conversation logging | Ruled. Raw transcripts stay local, only sanitised summaries are published. |
+| Open decision §3, source ingestion | Ruled. Repository source packs with machine-readable frontmatter. |
+| Phase 1 buildable tasks | All built, test-first, 14 units. |
+| Second runtime profile | Never created. Everything runs on one model. |
+| Agent identity file | Rewritten. It had scoped the agent to one person, which broke group use. |
+
+## Things learned that were not anticipated here
+
+**Half the participating organisations publish client-rendered sites.** A plain
+fetch of one of them returns two visible words against 320KB of markup; rendered,
+the same page yields 1,235. The corpus is therefore built from rendered snapshots
+with a content hash per file, which also makes weekly re-capture able to tell
+changed from unchanged.
+
+**A long-lived chat session keeps the system prompt it was built with.** A group
+thread that predates a new capability will never load it. This is invisible from
+the outside and cost real confusion before it was found.
+
+**Session identity is not message identity.** A group thread's recorded user is
+whoever opened the thread, not whoever sent the current message. Any permission
+check reading session identity in a group is measuring the wrong thing.
+
+## Where things now live
+
+- `plan/ark-agent/README.md` — the build track, start here
+- `plan/ark-agent/01-phase-1-vertical-slice.md` — Phase 1, fourteen units
+- `plan/ark-agent/02-`, `03-`, `04-` — Phases 2 to 4 at contract depth, each
+  opening with the decisions that must be ruled before it can start
+- `plan/ark-agent/decisions.md` — what was chosen and why
+- `plan/ark-agent/open-questions.md` — what is unresolved and who owns it
+- `plan/ark-agent/permissions.md` — who may add an organisation
+- `proposal/hackathon-1/execution/source-packs/` — the four organisation packs,
+  each with a sign-off block awaiting its representative
+- `proposal/hackathon-1/execution/outputs/` — the review sheet
+- `proposal/hackathon-1/state-snapshot-2026-08-20.md` — current state
+- `skills/` — the agent skills, and how to write and install one
+
+---
+
 # Day 1 — What Happened
 
 ## What we accomplished today
