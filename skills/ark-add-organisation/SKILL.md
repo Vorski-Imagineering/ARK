@@ -63,6 +63,12 @@ org" is heard as "you are in", so say the opposite plainly.
 
 ## Step 3 — admit it, if asked
 
+Approving requires a **direct message**, not the group. A group thread is a
+shared session whose recorded identity belongs to whoever opened the thread, not
+to whoever sent the current message, so it cannot establish who is asking. If
+someone asks you to approve in the group, tell them to message you directly.
+
+
 ```
 cd ~/ark && ./scripts/activate-org example-org
 ```
