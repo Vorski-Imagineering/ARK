@@ -53,6 +53,52 @@ Carried forward from the execution synthesis and `00-start-here.md`, where every
 
 ---
 
+## Representative approval — how does sign-off actually happen?
+
+`[OPEN QUESTION: By what mechanism does an organisation representative review generated answers and record approval, and what does approval attach to? Owner: whole group. Blocks: the Phase 1 gate, which cannot close without it.]`
+
+This is the last thing standing between Phase 1 and done, and it is the one part
+nobody has designed. Everything technical is built and evidenced. The gate says
+"representatives find no unresolved material misrepresentation", and there is
+currently no defined way for a representative to say so.
+
+Four things need answers, and they are separable:
+
+**Where does review happen?** A pull request comment on the review sheet keeps
+everything in git and auditable, but assumes every representative is comfortable
+in GitHub. A shared document is easier for non-technical reps and harder to
+audit. In conversation with the agent is the friendliest and the least durable.
+A hybrid — review anywhere, organiser records the outcome in the repository — is
+the least elegant and probably the most likely to actually happen.
+
+**What does approval attach to?** Approving *an answer* is precise and does not
+generalise: the next question produces a new answer nobody has seen. Approving
+*a source snapshot* generalises to every answer drawn from it, which is far more
+useful, and is what makes the weekly re-capture question below tractable. The
+snapshot is the better unit, but it means a representative is vouching for
+answers they have not read.
+
+**What is the standing of an unreviewed answer?** Today every generated record
+carries `review_status: unreviewed` and nothing stops it being shown. Options
+range from marking unreviewed output visibly, to withholding it entirely until a
+representative has approved its sources.
+
+**Who can approve, and can it be delegated?** Each organisation currently has one
+named representative. If that person is away, does the organisation's material go
+stale, or can approval be delegated, and to whom?
+
+A concrete starting proposal, offered so the group is choosing rather than
+starting from nothing: approval attaches to a **source snapshot**, is recorded as
+a signed line in the source pack itself with a date and the snapshot's content
+hash, and is given by a comment on the pull request that adds it. Answers drawn
+only from approved snapshots are shown normally; anything else is marked
+unreviewed. A changed hash on re-capture drops that source back to unapproved
+until the representative confirms again.
+
+That is a proposal, not a decision. The group should amend or replace it.
+
+---
+
 ## Source freshness and re-approval
 
 `[OPEN QUESTION: When a weekly re-capture finds that a source has changed, does the agent keep serving the last representative-approved snapshot until the new one is signed off, or does it index the new snapshot immediately and flag it as unreviewed? Owner: product lead plus organisation representatives.]`
