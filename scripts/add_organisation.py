@@ -299,3 +299,7 @@ def main() -> int:
         print("Staging is the permission boundary. Anyone who can reach the agent")
         print("can propose an organisation; only an operator can admit one.")
     return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
