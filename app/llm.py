@@ -60,6 +60,17 @@ class HermesLLM:
 
         hermes -z "<prompt>" --usage-file <path>
 
+    The call deliberately keeps the runtime's own context: the agent's persona,
+    memory, and skill index ride along with the evidence. That costs about
+    20,000 tokens per answer, almost all of it cache-read, and it is the reason
+    a sourced answer sounds like the same agent people talk to elsewhere. A
+    corpus answer in a different voice reads as a separate system bolted on.
+
+    Passing ``--ignore-rules`` suppresses that injection and reduces the call
+    from roughly 20,227 input tokens to 131, with the citation contract and the
+    refusal path both intact. It is available as a cost lever and is not the
+    default, because the saving buys tokens at the price of voice.
+
     Generated text arrives on stdout; token accounting is written as JSON to
     the usage file. The local proxy is not an option, since it supports only
     Nous Portal and xAI upstreams and neither is authenticated. Do not pass
@@ -75,29 +86,7 @@ class HermesLLM:
         with tempfile.TemporaryDirectory() as work:
             usage_path = Path(work) / "usage.json"
             completed = subprocess.run(
-                [
-                    self._binary,
-                    "-z",
-                    prompt,
-                    "--usage-file",
-                    str(usage_path),
-                    # Answer from the evidence and nothing else. This skips
-                    # injection of the agent's own persona, memory, and skill
-                    # index into a call whose entire job is grounded
-                    # generation. Without it the answering model carries about
-                    # 20,000 tokens of unrelated context and a competing set of
-                    # style instructions, which is why sourced answers came
-                    # back formatted like chat replies.
-                    #
-                    # Scope: this flag applies to this short-lived subprocess
-                    # only. It does not affect the gateway agent, cron jobs, or
-                    # any other use of the runtime.
-                    #
-                    # Deliberately NOT --ignore-user-config: that discards
-                    # config.yaml, and while the model survives on credentials
-                    # alone today, relying on that is a trap.
-                    "--ignore-rules",
-                ],
+                [self._binary, "-z", prompt, "--usage-file", str(usage_path)],
                 capture_output=True,
                 text=True,
                 timeout=self._timeout,

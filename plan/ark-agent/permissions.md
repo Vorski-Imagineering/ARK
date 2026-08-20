@@ -108,3 +108,21 @@ See the sign-off blocks in each source pack, and the approval question in
 
 Unset `ARK_APPROVAL_MODE`, or set it to `auto`, and restart. The operator list
 can stay in place; it is simply not consulted.
+
+---
+
+## Aside: the token cost of an answer
+
+Each corpus answer carries roughly 20,000 tokens of the runtime's own context —
+the agent's persona, memory, and skill index — alongside about 1,200 tokens of
+retrieved evidence. Almost all of it is cache-read, so it is cheap rather than
+paid fresh per call.
+
+That injection is kept deliberately. It is why a sourced answer sounds like the
+same agent people talk to elsewhere rather than like a separate system.
+
+If token cost ever becomes the binding constraint, passing `--ignore-rules` to
+the answering subprocess in `app/llm.py` reduces it from about 20,227 input
+tokens to 131. Verified: both the citation contract and the insufficient-evidence
+refusal survive the change. The trade is voice, not correctness.
+
