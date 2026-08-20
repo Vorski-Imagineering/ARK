@@ -74,3 +74,39 @@ repository under `research/The Coherence Company/` and
 `plan/The Coherence Company/`. It is CC0 and could be added as further sources
 if the representative wishes. It is deliberately not included in this first pack,
 which stays to the organisation's own website.
+
+## 10. Representative sign-off
+
+**This is the last thing standing between Phase 1 and done.** Everything
+technical is built and evidenced. Phase 1 closes when the representative for
+this organisation confirms that what the agent says about it is accurate.
+
+### What to do
+
+1. Open the review sheet:
+   `proposal/hackathon-1/execution/outputs/phase-1-review-sheet-2026-08-20.md`
+2. Read only this organisation's section. Follow the cited links and check the
+   claims against them.
+3. Tick the sources below that you approve, add your role label and the date,
+   and say plainly whether anything misrepresents the organisation.
+
+Either edit this file directly, or say it in a pull request comment or in the
+group and an organiser will record it here. Any of those counts. Do not let the
+mechanism be the reason this stalls — the mechanism itself is still an open
+question. [see: plan/ark-agent/open-questions.md]
+
+### Approval
+
+| Source | Snapshot hash | Approved | Notes |
+|---|---|---|---|
+| `coherence-company-home` | `1fdbdeaf4d92a8c9…` | ☐ | |
+| `coherence-company-vision` | `99306264074565d5…` | ☐ | |
+
+- **Approved by (role label):** `[TO COMPLETE]`
+- **Date:** `[YYYY-MM-DD]`
+- **Material misrepresentation found:** `[NONE / DESCRIBE]`
+- **Verdict:** `[APPROVED / APPROVED WITH CORRECTION / NOT APPROVED]`
+
+Approval attaches to the snapshot hashes above. If a weekly re-capture changes a
+hash, that source returns to unapproved until confirmed again, because the words
+you reviewed will have changed.
