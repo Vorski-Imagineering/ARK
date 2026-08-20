@@ -19,6 +19,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import process from "node:process";
 
 const DEFAULT_CONFIG = "proposal/hackathon-1/execution/snapshots/sources.json";
@@ -60,6 +61,39 @@ async function resolveBrowser(chromium) {
 }
 
 
+
+/**
+ * Import Playwright, tolerating the fact that it is not installed beside this
+ * script. Node resolves ESM imports relative to the importing file, so running
+ * from another checkout fails even when Playwright exists on the host.
+ *
+ * Override the search location with ARK_NODE_MODULES if it lives elsewhere.
+ */
+async function loadPlaywright() {
+  try {
+    return await import("playwright");
+  } catch {
+    const roots = [
+      process.env.ARK_NODE_MODULES,
+      path.join(process.env.HOME ?? "", ".hermes", "hermes-agent", "node_modules"),
+      path.join(process.cwd(), "node_modules"),
+    ].filter(Boolean);
+
+    for (const root of roots) {
+      const entry = path.join(root, "playwright", "index.js");
+      try {
+        return await import(pathToFileURL(entry).href);
+      } catch {
+        // try the next candidate
+      }
+    }
+    throw new Error(
+      `playwright not found. Searched: ${roots.join(", ")}. ` +
+        "Set ARK_NODE_MODULES to the directory containing it.",
+    );
+  }
+}
+
 const NAV_MAX_WORDS = 3;
 const NAV_MIN_RUN = 4;
 
@@ -95,7 +129,7 @@ async function main() {
   const outRoot = arg("--out", DEFAULT_OUT);
 
   const config = JSON.parse(await readFile(configPath, "utf8"));
-  const { chromium } = await import("playwright");
+  const { chromium } = await loadPlaywright();
   const browser = await resolveBrowser(chromium);
 
   const manifest = [];
