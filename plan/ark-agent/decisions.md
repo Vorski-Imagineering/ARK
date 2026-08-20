@@ -51,7 +51,7 @@ Format:
 - **Rejected:** OpenAI `text-embedding-3-small` as named in the technical specification; a provider-agnostic dual implementation.
 - **Why:** The server currently holds no API keys of any kind. A local model removes a credential to provision, store, rotate, and keep out of git; costs nothing; runs offline; and is fully deterministic, which matters because the retrieval tests assert on exact ranking. It also honours portability principle UP-P4 — the pattern should not require a specific subscription. The technical specification permits this: the index is "a derived cache, not a system of record," and the retrieval baseline is explicitly replaceable. Generation still uses the configured Hermes model.
 - **Affects:** Unit 5 (embedder), Unit 6 (index), Unit 7 (retrieval)
-- **Note:** `[ASSUMPTION: the chosen local model fits comfortably in the server's memory alongside the Hermes runtime. Verify in Unit 5 before proceeding.]`
+- **Verified 2026-08-20 (Unit 5):** assumption discharged. The ARK server reports 7.0 GiB available memory and 89 GB free disk with the runtime up. `all-MiniLM-L6-v2` loads and returns 384-dimensional unit-length vectors with no API key and no network call after the initial model download. The decision holds.
 
 ## D-4 · Phase numbering follows the working document, with an explicit mapping
 
