@@ -99,6 +99,35 @@ That is a proposal, not a decision. The group should amend or replace it.
 
 ---
 
+## Data governance
+
+`[OPEN QUESTION: Does holding captured organisational material under legitimate interest meet EU requirements, and what does that oblige us to produce — a privacy notice, a legitimate-interest assessment, an erasure path? Owner: named by the product lead; unanswered.]`
+
+The working position is legitimate interest rather than consent, on the grounds
+that consent cannot be obtained from people whose published pages were read, and
+that a consent record which nobody gave is worse than none. D-12 keeps
+contributors and data subjects separate for this reason.
+
+That position is reasoned but unverified. Nobody on the build has confirmed it
+against the actual regulation, and the note it came from says plainly that it is
+not legal advice. Treat it as the shape of an answer, not the answer.
+
+What it would oblige us to produce if it holds: a short privacy notice saying who
+holds what and why, a written legitimate-interest assessment, a working erasure
+path, and evidence of minimisation. We currently have none of those. What we do
+have is minimisation in practice — personal names and contact addresses found in
+captured pages are redacted at capture time by an explicit auditable list.
+
+`[OPEN QUESTION: Do captured snapshots and structured records move to the shared Postgres tables, and what is the boundary between what lives there and what stays in git? Owner: technical lead plus the contributor running those tables.]`
+
+Ruled in principle: the corpus moves to Postgres. Unruled: the seam. The
+canonical-versus-derived split already in place survives the move, since the
+index is a disposable cache rebuildable from the corpus — only the loader
+changes. What needs deciding is whether the source packs themselves move, or
+whether git keeps the packs while Postgres holds the captured rows.
+
+---
+
 ## Source freshness and re-approval
 
 `[OPEN QUESTION: When a weekly re-capture finds that a source has changed, does the agent keep serving the last representative-approved snapshot until the new one is signed off, or does it index the new snapshot immediately and flag it as unreviewed? Owner: product lead plus organisation representatives.]`

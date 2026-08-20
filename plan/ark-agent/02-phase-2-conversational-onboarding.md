@@ -123,6 +123,38 @@ Branch per unit, named `build/phase-<n>-unit-<m>`. Open a draft pull request whe
 
 ---
 
+# GOVERNANCE CONSTRAINTS
+
+These are not guidance. They are properties the units below must have, and each
+one is checkable rather than promised.
+
+**Contributors and data subjects never share a record.** A contributor is
+someone who adds material; their basis is participation, recorded as an
+agreement plus a timestamp at the moment access is granted. A data subject is
+someone appearing inside captured material; their basis is legitimate interest
+and consent is never sought from them. [see: D-12]
+
+How this is enforced rather than asserted: `lawful_basis` is a validated field
+with `consent` and `legitimate-interest` as distinct values, the onboarding units
+write only contributor records, and nothing in the ingest path can write a
+consent row. A data subject cannot acquire one by accident, because no code path
+exists that would create it.
+
+**Consent is revocable and revocation is a unit, not a policy.** Unit 2.4 exists
+because a consent record with no working withdrawal is a record of nothing.
+
+**Minimisation is a design constraint on the schema.** Hold what the coordination
+actually needs. Every field added to `Member` should survive the question "what
+breaks if this is absent", and a field that only exists because it might be
+useful later does not go in.
+
+**Sensitivity governs who sees a row.** `commons` is visible in the ecosystem
+view; anything else is scoped and must not surface in a cross-organisation
+answer. The personal feed and the ecosystem feed are one query with different
+scoping, not two systems.
+
+---
+
 # DATA CONTRACTS
 
 The `Organisation`, `Source`, `Chunk`, and generated `Answer`/digest shapes are ratified in Phase 1 and reused unchanged here. [see: plan/ark-agent/01-phase-1-vertical-slice.md#data-contracts] The records below are new to this phase. They are **not yet ratified** — refine them once §6 above clears. `[ASSUMPTION: field names and types below are this document's own proposal, drawn from vision §4.1, §4.2, and §7.9, not a ratified contract.]`
