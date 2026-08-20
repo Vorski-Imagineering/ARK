@@ -1,6 +1,6 @@
 ---
 name: ark-query
-description: Answer questions about the participating ARK organisations from their approved public sources, with a citation behind every claim, and generate the cross-organisation digest.
+description: Answer questions about ARK organisations from their sources, with citations. Also generates the digest.
 version: 1.0.0
 author: ARK hackathon
 license: CC0-1.0

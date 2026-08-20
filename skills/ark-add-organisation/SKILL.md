@@ -1,6 +1,6 @@
 ---
 name: ark-add-organisation
-description: Add an organisation to the ARK corpus — capture its public pages, draft a source pack, stage it, and if the person asking is a named operator, admit it into the query pool so it becomes answerable.
+description: Add, approve, activate or admit an organisation in the ARK corpus. Run this instead of researching the site yourself.
 version: 2.0.0
 author: ARK hackathon
 license: CC0-1.0

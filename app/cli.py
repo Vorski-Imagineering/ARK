@@ -208,11 +208,33 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
+def _source_urls(source_pack_dir: str = DEFAULT_SOURCE_PACK_DIR) -> dict[str, str]:
+    """Map every source id to its public URL so a citation is checkable.
+
+    A citation that prints only an identifier is not verifiable by the person
+    reading it. The URL is what makes the claim checkable, so the tool resolves
+    it rather than leaving the caller to go looking.
+    """
+    from app.source_pack import SourcePackError, load_source_pack
+
+    urls: dict[str, str] = {}
+    for path in sorted(Path(source_pack_dir).glob("*.md")):
+        try:
+            pack = load_source_pack(path)
+        except SourcePackError:
+            continue
+        for source in pack.sources:
+            urls[source.source_id] = source.canonical_url
+    return urls
+
+
 def _print_record(record) -> None:
     print(record.output)
     print("\nsources:")
+    urls = _source_urls()
     for source_id in record.cited_source_ids:
-        print(f"  - {source_id}")
+        url = urls.get(source_id)
+        print(f"  - {source_id}  {url}" if url else f"  - {source_id}  (URL not found)")
     if not record.cited_source_ids:
         print("  (none)")
     if record.limitations:
