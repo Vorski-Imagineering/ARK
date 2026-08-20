@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Admit a staged organisation into the live query pool.
+#
+# This is the permission boundary. Anyone who can reach the agent may propose an
+# organisation; only someone with shell access on this host can admit one.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+ORG="${1:-}"
+if [ -z "$ORG" ]; then
+  echo "usage: ./scripts/activate-org <organisation-id>"
+  echo
+  echo "staged and awaiting activation:"
+  ls proposal/hackathon-1/execution/source-packs-staging/*.md 2>/dev/null \
+    | xargs -n1 basename 2>/dev/null | sed 's/\.md$/  /' | sed 's/^/  - /' || echo "  (none)"
+  exit 1
+fi
+
+STAGED="proposal/hackathon-1/execution/source-packs-staging/${ORG}.md"
+LIVE="proposal/hackathon-1/execution/source-packs/${ORG}.md"
+
+[ -f "$STAGED" ] || { echo "no staged pack for '${ORG}' at ${STAGED}"; exit 1; }
+[ -f "$LIVE" ] && { echo "'${ORG}' is already live at ${LIVE}"; exit 1; }
+
+echo "reviewing ${STAGED} before admitting it:"
+echo "---"
+sed -n '1,25p' "$STAGED"
+echo "---"
+read -r -p "admit '${ORG}' into the query pool? [y/N] " reply
+case "$reply" in
+  [yY]) ;;
+  *) echo "aborted; nothing changed"; exit 1 ;;
+esac
+
+mv "$STAGED" "$LIVE"
+echo "moved into the live pool: ${LIVE}"
+./scripts/ingest --local-embedder 2>&1 | grep -v 'Warning:\|Loading weights' | tail -2
+echo
+echo "ACTIVE. Still not published and not approved:"
+echo "  - the profile is an auto-extracted placeholder, replace it"
+echo "  - no representative is named; name one and get sign-off"
+echo "  - commit and push when it is ready"

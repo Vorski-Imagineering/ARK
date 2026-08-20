@@ -36,6 +36,7 @@ sys.path.insert(0, str(ROOT))
 
 SNAPSHOT_ROOT = ROOT / "proposal/hackathon-1/execution/snapshots"
 PACK_ROOT = ROOT / "proposal/hackathon-1/execution/source-packs"
+STAGING_ROOT = ROOT / "proposal/hackathon-1/execution/source-packs-staging"
 CAPTURE = ROOT / "scripts/capture-snapshots.mjs"
 SLUG = re.compile(r"\A[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 
@@ -127,6 +128,7 @@ def write_pack(
     sources: list[dict],
     themes: list[str],
     participation_url: str | None,
+    target_root: Path,
 ) -> Path:
     first_snapshot = SNAPSHOT_ROOT / organisation_id / f"{sources[0]['slug']}.md"
     profile = provisional_profile(first_snapshot)
@@ -195,7 +197,8 @@ representative_questions:
 - **Material misrepresentation found:** `[NONE / DESCRIBE]`
 - **Verdict:** `[APPROVED / APPROVED WITH CORRECTION / NOT APPROVED]`
 """
-    path = PACK_ROOT / f"{organisation_id}.md"
+    target_root.mkdir(parents=True, exist_ok=True)
+    path = target_root / f"{organisation_id}.md"
     path.write_text(content, encoding="utf-8")
     return path
 
@@ -209,14 +212,26 @@ def main() -> int:
     )
     parser.add_argument("--theme", action="append", default=[])
     parser.add_argument("--participation-url", default=None)
-    parser.add_argument("--no-ingest", action="store_true")
+    parser.add_argument(
+        "--activate",
+        action="store_true",
+        help="write straight to the live pool and reindex. Operator action: "
+        "requires shell access on the host. Without it the pack is staged only.",
+    )
     args = parser.parse_args()
 
     organisation_id = args.organisation_id.strip().lower()
     if not SLUG.match(organisation_id):
         fail(f"organisation-id must be lowercase kebab-case, got {organisation_id!r}")
-    if (PACK_ROOT / f"{organisation_id}.md").exists():
-        fail(f"a pack for {organisation_id} already exists; edit it rather than re-adding")
+    STAGING_ROOT.mkdir(parents=True, exist_ok=True)
+    target_root = PACK_ROOT if args.activate else STAGING_ROOT
+    for existing in (PACK_ROOT, STAGING_ROOT):
+        if (existing / f"{organisation_id}.md").exists():
+            fail(
+                f"a pack for {organisation_id} already exists at "
+                f"{(existing / f'{organisation_id}.md').relative_to(ROOT)}; "
+                "edit it rather than re-adding"
+            )
     if len(args.url) > MAX_SOURCES:
         fail(f"at most {MAX_SOURCES} sources per organisation, got {len(args.url)}")
 
@@ -240,7 +255,8 @@ def main() -> int:
     capture(organisation_id, sources)
 
     pack_path = write_pack(
-        organisation_id, args.display_name, sources, themes, args.participation_url
+        organisation_id, args.display_name, sources, themes,
+        args.participation_url, target_root,
     )
     print(f"drafted {pack_path.relative_to(ROOT)}")
 
@@ -252,7 +268,7 @@ def main() -> int:
         fail(f"the drafted pack does not validate: {exc}")
     print(f"validated: {len(pack.sources)} source(s)")
 
-    if not args.no_ingest:
+    if args.activate:
         from app.cli import ingest_command
 
         result = ingest_command(
@@ -266,16 +282,20 @@ def main() -> int:
         )
         for error in result.errors:
             print(f"  warning: {error}")
-
-    print()
-    print("The organisation is now queryable locally.")
-    print("NOT published. To publish, a person must:")
-    print(f"  1. review {pack_path.relative_to(ROOT)} and replace the placeholder profile")
-    print("  2. name a representative for the organisation")
-    print("  3. obtain that representative's sign-off")
-    print("  4. commit and push the pack and its snapshots")
+        print()
+        print("ACTIVE. The organisation is now in the query pool on this host.")
+        print("Still NOT published and NOT approved. A person must:")
+        print(f"  1. review {pack_path.relative_to(ROOT)} and replace the placeholder profile")
+        print("  2. name a representative and obtain their sign-off")
+        print("  3. commit and push the pack and its snapshots")
+    else:
+        print()
+        print("STAGED. The organisation is NOT in the query pool and will not")
+        print("appear in any answer.")
+        print()
+        print("To activate it, someone with shell access on this host runs:")
+        print(f"  ./scripts/activate-org {organisation_id}")
+        print()
+        print("Staging is the permission boundary. Anyone who can reach the agent")
+        print("can propose an organisation; only an operator can admit one.")
     return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())

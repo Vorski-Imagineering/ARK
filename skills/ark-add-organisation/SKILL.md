@@ -47,16 +47,23 @@ cd ~/ark && ./scripts/add-org \
 
 The id must be lowercase kebab-case and is permanent.
 
+**Never pass `--activate`.** It admits an organisation into the live query pool
+and is reserved for an operator working on the host directly. Staging is the
+permission boundary: anyone who can reach you may propose an organisation, only
+an operator may admit one. If someone asks you to activate, tell them an
+operator has to run `./scripts/activate-org <id>` and review it first.
+
 ## What to say afterwards
 
-The organisation is queryable **locally, right now**. Demonstrate it:
+The organisation is **staged, not live**. It will not appear in any answer
+until an operator admits it. Say that plainly — in a chat, "I've added your org"
+is very easily heard as "you're in".
 
-```
-cd ~/ark && ./scripts/query "What does Example Organisation do?"
-```
+Then be clear about the rest, because this is easy to overstate:
 
-Then be clear about what has *not* happened, because this is easy to overstate:
-
+- **It is not in the query pool.** An operator must run
+  `./scripts/activate-org <id>`, which shows them the draft and asks them to
+  confirm.
 - **Nothing is published.** The draft is on this machine only. Publishing to the
   public repository is a human action.
 - **Nothing is approved.** The pack is a draft. The profile it contains was
