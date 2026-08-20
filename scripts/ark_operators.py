@@ -21,6 +21,15 @@ import sys
 from pathlib import Path
 
 STATE_DB = Path.home() / ".hermes/state.db"
+
+# Approval mode. "auto" means anything proposed is admitted immediately;
+# "operator" means a named operator must admit it from a direct message.
+#
+# Default is auto, deliberately. During the hackathon the cost of a wrong
+# organisation appearing is a one-line fix, and the cost of friction is that
+# nobody tries it. The operator machinery below stays in place and is switched
+# on with ARK_APPROVAL_MODE=operator when that trade changes.
+APPROVAL_MODE = os.environ.get("ARK_APPROVAL_MODE", "auto").strip().lower()
 OPERATORS_FILE = Path(
     os.environ.get("ARK_OPERATORS_FILE", Path.home() / ".ark-operators.json")
 )
@@ -115,7 +124,14 @@ def load_operators() -> dict:
         return {"operators": []}
 
 
+def approval_required() -> bool:
+    return APPROVAL_MODE == "operator"
+
+
 def is_operator(identity: Identity | None) -> tuple[bool, str]:
+    if not approval_required():
+        return True, "approval not required (ARK_APPROVAL_MODE=auto)"
+
     if identity is None or not identity.user_id:
         return False, "could not determine who is asking"
 
@@ -143,7 +159,12 @@ def main() -> int:
     command = sys.argv[1] if len(sys.argv) > 1 else "whoami"
     identity = resolve_identity()
 
+    if command == "mode":
+        print(APPROVAL_MODE)
+        return 0
+
     if command == "whoami":
+        print(f"approval mode: {APPROVAL_MODE}")
         if identity is None:
             print("caller: unknown (no platform session found)")
             return 1

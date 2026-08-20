@@ -220,11 +220,18 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    # In auto mode anything proposed is admitted immediately. In operator mode
+    # a proposal is staged and a named operator admits it separately.
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from ark_operators import approval_required
+
+    activate = args.activate or not approval_required()
+
     organisation_id = args.organisation_id.strip().lower()
     if not SLUG.match(organisation_id):
         fail(f"organisation-id must be lowercase kebab-case, got {organisation_id!r}")
     STAGING_ROOT.mkdir(parents=True, exist_ok=True)
-    target_root = PACK_ROOT if args.activate else STAGING_ROOT
+    target_root = PACK_ROOT if activate else STAGING_ROOT
     for existing in (PACK_ROOT, STAGING_ROOT):
         if (existing / f"{organisation_id}.md").exists():
             fail(
@@ -268,7 +275,7 @@ def main() -> int:
         fail(f"the drafted pack does not validate: {exc}")
     print(f"validated: {len(pack.sources)} source(s)")
 
-    if args.activate:
+    if activate:
         from app.cli import ingest_command
 
         result = ingest_command(

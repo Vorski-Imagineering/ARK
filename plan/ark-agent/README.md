@@ -28,6 +28,7 @@ Everything here is designed to be executed by an AI agent across many short sess
 | `ledger.md` | Append-only unit progress. The build's memory. | Every session, first thing. |
 | `decisions.md` | Dated record of what was chosen, rejected, and why | When something looks arbitrary. |
 | `open-questions.md` | What is unresolved, who owns it, what it blocks | Before opening a new phase. |
+| `permissions.md` | Who may add an organisation, and how to require approval | Before changing who can add organisations. |
 
 ---
 

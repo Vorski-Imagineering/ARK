@@ -105,3 +105,15 @@ Format:
 - **Why:** The build is executed by a mid-capability model across many short sessions. Pre-written tests give each session an unambiguous, machine-checkable completion signal, which no amount of prose instruction achieves. Critically, an agent that writes its own tests tends to compute expected values by calling the code under test — producing a suite that passes regardless of correctness. Hand-derived literal fixtures are the only defence against that.
 - **Affects:** every unit in every phase
 - **Note:** No prior document in this repository specifies test-driven development. "Acceptance tests" elsewhere means human readiness gates, not automated tests. This decision introduces a new practice rather than extending an existing one.
+
+## D-9 · Organisations are auto-approved for now, with the gate built and switched off
+
+- **Date:** 2026-08-20
+- **Ruled by:** Event lead
+- **Status:** ACTIVE
+- **Decision:** `ARK_APPROVAL_MODE` defaults to `auto`. Anyone talking to the agent may add an organisation and it becomes answerable immediately. The named-operator gate remains built, tested, and documented, and is enabled by setting the mode to `operator`.
+- **Rejected:** Requiring operator approval from the start; removing the permission machinery entirely.
+- **Why:** While the group is experimenting, the cost of a wrong organisation appearing is a one-line fix, and the cost of friction is that nobody tries it. Deleting the machinery would mean rebuilding it under time pressure later, when the trade has changed and the reasoning has been forgotten. Building it, proving it works, and switching it off keeps both the low friction and the option.
+- **Affects:** `scripts/add-org`, `scripts/activate-org`, `scripts/ark_operators.py`, the `ark-add-organisation` skill
+- **Note:** The operator list lives on the host and never in this repository — it holds platform user identifiers, which are personal data and do not belong in a public CC0 repository. How to switch the mode on is in `plan/ark-agent/permissions.md`.
+
