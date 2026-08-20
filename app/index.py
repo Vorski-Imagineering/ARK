@@ -228,6 +228,19 @@ class Index:
         ).fetchall()
         return [self._row_to_chunk(row) for row in rows]
 
+    def embedding_signature(self) -> tuple[str, int] | None:
+        """The model identifier and vector dimension stored in this index.
+
+        A query has to be embedded the same way its corpus was, so the reader
+        needs to know which model produced these vectors.
+        """
+        row = self._connection.execute(
+            "SELECT embedding_model, LENGTH(embedding) FROM chunks LIMIT 1"
+        ).fetchone()
+        if row is None:
+            return None
+        return str(row[0]), int(row[1]) // 8
+
     def fingerprint(self) -> str:
         """Content identity of the index.
 
