@@ -81,15 +81,52 @@ The three agreed representative questions — the fixed acceptance set for the e
 
 The Day 1 record listed a second runtime profile as pending. It was never created. This snapshot supersedes any reading of that table which assumed two profiles exist.
 
+## What became usable on 2026-08-20
+
+The Phase 1 slice is no longer terminal-only. Two skills are installed on the
+agent and reachable from the group chat:
+
+- **ask it about an organisation** — it answers from the corpus and prints the
+  public URL beside every citation, or refuses when the evidence does not
+  support an answer
+- **add an organisation** — one instruction captures the pages, drafts a source
+  pack, validates it, rebuilds the index, and the organisation is answerable
+  immediately
+
+Adding is open to anyone talking to the agent. A named-operator gate is built,
+tested, and switched off; `plan/ark-agent/permissions.md` explains how to turn
+it on and why approval needs a direct message rather than a group thread.
+
+Three findings worth carrying forward, each of which cost a real failure first:
+
+**A long-lived chat session keeps the system prompt it was built with.** A group
+thread that predates a new skill will never load it. Retiring the session is
+what makes new capability visible, which is not obvious from the outside.
+
+**Session identity is not message identity.** A group thread's recorded user is
+whoever opened the thread, not whoever sent the current message — verified on a
+thread carrying 125 messages across two days under one name. Any permission
+check reading session identity in a group is measuring the wrong thing.
+
+**Grounded generation was carrying the agent's whole persona.** Each answer sent
+about 20,000 tokens of system prompt, memory, and skill index alongside 1,200
+tokens of evidence, and answers came back shaped by competing style rules.
+Suppressing that injection for the answering subprocess only: 20,227 input
+tokens to 131, with the citation contract and refusal path both intact.
+
 ## Immediate next actions
 
-1. Initialise a local working repository on the server so the agent's output is versioned.
-2. Resolve repository write authentication so the agent can open pull requests.
-3. Rewrite the identity file for group scope.
-4. Run Phase 1 Unit 0 — scaffold and test harness.
-5. Collect source packs from three organisations.
-6. Choose the three representative questions.
-7. Name the unassigned ownership roles, recovery custodian first.
+1. Representatives review the sheet at `execution/outputs/` and complete the
+   sign-off blocks in their own source pack. This is the only thing between
+   Phase 1 and done.
+2. Rule how representative approval should work generally — see the question in
+   `plan/ark-agent/open-questions.md`, which carries a starting proposal to
+   amend rather than a blank page.
+3. Resolve repository write authentication so the agent can open pull requests
+   instead of a person relaying its commits.
+4. Name the unassigned ownership roles, recovery custodian first.
+5. Decide whether Phase 2, 3 or 4 opens next, and rule the decisions each one
+   is blocked on.
 
 ---
 
