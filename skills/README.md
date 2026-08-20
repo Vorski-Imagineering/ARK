@@ -8,7 +8,7 @@ consistently. If you build something twice, package it here.
 | Skill | What it does | Installed on the ARK agent |
 |---|---|---|
 | `ark-query` | Answer from the ARK corpus with citations; generate the digest | Yes |
-| `ark-add-organisation` | Capture an organisation's pages, draft its pack, stage it | Yes |
+| `ark-add-organisation` | Capture an organisation's pages, draft its pack, make it answerable | Yes |
 | `ark-source-pack` | Help a representative draft and validate a pack by hand | No — reference |
 | `ark-tdd-unit` | Execute one test-driven build unit from a phase document | No — reference |
 | `ark-session-log` | Write the sanitised session record, route transcripts locally | No — reference |
@@ -76,10 +76,14 @@ The agent may read the ARK checkout and run `./scripts/query`,
 canonical corpus, no ability to change its own configuration, and no push
 credentials.
 
-`add-org` **stages** an organisation. Staged organisations are not indexed and
-appear in no answer. Admitting one into the live query pool requires
-`./scripts/activate-org <id>`, which only runs with shell access on the host and
-prompts for confirmation after showing the draft.
+**Adding an organisation is currently open to anyone.** `add-org` captures,
+drafts, validates and reindexes in one step, and the organisation is answerable
+immediately.
 
-Shell access is the permission boundary. It needs no allowlist to maintain, no
-identity plumbing, and no trust in the agent to enforce a rule about itself.
+A named-operator gate exists and is switched off. When enabled, a proposal is
+staged and only a named operator can admit it. See
+`plan/ark-agent/permissions.md` for how to turn it on, and for why approval has
+to happen in a direct message rather than a group thread.
+
+Whichever mode is set, adding an organisation never publishes to this repository
+and never marks it approved. Those remain human actions.
